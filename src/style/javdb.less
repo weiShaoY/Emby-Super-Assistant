@@ -1,0 +1,141 @@
+.javdb {
+  .sub-header {
+    display: none;
+  }
+
+  #footer {
+    display: none;
+  }
+
+
+  // 盒子高亮
+  .is-highlight {
+    padding: 10px;
+
+    border-radius: 10px;
+
+    // background-color: #FF407D;
+    // background-color: #74E291;
+    background-color: #EA1179;
+
+
+    .cover {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    img {
+      border-radius: 10px;
+    }
+
+    // /////////////// 列表页
+    strong {
+      color: #fff !important;
+
+      margin-right: 10px;
+    }
+
+    .video-title {
+      color: #fff !important;
+    }
+
+    .score {
+      color: #fff !important;
+    }
+
+    .meta {
+      color: #fff !important;
+    }
+
+
+    // /////////////// 详情页
+    .panel-block {
+      strong {
+        color: #363636 !important;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  // # /////////////////////////////////////  列表页  /////////////////////////////////////
+  .tags {
+    .tag {
+      margin-right: 10px !important;
+    }
+  }
+
+
+  // $ /////////////////////////////////////  详情页  /////////////////////////////////////
+
+  //  影片信息
+  .video-meta-panel {
+
+    // 左边图片
+    .column-video-cover {
+      width: 63% !important;
+    }
+
+    //  右边信息
+    .movie-panel-info {
+      border-radius: 10px;
+
+      a {
+        color: #485fc7;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+
+      .first-block {
+        .value {
+          font-size: 24px !important;
+          font-weight: 700 !important;
+        }
+      }
+
+      // 第8个
+      .panel-block {
+
+        &:nth-child(9) {
+
+          .value {
+
+            font-size: 0;
+
+            a {
+              font-size: 16px !important;
+            }
+
+            strong::before {
+              content: '';
+              /* 使用空内容覆盖 */
+            }
+
+            strong::after {
+              content: "\A";
+              /* 添加换行符 */
+              white-space: pre;
+              /* 保留空白符（包括换行符） */
+            }
+          }
+        }
+
+        &:nth-last-child(2) {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+
+
+  // 种子列表
+  .tabs.no-bottom {
+    display: none;
+  }
+
+  .top-meta {
+    display: none;
+  }
+}

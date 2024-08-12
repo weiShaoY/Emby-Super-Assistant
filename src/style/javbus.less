@@ -1,0 +1,118 @@
+.javbus {
+
+
+
+  .footer {
+    display: none;
+  }
+
+  // 盒子高亮
+  .is-highlight {
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background-color: #EA1179;
+
+    #mag-submit-show {
+      display: none;
+    }
+
+    img {
+      border-radius: 10px;
+    }
+
+  }
+
+  // 详情页
+  .container {
+
+    //  顶部标题
+    h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 20px 0;
+    }
+
+    // 左边图片
+    .screencap {
+      width: 63% !important;
+      display: block;
+      border: none;
+    }
+
+
+    //  影片信息
+    .info {
+      background-color: #fff;
+      border-radius: 10px;
+      width: 37%;
+      padding: 12px;
+
+      a {
+        color: #485FC7;
+      }
+
+      p {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        &:first-child> :last-child {
+          font-size: 24px;
+          font-weight: 700;
+        }
+
+        > :first-child {
+          margin-right: 10px;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+
+      > :nth-last-child(2) {
+        font-size: 0;
+        display: block;
+
+        span {
+          font-size: 16px !important;
+
+          &::before {
+            content: '';
+          }
+
+          &::after {
+            content: "\A";
+            white-space: pre;
+          }
+        }
+      }
+    }
+  }
+
+
+
+  // 列表页
+  .masonry #waterfall {
+    height: 100% !important;
+
+    .item {
+      position: static !important;
+      height: auto;
+
+      .movie-box {
+        padding: 10px;
+
+        .photo-frame {
+          margin: 0;
+
+        }
+
+      }
+
+    }
+
+
+  }
+}
