@@ -5,26 +5,12 @@ export const videoConfig = {
   /**
    *   视频扩展名数组（注意：这个数组在 `tagRegex` 的定义中并未直接使用）
    */
-  extensionArray: [
-    'mp4',
-    'mkv',
-    'avi',
-    'flv',
-    'wmv',
-    'mov',
-    'rmvb',
-  ],
+  extensionArray: ['mp4', 'mkv', 'avi', 'flv', 'wmv', 'mov', 'rmvb'],
 
   /**
    *  视频标签名数组
    */
-  tagArray: [
-    '-破解-c',
-    '-c',
-    '-4K-破解',
-    '-破解',
-    '-4k',
-  ],
+  tagArray: ['-破解-c', '-c', '-4K-破解', '-破解', '-4k'],
 
   /**
    *  视频标签匹配正则（注意：这里使用 `tagArray`）
@@ -41,6 +27,10 @@ export const videoConfig = {
     },
     {
       name: '破解-c',
+      backgroundColor: '#fca650',
+    },
+    {
+      name: '-UC',
       backgroundColor: '#fca650',
     },
     {
