@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name          Emby-助手
+// @name          Emby-调用带第三方播放器
 // @namespace    http://tampermonkey.net/
 // @version      1.1.0
 // @description  emby launch extetnal player
@@ -431,18 +431,16 @@
   /**
    *  判断是否为Javdb跳转过来
    */
-  function checkIfReferredFromJavdb() {
-    const aaa = GM_getValue('emby-btn')
+  // function checkIfReferredFromJavdb() {
+  //   const aaa = GM_getValue('emby-btn')
 
-    console.log('%c Line:387 🍔 aaa', 'color:#93c0a4', aaa)
-  }
+  //   console.log('%c Line:387 🍔 aaa', 'color:#93c0a4', aaa)
+  // }
 
   /**
    * 监控DOM变化，显示外部播放器按钮。
    */
   document.addEventListener('viewbeforeshow', (e) => {
-    checkIfReferredFromJavdb()
-
     if (e.detail.contextPath.startsWith('/item?id=')) {
       const mutation = new MutationObserver(() => {
         if (showFlag()) {
