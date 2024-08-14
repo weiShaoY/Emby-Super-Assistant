@@ -32,15 +32,6 @@ function main() {
   const elementList = document.querySelectorAll('#waterfall .movie-box')
 
   elementList.forEach((ele: any) => {
-    console.log('%c Line:35 🍎 ele', 'color:#b03734', ele)
-
-    /**
-     *  获取视频名称 (小写，去除空格)
-     */
-    // const videoName = ele
-    //   .querySelector('strong')
-    //   ?.textContent?.toLowerCase().replace(/\s+/g, '') as string
-
     const videoName = ele.getAttribute('href')?.substring(ele.getAttribute('href').lastIndexOf('/') + 1)
       .trim()
       .toLowerCase()
@@ -50,11 +41,9 @@ function main() {
       return
     }
 
-    // const boxElement = ele.querySelector('.box')
+    const tagsElement = ele.querySelector('.item-tag')
 
-    // const tagsElement = ele.querySelector('.item-tag')
-
-    ele?.classList.add(`btsow_btn_${videoName}`)
+    tagsElement?.classList.add(`btsow_btn_${videoName}`, 'flex', 'gap-2', 'flex-wrap', 'h-auto')
 
     btsowBtnList.value.push(videoName)
 
@@ -71,12 +60,12 @@ function main() {
         ele?.classList.add('is-highlight')
 
         if (!embyBtnList.value.length) {
-          ele?.classList.add(`emby_btn_${videoName}`)
+          tagsElement?.classList.add(`emby_btn_${videoName}`)
 
           embyBtnList.value.push(`${videoName}`)
         }
 
-        ele?.classList.add(`added_to_inventory_tags_${item.videoName}`)
+        ele?.classList.add(`added_to_emby_btn_${item.videoName}`)
 
         addedToInventoryBtnList.value.push(item)
 
@@ -96,7 +85,7 @@ function main() {
 
     //  如果当前视频有中文磁链可用并且和 Emby中已经存在的视频没有中文磁链 则 添加提示更新中文磁链按钮
     if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent.value && count.value) {
-      ele?.classList.add(`update_chinese_btn_tags_${videoName}`)
+      tagsElement?.classList.add(`update_chinese_btn_${videoName}`)
 
       updateChineseBtnList.value.push(videoName)
     }
@@ -115,12 +104,12 @@ onMounted(() => {
     :key="videoName"
   >
     <Teleport
-      :to="`.update_chinese_btn_tags_${videoName}`"
+      :to="`.update_chinese_btn_${videoName}`"
     >
       <UpdateChineseButton
-        :height="30"
+        :height="24"
         :radius="0"
-        class="m-t-2 w-full"
+        class="!flex-center"
       />
     </Teleport>
   </template>
@@ -135,26 +124,10 @@ onMounted(() => {
     >
       <BtsowButton
         :video-name="videoName"
-        :height="30"
         :radius="0"
-        class="m-t-2 w-full"
-      />
-    </Teleport>
-  </template>
-
-  <template
-    v-for="videoName in embyBtnList"
-    :key="videoName"
-  >
-
-    <Teleport
-      :to="`.emby_btn_${videoName}`"
-    >
-      <EmbyButton
-        :video-name="videoName"
-        :height="30"
-        :radius="0"
-        class="m-t-2 w-full"
+        :width="50"
+        :height="24"
+        class="!text-3"
       />
     </Teleport>
   </template>
@@ -165,12 +138,29 @@ onMounted(() => {
     :key="item.videoName"
   >
     <Teleport
-      :to="`.added_to_inventory_tags_${item.videoName}`"
+      :to="`.added_to_emby_btn_${item.videoName}`"
     >
       <AddedToEmbyButton
         :video="item"
-        :height="30"
-        class="w-full"
+      />
+    </Teleport>
+  </template>
+
+  <!-- 在Emby打开按钮 -->
+  <template
+    v-for="videoName in embyBtnList"
+    :key="videoName"
+  >
+
+    <Teleport
+      :to="`.emby_btn_${videoName}`"
+    >
+      <EmbyButton
+        :video-name="videoName"
+        :radius="0"
+        :width="50"
+        :height="24"
+        class="!text-3"
       />
     </Teleport>
   </template>

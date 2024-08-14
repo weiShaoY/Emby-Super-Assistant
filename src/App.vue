@@ -3,6 +3,8 @@ import Javdb from '@/javdb/index.vue'
 
 import Javbus from '@/javbus/index.vue'
 
+import Emby from '@/emby/index.vue'
+
 // 获取 当前 网站 url
 const currentUrl = window.location.href
 
@@ -24,6 +26,7 @@ if (bodyElement) {
     console.log('%c Line:24 🍅 bodyElement', 'color:#42b983', bodyElement)
   }
   else if (isEmby) {
+    console.log('%c Line:29 🥔 isEmby', 'color:#e41a6a', isEmby)
     bodyElement.classList.add('emby')
   }
 }
@@ -36,6 +39,10 @@ if (bodyElement) {
 
   <Javbus
     v-else-if="isJavbus"
+  />
+
+  <Emby
+    v-else-if="isEmby"
   />
 
   <!-- <Personality /> -->

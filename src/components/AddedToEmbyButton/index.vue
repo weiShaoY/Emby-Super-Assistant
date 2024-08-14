@@ -121,7 +121,7 @@ function directoryStructureCopyToClipboard(event: any) {
       />
 
       <div
-        class="front cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] relative block flex translate-y-[-4px] transform items-center justify-between rounded-[12px] bg-[#219C90] p-[12px_27px] text-[1.1rem] text-white transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] active:transition-transform hover:transition-transform"
+        class="front cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] relative block flex translate-y-[-4px] transform items-center justify-between rounded-[12px] bg-[#219C90] p-[12px_27px] text-[1.1rem] transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] !text-white active:transition-transform hover:transition-transform"
       >
         <span
           class="flex-1 truncate text-start"
@@ -135,14 +135,14 @@ function directoryStructureCopyToClipboard(event: any) {
           <img
             v-if="!isShowCopy"
             :src="copySvg"
-            class="h-5 w-5"
+            class="!h-5 !w-5"
             alt="复制"
           >
 
           <img
             v-if="isShowCopy"
             :src="finishSvg"
-            class="h-5 w-5"
+            class="!h-5 !w-5"
             alt="已复制"
           >
         </div>
