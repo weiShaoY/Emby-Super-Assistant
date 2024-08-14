@@ -16,6 +16,14 @@ const props = defineProps({
   },
 
   /**
+   *  是否显示视频名称
+   */
+  isShowVideoName: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
    *  按钮宽度
    */
   width: {
@@ -156,7 +164,8 @@ onMounted(async () => {
     }"
     @click="embyBtnHandler"
   >
-    Emby
+
+    {{ isShowVideoName ? videoName : 'Emby' }}
   </div>
 </template>
 

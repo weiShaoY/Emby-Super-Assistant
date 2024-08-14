@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { Notification } from '@arco-design/web-vue'
 
+import DuplicatesModel from './components/duplicatesModel.vue'
+
 import { videoManager } from '@/utils'
 
 import { videoConfig } from '@/config'
@@ -175,14 +177,36 @@ async function mainBtnHandler() {
   }
 }
 
+/**
+ *  是否显示查重弹窗
+ */
+const isShowDuplicatesModel = ref(false)
+
+const duplicatesVideoList = ref<VideoType[]>([])
+
+const duplicatesVideoNameList = ref<string[]>([])
+
 function videoDuplicate(event: any) {
   event.stopPropagation()
+  isShowDuplicatesModel.value = true
+  const duplicate = videoManager.duplicate()
 
-  videoManager.duplicate()
+  duplicatesVideoList.value = duplicate.duplicatesVideoList
+  console.log('%c Line:195 🥑 duplicatesVideoList.value', 'color:#fca650', duplicatesVideoList.value)
+
+  duplicatesVideoNameList.value = duplicate.duplicatesVideoNameList
 }
 </script>
 
 <template>
+  <!-- 查重弹窗 -->
+  <DuplicatesModel
+    v-if="isShowDuplicatesModel"
+    v-model="isShowDuplicatesModel"
+    :duplicates-video-list="duplicatesVideoList"
+    :duplicates-video-name-list="duplicatesVideoNameList"
+  />
+
   <div
     class="group fixed bottom-2 left-2 z-1000 flex items-center justify-center border border-2 border-white/80 rounded-full rounded-lg p-1 shadow-2xl"
     @click="mainBtnHandler"

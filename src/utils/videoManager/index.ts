@@ -31,12 +31,12 @@ export const videoManager = {
    * 视频文件查重
    */
   duplicate() {
-  /**
-   * 找出具有相同属性值的重复项
-   * @param {VideoType[]} list - 要处理的数组
-   * @param {keyof VideoType} property - 用于比较的属性名
-   * @returns {VideoType[]} result - 具有重复项的新数组
-   */
+    /**
+     * 找出具有相同属性值的重复项
+     * @param {VideoType[]} list - 要处理的数组
+     * @param {keyof VideoType} property - 用于比较的属性名
+     * @returns {VideoType[]} result - 具有重复项的新数组
+     */
     function findDuplicatesByProperty(
       list: VideoType[],
       property: keyof VideoType,
@@ -97,49 +97,47 @@ export const videoManager = {
 
     /**
      * 主函数，处理筛选重复项逻辑
+     * @returns {{videoList: VideoType[], videoNameList: string[]}} - 返回重复的视频和去重后的视频名称列表
      */
-    function handleDuplicates() {
+    function handleDuplicates(): {
+      duplicatesVideoList: VideoType[]
+      duplicatesVideoNameList: string[]
+    } {
       const videoFileArray = videoManager.get()
 
       if (!videoFileArray)
-        return
+        return { duplicatesVideoList: [], duplicatesVideoNameList: [] }
 
       /**
-       *  所有重复的影片
+       *  所有重复的影片列表
        */
-      const allDuplicatesVideoList = findDuplicatesByProperty(
+      const duplicatesVideoList = findDuplicatesByProperty(
         videoFileArray,
         'videoProcessedName',
       )
 
       /**
-       *  Emby去重的影片标题
+       *  Emby去重的影片标题列表
        */
-      const EmbyRemovesDuplicateVideoTitle = getUniqueVideoProcessedName(videoFileArray)
+      const duplicatesVideoNameList = getUniqueVideoProcessedName(videoFileArray)
 
-      // 弹出提示框
-      // alert(`共发现${allDuplicates.length}个重复项，
-      // 共${EmbyRemovesDuplicateVideoTitle.length}个去重后的影片标题，
-      // 请查看控制台！`)
+      // Notification.success({
+      //   title: `共发现:\u00A0\u00A0${duplicatesVideoList.length}部\u00A0\u00A0视频重复`,
+      //   content: `共${videoNameList.length}个去重后的影片标题
+      //    ${videoNameList.join('\n')}`,
 
-      Notification.success({
-        title: `共发现:\u00A0\u00A0${allDuplicatesVideoList.length}部\u00A0\u00A0视频重复`,
-        content:
-         `共${EmbyRemovesDuplicateVideoTitle.length}个去重后的影片标题
-         ${EmbyRemovesDuplicateVideoTitle.join(
-          '\n',
-        )}`,
+      //   duration: 300000,
+      //   closable: true,
+      //   style: {
+      //     whiteSpace: 'pre-line', // 添加这个样式
+      //   },
+      // })
 
-        duration: 300000,
-        closable: true,
-        style: {
-          whiteSpace: 'pre-line', // 添加这个样式
-        },
-      })
+      return { duplicatesVideoList, duplicatesVideoNameList }
     }
 
-    // 调用主函数来处理重复项
-    handleDuplicates()
+    // 调用主函数来处理重复项并返回结果
+    return handleDuplicates()
   },
 
 }
