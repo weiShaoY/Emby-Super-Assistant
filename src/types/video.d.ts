@@ -46,9 +46,9 @@ namespace VideoType {
   }
 
   /**
-   * 视频排序规则数组中的单个规则
+   * 种子列表排序规则数组的每一项
    */
-  type TorrentListRuleItem = {
+  type torrentListSortingRuleArrayItem = {
 
     /**
      * 匹配名称
@@ -59,6 +59,22 @@ namespace VideoType {
      * 匹配上的背景颜色
      */
     backgroundColor: string
+  }
+
+  /**
+   *  标签列表的每一项
+   */
+  type tagMatchArrayItem = {
+
+    /**
+     * 标签名
+     */
+    name: string
+
+    /**
+     * 标签链接
+     */
+    url: string
   }
 
   /**
@@ -84,9 +100,14 @@ namespace VideoType {
     tagRegex: RegExp
 
     /**
-     *  视频排序规则数组
+     *  种子列表排序规则数组
      */
-    torrentListRuleArray: TorrentListRuleItem[]
+    torrentListSortingRuleArray: torrentListSortingRuleArrayItem[]
+
+    /**
+     *  标签匹配数组
+     */
+    tagMatchArray: tagMatchArrayItem[]
   }
 
 }

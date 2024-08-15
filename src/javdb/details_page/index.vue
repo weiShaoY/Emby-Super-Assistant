@@ -122,7 +122,7 @@ function getTorrentList() {
 
     const time = item.querySelector('.time')?.textContent?.trim()
 
-    if (!name || !url || !size || !time) {
+    if (!name || !url || !time) {
       return
     }
 
@@ -137,7 +137,6 @@ function getTorrentList() {
       time,
       isHD,
       isChinese,
-      backgroundColor: '',
     }
 
     torrentList.value.push(torrentListItem)

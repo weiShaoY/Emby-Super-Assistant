@@ -1,3 +1,5 @@
+import fourK from '@/assets/svg/fourK.svg'
+
 /**
  * 视频匹配配置
  */
@@ -9,14 +11,14 @@ export const videoConfig: VideoType.VideoConfig = {
 
   tagRegex: undefined as any, // 初始化为 undefined，稍后在对象定义后设置
 
-  torrentListRuleArray: [
+  torrentListSortingRuleArray: [
     {
       name: '-UC.torrent.无码破解',
-      backgroundColor: '#FF9F7F',
+      backgroundColor: '#03AED2',
     },
     {
       name: '破解-c',
-      backgroundColor: '#fca650',
+      backgroundColor: '##00BFFF',
     },
     {
       name: '-UC',
@@ -24,15 +26,23 @@ export const videoConfig: VideoType.VideoConfig = {
     },
     {
       name: '-c',
-      backgroundColor: '#FF4E88',
+      backgroundColor: '#FF1493',
+    },
+    {
+      name: '-C.torrent',
+      backgroundColor: '#FF6347',
     },
     {
       name: '-C',
-      backgroundColor: '#FF4E88',
+      backgroundColor: '#1A4D2E',
+    },
+    {
+      name: 'ch',
+      backgroundColor: '#00FFFF',
     },
     {
       name: '4K-破解',
-      backgroundColor: '#C75B7A',
+      backgroundColor: '#9BEC00',
     },
     {
       name: '4k',
@@ -40,16 +50,24 @@ export const videoConfig: VideoType.VideoConfig = {
     },
     {
       name: '无码破解',
-      backgroundColor: '#F0A8D0',
+      backgroundColor: '#F4CE14',
     },
     {
       name: '无码',
-      backgroundColor: '#C63C51',
+      backgroundColor: '#95D2B3',
     },
     {
       name: 'torrent',
-      backgroundColor: '#FF4E88',
+      backgroundColor: '#006989',
     },
+  ],
+
+  tagMatchArray: [
+    {
+      name: '4k',
+      url: fourK.toString(),
+    },
+
   ],
 }
 

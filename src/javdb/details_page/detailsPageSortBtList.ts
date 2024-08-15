@@ -59,12 +59,12 @@ export function sortBtList(): void {
     /**
      *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexA = videoConfig.torrentListRuleArray.findIndex(rule => videoA.videoName.toLowerCase().includes(rule.name.toLowerCase()))
+    const indexA = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoA.videoName.toLowerCase().includes(rule.name.toLowerCase()))
 
     /**
      *   视频B在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexB = videoConfig.torrentListRuleArray.findIndex(rule => videoB.videoName.toLowerCase().includes(rule.name.toLowerCase()))
+    const indexB = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoB.videoName.toLowerCase().includes(rule.name.toLowerCase()))
 
     // 1.在规则数组中，按数组里关键词的顺序排序,如果关键词的顺序一样了,按文件大小排序
 
@@ -122,11 +122,11 @@ export function sortBtList(): void {
     /**
      *   视频在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const inSortingRuleArrayIndex = videoConfig.torrentListRuleArray.findIndex(rule => item.videoName.toLowerCase().includes(rule.name.toLowerCase()))
+    const inSortingRuleArrayIndex = videoConfig.torrentListSortingRuleArray.findIndex(rule => item.videoName.toLowerCase().includes(rule.name.toLowerCase()))
 
     // 如果在规则数组中，则设置规则数组中定义的背景颜色
     if (inSortingRuleArrayIndex !== -1) {
-      item.style.backgroundColor = videoConfig.torrentListRuleArray[inSortingRuleArrayIndex].backgroundColor
+      item.style.backgroundColor = videoConfig.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor
     }
 
     item.classList.remove('item')

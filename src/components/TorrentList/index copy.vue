@@ -36,45 +36,31 @@ function copyTorrentUrl(torrent: TorrentType) {
 }
 
 async function main() {
-  /**
-   * 设置背景颜色和标签
-   */
   torrentList.value = torrentList.value.map((torrent: TorrentType) => {
     const inSortingRuleArrayIndex = videoConfig.torrentListSortingRuleArray.findIndex(rule =>
-      torrent.name.includes(rule.name),
+      torrent.name.toLowerCase().includes(rule.name),
     )
 
-    const isIconSortingRuleArrayIndex = videoConfig.tagMatchArray.findIndex(rule =>
-      torrent.name.includes(rule.name),
-    )
-
-    // 初始化一个新的对象，用于存储可能的更新
-    const updatedTorrent = { ...torrent }
-
-    // 如果找到匹配的背景颜色规则，设置 backgroundColor
     if (inSortingRuleArrayIndex !== -1) {
-      updatedTorrent.backgroundColor = videoConfig.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor
+      return {
+        ...torrent,
+        backgroundColor: videoConfig.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor,
+      }
     }
 
-    // 如果找到匹配的标签规则，设置 tag
-    if (isIconSortingRuleArrayIndex !== -1) {
-      updatedTorrent.tag = videoConfig.tagMatchArray[isIconSortingRuleArrayIndex].url
-    }
-
-    // 返回更新后的对象
-    return updatedTorrent
+    return torrent
   })
 
   torrentList.value.sort((videoA: TorrentType, videoB: TorrentType) => {
   /**
    *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
    */
-    const indexA = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoA.name.includes(rule.name))
+    const indexA = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoA.name.toLowerCase().includes(rule.name))
 
     /**
      *   视频B在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexB = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoB.name.includes(rule.name))
+    const indexB = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoB.name.toLowerCase().includes(rule.name))
 
     // 1.在规则数组中，按数组里关键词的顺序排序,如果关键词的顺序一样了,按文件大小排序
 
@@ -179,25 +165,24 @@ main()
 
         </div>
 
-        <div>
+        <div
+          class="flex flex-wrap"
+        >
           <!-- # -----------------------------------------------  列表循环  Start  ------------------------------------------------->
-          <div
-            v-for="(torrent, index) in torrentList"
-            :key="index"
-          >
+          <div>
             <div
-              class="group relative z-0 h-[6em] flex cursor-pointer items-center justify-between overflow-hidden rounded-[1em] p-2"
+              v-for="(torrent, index) in torrentList"
+              :key="index"
+              class="group relative z-0 h-[6em] w-full flex cursor-pointer items-center justify-between overflow-hidden border-b-1 rounded-[1em] p-2 !m-b-3"
               :style="{
-                backgroundColor: torrent.backgroundColor,
-                color: torrent.backgroundColor ? '#fff' : '#000',
+                'background-color': torrent.backgroundColor,
+
+                'color': torrent.backgroundColor ? 'white' : 'black',
               }"
             >
               <!-- 悬浮动画 -->
               <div
-                class="absolute z-[-1] h-[5em] w-[5em] rounded-full duration-500 -left-[4.5em] -top-[4.5em] group-hover:scale-[4500%]"
-                :style="{
-                  background: 'linear-gradient(to right,#00DFA2,#E8DC49)',
-                }"
+                class="absolute z-[-1] h-[5em] w-[5em] rounded-full bg-[#00ddeb] duration-500 -left-[4.5em] -top-[4.5em] group-hover:scale-[4500%]"
               />
 
               <!-- 左边 -->
@@ -209,7 +194,7 @@ main()
                   class="w-100 p-2"
                 >
                   <div
-                    class="truncate text-4 font-700 group-hover:text-#fff"
+                    class="truncate text-4 font-bold"
                   >
                     {{
                       torrent.name
@@ -217,10 +202,7 @@ main()
                   </div>
 
                   <div
-                    class="m-t-1 text-3 font-600 !group-hover:text-#fff"
-                    :style="{
-                      color: torrent.backgroundColor ? '#fff' : '#9CA3AF',
-                    }"
+                    class="text-xs text-coolGray-400 font-medium"
                   >
                     {{
                       torrent.time
@@ -230,37 +212,22 @@ main()
 
                 <!-- 左边第二列 -->
                 <div
-                  v-if="torrent.size"
-                  class="m-l-3 w-30 group-hover:text-#fff"
+                  class="m-l-3 w-30"
                 >
                   <span
-                    class="text-4 font-700"
+                    class="text-4 font-bold"
                   >
                     {{
                       torrent.size
                     }}
                   </span>
 
-                  <span
-                    class="font-600"
-                  >
+                  <span>
                     GB
                   </span>
                 </div>
 
                 <!-- 左边第三列 -->
-                <div
-                  v-if="torrent.isHD"
-                  class="w-auto p-2"
-                >
-                  <img
-                    :src="hdSvg"
-                    alt="高清"
-                    class="h-6 w-6"
-                  >
-                </div>
-
-                <!-- 左边第四列 -->
                 <div
                   v-if="torrent.isChinese"
                   class="w-auto p-2"
@@ -272,16 +239,17 @@ main()
                   >
                 </div>
 
-                <!-- 左边第五列 -->
+                <!-- 左边第四列 -->
                 <div
-                  v-if="torrent.tag"
+                  v-if="torrent.isHD"
                   class="w-auto p-2"
                 >
                   <img
-                    :src="torrent.tag"
-                    alt=""
+                    :src="hdSvg"
+                    alt="高清"
                     class="h-6 w-6"
                   >
+
                 </div>
               </div>
 
@@ -298,14 +266,6 @@ main()
                 </button>
               </div>
             </div>
-
-            <div
-              v-if="index !== torrentList.length - 1"
-              class="m-y-2 h-[1px] rounded bg-#9CA3AF"
-            >
-              <!-- 分割线 -->
-            </div>
-
           </div>
           <!-- # -----------------------------------------------  列表循环  End  ------------------------------------------------->
 
@@ -317,5 +277,11 @@ main()
 </template>
 
 <style lang="less" scoped>
-
+// .item {
+//   background-color: #fff;
+//   &:hover {
+//     color: #fff;
+//     background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+//   }
+// }
 </style>

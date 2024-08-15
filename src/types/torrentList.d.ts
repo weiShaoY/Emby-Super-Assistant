@@ -36,5 +36,10 @@ type TorrentType = {
   /**
    *  背景颜色
    */
-  backgroundColor: string
+  backgroundColor?: string
+
+  /**
+   *  匹配的标签名
+   */
+  tag?: string
 }

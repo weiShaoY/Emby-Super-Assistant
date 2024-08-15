@@ -130,7 +130,6 @@ function getTorrentList() {
       time,
       isHD,
       isChinese,
-      backgroundColor: '',
     }
 
     torrentList.value.push(torrentListItem)
