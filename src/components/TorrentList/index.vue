@@ -37,14 +37,14 @@ function copyTorrentUrl(torrent: TorrentType) {
 
 async function main() {
   torrentList.value = torrentList.value.map((torrent: TorrentType) => {
-    const inSortingRuleArrayIndex = videoConfig.sortingRuleArray.findIndex(rule =>
-      torrent.name.toLowerCase().includes(rule.name.toLowerCase()),
+    const inSortingRuleArrayIndex = videoConfig.torrentListRuleArray.findIndex(rule =>
+      torrent.name.toLowerCase().includes(rule.name),
     )
 
     if (inSortingRuleArrayIndex !== -1) {
       return {
         ...torrent,
-        backgroundColor: videoConfig.sortingRuleArray[inSortingRuleArrayIndex].backgroundColor,
+        backgroundColor: videoConfig.torrentListRuleArray[inSortingRuleArrayIndex].backgroundColor,
       }
     }
 
@@ -55,12 +55,12 @@ async function main() {
   /**
    *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
    */
-    const indexA = videoConfig.sortingRuleArray.findIndex(rule => videoA.name.toLowerCase().includes(rule.name.toLowerCase()))
+    const indexA = videoConfig.torrentListRuleArray.findIndex(rule => videoA.name.toLowerCase().includes(rule.name))
 
     /**
      *   视频B在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexB = videoConfig.sortingRuleArray.findIndex(rule => videoB.name.toLowerCase().includes(rule.name.toLowerCase()))
+    const indexB = videoConfig.torrentListRuleArray.findIndex(rule => videoB.name.toLowerCase().includes(rule.name))
 
     // 1.在规则数组中，按数组里关键词的顺序排序,如果关键词的顺序一样了,按文件大小排序
 

@@ -1,26 +1,15 @@
 /**
- *  视频匹配配置
+ * 视频匹配配置
  */
-export const videoConfig = {
-  /**
-   *   视频扩展名数组（注意：这个数组在 `tagRegex` 的定义中并未直接使用）
-   */
+export const videoConfig: VideoConfigType.VideoConfig = {
+
   extensionArray: ['mp4', 'mkv', 'avi', 'flv', 'wmv', 'mov', 'rmvb'],
 
-  /**
-   *  视频标签名数组
-   */
   tagArray: ['-破解-c', '-c', '-4K-破解', '-破解', '-4k'],
 
-  /**
-   *  视频标签匹配正则（注意：这里使用 `tagArray`）
-   */
-  tagRegex: undefined as any, // 初始化为 null，稍后在对象定义后设置
+  tagRegex: undefined as any, // 初始化为 undefined，稍后在对象定义后设置
 
-  /**
-   *  视频排序规则数组
-   */
-  sortingRuleArray: [
+  torrentListRuleArray: [
     {
       name: '-UC.torrent.无码破解',
       backgroundColor: '#FF9F7F',
@@ -38,7 +27,7 @@ export const videoConfig = {
       backgroundColor: '#FF4E88',
     },
     {
-      name: 'c',
+      name: '-C',
       backgroundColor: '#FF4E88',
     },
     {
@@ -56,6 +45,10 @@ export const videoConfig = {
     {
       name: '无码',
       backgroundColor: '#C63C51',
+    },
+    {
+      name: 'torrent',
+      backgroundColor: '#FF4E88',
     },
   ],
 }
