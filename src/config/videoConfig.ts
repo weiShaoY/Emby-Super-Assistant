@@ -1,7 +1,7 @@
 /**
  * 视频匹配配置
  */
-export const videoConfig: VideoConfigType.VideoConfig = {
+export const videoConfig: VideoType.VideoConfig = {
 
   extensionArray: ['mp4', 'mkv', 'avi', 'flv', 'wmv', 'mov', 'rmvb'],
 

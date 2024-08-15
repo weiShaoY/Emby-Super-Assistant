@@ -10,7 +10,7 @@ const btsowBtnList = ref<string[]>([])
 /**
  *  已入库的视频
  */
-const addedToInventoryBtnList = ref<VideoType[]>([])
+const addedToInventoryBtnList = ref<VideoType.Video[]>([])
 
 /**
  *  在Emby打开按钮
@@ -54,7 +54,7 @@ function main() {
      */
     const isEmbyHaveChineseTorrent = ref(false)
 
-    videoFileArray.forEach((item: VideoType) => {
+    videoFileArray.forEach((item: VideoType.Video) => {
       //  当前项的videoName 是否包含在nfo文件中
       if (item.videoProcessedName.includes(videoName)) {
         ele?.classList.add('is-highlight')

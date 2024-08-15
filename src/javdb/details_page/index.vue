@@ -6,7 +6,7 @@ import { sortBtList } from './detailsPageSortBtList'
 
 import { videoManager } from '@/utils'
 
-const addedToEmbyList = ref<VideoType[]>([])
+const addedToEmbyList = ref<VideoType.Video[]>([])
 
 /**
  *  是否显示提示更新中文磁链按钮
@@ -65,7 +65,7 @@ function main() {
    */
   const isEmbyHaveChineseTorrent = ref(false)
 
-  videoFileArray.forEach((item: VideoType) => {
+  videoFileArray.forEach((item: VideoType.Video) => {
     //  当前项的videoName 是否包含在nfo文件中
     if (item.videoProcessedName.includes(videoName.value)) {
       document.querySelector('.video-meta-panel')?.classList.add('is-highlight')
@@ -153,8 +153,6 @@ onMounted(() => {
   getTorrentList()
 
   const columns = document.querySelectorAll('.columns')
-
-  console.log('%c Line:156 🍅 columns', 'color:#42b983', columns)
 
   columns[4].insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
 

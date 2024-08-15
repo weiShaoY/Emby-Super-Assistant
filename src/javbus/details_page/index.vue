@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 
 import { videoManager } from '@/utils'
 
-const addedToEmbyList = ref<VideoType[]>([])
+const addedToEmbyList = ref<VideoType.Video[]>([])
 
 /**
  *  是否显示提示更新中文磁链按钮
@@ -52,7 +52,7 @@ function main() {
    */
   const isEmbyHaveChineseTorrent = ref(false)
 
-  videoFileArray.forEach((item: VideoType) => {
+  videoFileArray.forEach((item: VideoType.Video) => {
     //  当前项的videoName 是否包含在nfo文件中
     if (item.videoProcessedName.includes(videoName.value)) {
       document.querySelector('.movie')?.classList.add('is-highlight')

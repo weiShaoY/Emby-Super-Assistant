@@ -7,7 +7,7 @@ defineProps({
    *  全部重复视频
    */
   duplicatesVideoList: {
-    type: Array as PropType<VideoType[]>,
+    type: Array as PropType<VideoType.Video[]>,
     required: true,
   },
 
