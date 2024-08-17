@@ -188,13 +188,16 @@ const duplicatesVideoNameList = ref<string[]>([])
 
 function videoDuplicate(event: any) {
   event.stopPropagation()
-  isShowDuplicatesModel.value = true
+
   const duplicate = videoManager.duplicate()
 
   duplicatesVideoList.value = duplicate.duplicatesVideoList
-  console.log('%c Line:195 🥑 duplicatesVideoList.value', 'color:#fca650', duplicatesVideoList.value)
 
   duplicatesVideoNameList.value = duplicate.duplicatesVideoNameList
+
+  console.log('%c Line:195 🥑 duplicatesVideoList.value', 'color:#fca650', duplicatesVideoList.value)
+
+  isShowDuplicatesModel.value = true
 }
 </script>
 
