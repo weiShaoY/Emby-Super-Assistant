@@ -1,205 +1,205 @@
-.javbus {
+// .javbus {
 
 
 
 
-  .footer {
-    display: none;
-  }
+//   .footer {
+//     display: none;
+//   }
 
-  // 盒子高亮
-  .is-highlight {
-    padding: 10px;
+//   // 盒子高亮
+//   .is-highlight {
+//     padding: 10px;
 
-    border-radius: 10px;
+//     border-radius: 10px;
 
-    background-color: #EA1179;
-
-
-
-    .photo-info {
-      background-color: #EA1179;
-      color: #fff;
-
-      span {
-        color: #fff;
-
-        date {
-          color: #fff;
-        }
-      }
-
-
-    }
-
-    #mag-submit-show {
-      display: none;
-    }
+//     background-color: #EA1179;
 
 
 
-  }
+//     .photo-info {
+//       background-color: #EA1179;
+//       color: #fff;
 
-  // 详情页
-  .container {
+//       span {
+//         color: #fff;
 
-    //  顶部标题
-    h3 {
-      font-size: 24px;
-      font-weight: 700;
-      margin: 20px 0;
-    }
-
-    // 左边图片
-    .screencap {
-      width: 63% !important;
-      display: block;
-      border: none;
-    }
+//         date {
+//           color: #fff;
+//         }
+//       }
 
 
-    //  影片信息
-    .info {
-      background-color: #fff;
-      border-radius: 10px;
-      width: 37%;
-      padding: 12px;
+//     }
 
-      a {
-        color: #485FC7;
-      }
-
-      p {
-        min-height: 40px;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-
-        &:first-child> :last-child {
-          font-size: 24px;
-          font-weight: 700;
-        }
-
-        > :first-child {
-          margin-right: 10px;
-          font-size: 16px;
-          font-weight: 700;
-        }
-      }
-
-      > :nth-last-child(2) {
-        font-size: 0;
-        display: block;
-
-        span {
-          font-size: 16px !important;
-
-          &::before {
-            content: '';
-          }
-
-          &::after {
-            content: "\A";
-            white-space: pre;
-          }
-        }
-      }
-    }
-  }
+//     #mag-submit-show {
+//       display: none;
+//     }
 
 
 
-  .row>#waterfall {
-    width: auto !important;
-    height: auto !important;
-  }
+//   }
 
-  // 列表页
-  .masonry #waterfall {
+//   // 详情页
+//   .container {
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 1344px;
-    height: 100% !important;
+//     //  顶部标题
+//     h3 {
+//       font-size: 24px;
+//       font-weight: 700;
+//       margin: 20px 0;
+//     }
 
-    .item {
-      position: static !important;
-      height: auto;
-
-      .movie-box {
-        padding: 10px;
-
-        width: auto !important;
-
-        img {
-          width: 100% !important;
-        }
-
-        .photo-frame {
-          margin: 0;
-
-        }
-
-      }
-
-    }
-
-  }
-}
-
-@media screen and (max-width: 1408px) {
-  .javbus {
-
-    .masonry #waterfall {
-      grid-template-columns: repeat(4, 1fr);
-
-      max-width: 1344px;
+//     // 左边图片
+//     .screencap {
+//       width: 63% !important;
+//       display: block;
+//       border: none;
+//     }
 
 
+//     //  影片信息
+//     .info {
+//       background-color: #fff;
+//       border-radius: 10px;
+//       width: 37%;
+//       padding: 12px;
 
-    }
-  }
-}
+//       a {
+//         color: #485FC7;
+//       }
 
-@media screen and (max-width: 1216px) {
-  .javbus {
-    .masonry #waterfall {
-      grid-template-columns: repeat(3, 1fr);
+//       p {
+//         min-height: 40px;
+//         display: flex;
+//         align-items: center;
+//         flex-wrap: wrap;
 
-      max-width: 1152px;
+//         &:first-child> :last-child {
+//           font-size: 24px;
+//           font-weight: 700;
+//         }
 
-    }
-  }
-}
+//         > :first-child {
+//           margin-right: 10px;
+//           font-size: 16px;
+//           font-weight: 700;
+//         }
+//       }
 
-@media screen and (max-width: 1024px) {
-  .javbus {
-    .masonry #waterfall {
-      grid-template-columns: repeat(3, 1fr);
+//       > :nth-last-child(2) {
+//         font-size: 0;
+//         display: block;
 
-      max-width: 1024px;
+//         span {
+//           font-size: 16px !important;
 
-    }
-  }
-}
+//           &::before {
+//             content: '';
+//           }
 
-@media screen and (max-width: 768px) {
-  .javbus {
-    .masonry #waterfall {
-      grid-template-columns: repeat(2, 1fr);
+//           &::after {
+//             content: "\A";
+//             white-space: pre;
+//           }
+//         }
+//       }
+//     }
+//   }
 
-      max-width: 768px;
 
-    }
-  }
-}
 
-@media screen and (max-width: 480px) {
-  .javbus {
-    .masonry #waterfall {
-      grid-template-columns: repeat(1, 1fr);
+//   .row>#waterfall {
+//     width: auto !important;
+//     height: auto !important;
+//   }
 
-      max-width: 480px;
-    }
-  }
-}
+//   // 列表页
+//   .masonry #waterfall {
+
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     max-width: 1344px;
+//     height: 100% !important;
+
+//     .item {
+//       position: static !important;
+//       height: auto;
+
+//       .movie-box {
+//         padding: 10px;
+
+//         width: auto !important;
+
+//         img {
+//           width: 100% !important;
+//         }
+
+//         .photo-frame {
+//           margin: 0;
+
+//         }
+
+//       }
+
+//     }
+
+//   }
+
+//   @media screen and (max-width: 1408px) {
+//     .javbus {
+
+//       .masonry #waterfall {
+//         grid-template-columns: repeat(4, 1fr);
+
+//         max-width: 1344px;
+
+
+
+//       }
+//     }
+//   }
+
+//   @media screen and (max-width: 1216px) {
+//     .javbus {
+//       .masonry #waterfall {
+//         grid-template-columns: repeat(3, 1fr);
+
+//         max-width: 1152px;
+
+//       }
+//     }
+//   }
+
+//   @media screen and (max-width: 1024px) {
+//     .javbus {
+//       .masonry #waterfall {
+//         grid-template-columns: repeat(3, 1fr);
+
+//         max-width: 1024px;
+
+//       }
+//     }
+//   }
+
+//   @media screen and (max-width: 768px) {
+//     .javbus {
+//       .masonry #waterfall {
+//         grid-template-columns: repeat(2, 1fr);
+
+//         max-width: 768px;
+
+//       }
+//     }
+//   }
+
+//   @media screen and (max-width: 480px) {
+//     .javbus {
+//       .masonry #waterfall {
+//         grid-template-columns: repeat(1, 1fr);
+
+//         max-width: 480px;
+//       }
+//     }
+//   }
+// }

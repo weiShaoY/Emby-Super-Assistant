@@ -17,7 +17,7 @@ const isLoading = ref(false)
 /**
  * 视频文件集
  */
-const videoFileSet: Set<VideoType> = new Set([])
+const videoFileSet: Set<VideoType.Video> = new Set([])
 
 type FileData = {
   fileHandle: FileSystemFileHandle
@@ -140,7 +140,7 @@ async function mainBtnHandler() {
         fileData.parentDirectoryHandle,
       )
 
-      const item: VideoType = {
+      const item: VideoType.Video = {
         videoName: file.name.substring(0, file.name.length - '.nfo'.length),
         videoFullName,
         videoProcessedName: processFileName(file.name),
@@ -182,7 +182,7 @@ async function mainBtnHandler() {
  */
 const isShowDuplicatesModel = ref(false)
 
-const duplicatesVideoList = ref<VideoType[]>([])
+const duplicatesVideoList = ref<VideoType.Video[]>([])
 
 const duplicatesVideoNameList = ref<string[]>([])
 

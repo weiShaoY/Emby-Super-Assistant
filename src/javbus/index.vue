@@ -14,7 +14,6 @@ const waterfallElement = document.querySelector('#waterfall')
 if (waterfallElement) {
   isListPage.value = true
 }
-
 else {
   isListPage.value = false
 }
@@ -23,15 +22,13 @@ else {
 <template>
   <StoreHouseButton />
 
-  <ListPage
+  <!-- <ListPage
     v-if="isListPage"
   />
 
   <DetailsPage
     v-else
-  />
+  /> -->
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>

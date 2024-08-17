@@ -21,12 +21,11 @@ if (bodyElement) {
   if (isJavdb) {
     bodyElement.classList.add('javdb')
   }
+
   else if (isJavbus) {
     bodyElement.classList.add('javbus')
-    console.log('%c Line:24 🍅 bodyElement', 'color:#42b983', bodyElement)
   }
   else if (isEmby) {
-    console.log('%c Line:29 🥔 isEmby', 'color:#e41a6a', isEmby)
     bodyElement.classList.add('emby')
   }
 }

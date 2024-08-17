@@ -1,14 +1,12 @@
-import { Notification } from '@arco-design/web-vue'
-
 /**
  * 视频文件管理
  */
 export const videoManager = {
   /**
-   * 获取视频文件
+   * 获取视频文件数组
    * @return {VideoType[] | null} -  videoFileArray -  视频文件 JSON 字符串
    */
-  get(): VideoType[] | null {
+  get(): VideoType.Video[] | null {
     const videoFileJson = localStorage.getItem('videoFile')
 
     return videoFileJson ? JSON.parse(videoFileJson) : null
@@ -18,7 +16,7 @@ export const videoManager = {
    * 设置视频文件
    * @param {Set<VideoType>} videoFileSet - 视频文件集合
    */
-  set(videoFileSet: Set<VideoType>): void {
+  set(videoFileSet: Set<VideoType.Video>): void {
     const videoFile = JSON.stringify(Array.from(videoFileSet))
 
     localStorage.setItem('videoFile', videoFile)
@@ -38,12 +36,12 @@ export const videoManager = {
      * @returns {VideoType[]} result - 具有重复项的新数组
      */
     function findDuplicatesByProperty(
-      list: VideoType[],
-      property: keyof VideoType,
-    ): VideoType[] {
-      const propertyMap: { [key: string]: VideoType[] } = {}
+      list: VideoType.Video[],
+      property: keyof VideoType.Video,
+    ): VideoType.Video[] {
+      const propertyMap: { [key: string]: VideoType.Video[] } = {}
 
-      const duplicates: VideoType[] = []
+      const duplicates: VideoType.Video[] = []
 
       list.forEach((item) => {
         const key = item[property] as string
@@ -69,8 +67,8 @@ export const videoManager = {
      * @param {VideoType[]} items - 要处理的数组
      * @returns {string[]} uniqueVideoProcessedNames - 去重后的 videoProcessedName 数组
      */
-    function getUniqueVideoProcessedName(items: VideoType[]): string[] {
-      const videoProcessedNameMap: { [key: string]: VideoType[] } = {}
+    function getUniqueVideoProcessedName(items: VideoType.Video[]): string[] {
+      const videoProcessedNameMap: { [key: string]: VideoType.Video[] } = {}
 
       const uniqueVideoProcessedNames: string[] = []
 
@@ -100,7 +98,7 @@ export const videoManager = {
      * @returns {{videoList: VideoType[], videoNameList: string[]}} - 返回重复的视频和去重后的视频名称列表
      */
     function handleDuplicates(): {
-      duplicatesVideoList: VideoType[]
+      duplicatesVideoList: VideoType.Video[]
       duplicatesVideoNameList: string[]
     } {
       const videoFileArray = videoManager.get()
@@ -120,18 +118,6 @@ export const videoManager = {
        *  Emby去重的影片标题列表
        */
       const duplicatesVideoNameList = getUniqueVideoProcessedName(videoFileArray)
-
-      // Notification.success({
-      //   title: `共发现:\u00A0\u00A0${duplicatesVideoList.length}部\u00A0\u00A0视频重复`,
-      //   content: `共${videoNameList.length}个去重后的影片标题
-      //    ${videoNameList.join('\n')}`,
-
-      //   duration: 300000,
-      //   closable: true,
-      //   style: {
-      //     whiteSpace: 'pre-line', // 添加这个样式
-      //   },
-      // })
 
       return { duplicatesVideoList, duplicatesVideoNameList }
     }

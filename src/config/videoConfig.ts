@@ -24,6 +24,7 @@ export const videoConfig: VideoType.VideoConfig = {
       name: '-UC',
       backgroundColor: '#fca650',
     },
+
     {
       name: '-c',
       backgroundColor: '#FF1493',
@@ -39,6 +40,11 @@ export const videoConfig: VideoType.VideoConfig = {
     {
       name: 'ch',
       backgroundColor: '#00FFFF',
+    },
+    {
+      name: 'ThZu.Cc',
+      backgroundColor: '#FF4900',
+
     },
     {
       name: '4K-破解',
