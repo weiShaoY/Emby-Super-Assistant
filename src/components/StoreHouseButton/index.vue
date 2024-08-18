@@ -15,6 +15,20 @@ import storeHouseSvg from '@/assets/svg/storeHouse.svg'
 const isLoading = ref(false)
 
 /**
+ *  是否显示查重弹窗
+ */
+const isShowDuplicatesModel = ref(false)
+
+/**
+ *  查重按钮点击事件
+ */
+function videoDuplicateHandle(event: any) {
+  event.stopPropagation()
+
+  isShowDuplicatesModel.value = true
+}
+
+/**
  * 视频文件集
  */
 const videoFileSet: Set<VideoType.Video> = new Set([])
@@ -23,37 +37,6 @@ type FileData = {
   fileHandle: FileSystemFileHandle
   folderNames: string[]
   parentDirectoryHandle: FileSystemDirectoryHandle
-}
-
-/**
- * 递归获取目录下的所有文件
- * @param {FileSystemDirectoryHandle} directoryHandle - 当前目录句柄
- * @param {string[]} folderNames - 目录名数组
- * @returns {AsyncGenerator<FileData>} 异步生成器，生成每个文件的数据
- */
-async function* getFiles(
-  directoryHandle: any,
-  folderNames: string[] = [],
-): AsyncGenerator<FileData> {
-  for await (const entry of directoryHandle.entries()) {
-    const [name, handle] = entry
-
-    try {
-      if (handle.kind === 'file' && name.endsWith('.nfo')) {
-        yield {
-          fileHandle: handle,
-          folderNames: [...folderNames],
-          parentDirectoryHandle: directoryHandle,
-        }
-      }
-      else if (handle.kind === 'directory') {
-        yield * getFiles(handle, [...folderNames, name])
-      }
-    }
-    catch (e) {
-      console.error(e)
-    }
-  }
 }
 
 /**
@@ -107,15 +90,52 @@ function getVideoTagName(videoFullName: string): string[] {
   }
 }
 
-// 主按钮处理函数
+/**
+ * 递归获取目录下的所有文件
+ * @param {FileSystemDirectoryHandle} directoryHandle - 当前目录句柄
+ * @param {string[]} folderNames - 目录名数组
+ * @returns {AsyncGenerator<FileData>} 异步生成器，生成每个文件的数据
+ */
+async function* getFiles(
+  directoryHandle: any,
+  folderNames: string[] = [],
+): AsyncGenerator<FileData> {
+  for await (const entry of directoryHandle.entries()) {
+    console.log('%c Line:90 🥓 entry', 'color:#465975', entry)
+    const [name, handle] = entry
+
+    try {
+      if (handle.kind === 'file' && name.endsWith('.nfo')) {
+        yield {
+          fileHandle: handle,
+          folderNames: [...folderNames],
+          parentDirectoryHandle: directoryHandle,
+        }
+      }
+      else if (handle.kind === 'directory') {
+        yield * getFiles(handle, [...folderNames, name])
+      }
+    }
+    catch (e) {
+      console.error(e)
+    }
+  }
+}
+
+/**
+ *  主按钮点击事件
+ */
 async function mainBtnHandler() {
+  // 清空存储视频文件信息的 Set
   videoFileSet.clear()
 
   try {
+    // 使用 showDirectoryPicker API 打开目录选择器，让用户选择一个目录
     const directoryHandle: FileSystemDirectoryHandle = await (
       window as any
     ).showDirectoryPicker()
 
+    // 如果用户没有选择目录，显示错误通知并退出函数
     if (!directoryHandle) {
       Notification.error({
         title: `获取本地信息失败`,
@@ -127,19 +147,35 @@ async function mainBtnHandler() {
       return
     }
 
-    const startTime = Date.now()
-
     isLoading.value = true
 
+    /**
+     *  开始时间
+     */
+    const startTime = Date.now()
+
+    // 使用 for-await-of 语法异步遍历用户选择的目录中的所有文件
     for await (const fileData of getFiles(directoryHandle, [
       directoryHandle.name,
     ])) {
+      console.log('%c Line:150 🍷 fileData', 'color:#e41a6a', fileData)
+
+      /**
+       *  通过句柄获取文件的 File 对象
+       */
       const file = await fileData.fileHandle.getFile()
 
+      // const fileContent = await file.text()
+
+      // ///////////////////////////
+      /**
+       *   根据文件的父目录获取视频文件的完整名称
+       */
       const videoFullName = await findVideoFileName(
         fileData.parentDirectoryHandle,
       )
 
+      // 创建一个包含视频信息的对象
       const item: VideoType.Video = {
         videoName: file.name.substring(0, file.name.length - '.nfo'.length),
         videoFullName,
@@ -151,13 +187,21 @@ async function mainBtnHandler() {
           videoFullName.includes('-c') || videoFullName.includes('-C'),
       }
 
+      // 将该视频信息对象添加到 Set 中
       videoFileSet.add(item)
     }
 
+    // 将收集到的所有视频信息存储到 videoManager 中
     videoManager.set(videoFileSet)
 
+    /**
+     *  结束时间
+     */
     const endTime = Date.now()
 
+    /**
+     *   耗时
+     */
     const time = ((endTime - startTime) / 1000).toFixed(2)
 
     isLoading.value = false
@@ -170,34 +214,11 @@ async function mainBtnHandler() {
     })
   }
   catch (error) {
-    console.error('Error picking directory:', error)
+    console.error('错误:', error)
   }
   finally {
     isLoading.value = false
   }
-}
-
-/**
- *  是否显示查重弹窗
- */
-const isShowDuplicatesModel = ref(false)
-
-const duplicatesVideoList = ref<VideoType.Video[]>([])
-
-const duplicatesVideoNameList = ref<string[]>([])
-
-function videoDuplicate(event: any) {
-  event.stopPropagation()
-
-  const duplicate = videoManager.duplicate()
-
-  duplicatesVideoList.value = duplicate.duplicatesVideoList
-
-  duplicatesVideoNameList.value = duplicate.duplicatesVideoNameList
-
-  console.log('%c Line:195 🥑 duplicatesVideoList.value', 'color:#fca650', duplicatesVideoList.value)
-
-  isShowDuplicatesModel.value = true
 }
 </script>
 
@@ -206,8 +227,6 @@ function videoDuplicate(event: any) {
   <DuplicatesModel
     v-if="isShowDuplicatesModel"
     v-model="isShowDuplicatesModel"
-    :duplicates-video-list="duplicatesVideoList"
-    :duplicates-video-name-list="duplicatesVideoNameList"
   />
 
   <div
@@ -256,7 +275,7 @@ function videoDuplicate(event: any) {
 
     <div
       class="absolute left-[50%] z-800 w-22 origin-left scale-0 cursor-pointer border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out -top-11 -translate-x-[50%] group-hover:scale-100"
-      @click="videoDuplicate"
+      @click="videoDuplicateHandle"
     >
       视频查重
     </div>

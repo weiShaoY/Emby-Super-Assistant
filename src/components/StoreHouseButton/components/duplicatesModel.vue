@@ -1,24 +1,10 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import EmbyBottom from '@/components/EmbyButton/index.vue'
+import { videoManager } from '@/utils'
 
-defineProps({
-  /**
-   *  全部重复视频
-   */
-  duplicatesVideoList: {
-    type: Array as PropType<VideoType.Video[]>,
-    required: true,
-  },
+const duplicatesVideoList = ref <VideoType.Video[]>([])
 
-  /**
-   *  去重后视频标题数组
-   */
-  duplicatesVideoNameList: {
-    type: Array as PropType<string[]>,
-    required: true,
-  },
-})
+const duplicatesVideoNameList = ref <string[]>([])
 
 const visible = defineModel({ type: Boolean, default: false })
 
@@ -26,6 +12,20 @@ const visible = defineModel({ type: Boolean, default: false })
  *  是否显示全部
  */
 const isShowAll = ref(false)
+
+function main() {
+  const duplicate = videoManager.duplicate()
+
+  duplicatesVideoList.value = duplicate.duplicatesVideoList
+
+  console.log('%c Line:22 🍊 所有重复的影片列表', 'color:#b03734', duplicatesVideoList)
+
+  duplicatesVideoNameList.value = duplicate.duplicatesVideoNameList
+
+  console.log('%c Line:26 🍕 Emby去重的影片标题列表', 'color:#7f2b82', duplicatesVideoNameList)
+}
+
+main()
 </script>
 
 <template>

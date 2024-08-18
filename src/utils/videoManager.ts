@@ -45,8 +45,8 @@ export const videoManager = {
       }, {} as { [key: string]: T[] })
 
       return Object.values(propertyMap)
-        .flat()
-        .filter((_, i, arr) => arr.length > 1)
+        .filter(items => items.length > 1) // 过滤掉那些只有一个项的属性值
+        .flat() // 展平数组，返回所有重复项
     }
 
     /**
@@ -67,33 +67,20 @@ export const videoManager = {
       return Object.keys(propertyMap).filter(key => propertyMap[key].length > 1)
     }
 
-    /**
-     * 主函数，处理筛选重复项逻辑
-     * @returns {{videoList: VideoType[], videoNameList: string[]}} - 返回重复的视频和去重后的视频名称列表
-     */
-    function handleDuplicates(): {
-      duplicatesVideoList: VideoType.Video[]
-      duplicatesVideoNameList: string[]
-    } {
-      const videoFileArray = videoManager.get() || []
+    const videoFileArray = videoManager.get() || []
 
-      return {
-        /**
-         *  所有重复的影片列表
-         */
-        duplicatesVideoList: findDuplicatesByProperty(videoFileArray, 'videoProcessedName'),
+    return {
+      /**
+       *  所有重复的影片列表
+       */
+      duplicatesVideoList: findDuplicatesByProperty(videoFileArray, 'videoProcessedName'),
 
-        /**
-         *  Emby去重的影片标题列表
-         */
-        duplicatesVideoNameList: getUniqueValuesByProperty(videoFileArray, 'videoProcessedName'),
-      }
+      /**
+       *  Emby去重的影片标题列表
+       */
+      duplicatesVideoNameList: getUniqueValuesByProperty(videoFileArray, 'videoProcessedName'),
     }
-
-    // 调用主函数来处理重复项并返回结果
-    return handleDuplicates()
   },
-
 }
 
 export default videoManager
