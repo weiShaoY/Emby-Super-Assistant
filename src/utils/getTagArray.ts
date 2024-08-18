@@ -15,7 +15,9 @@ function getTagArray(fullName: string): Array<{ name: string[], url: string }> {
       .filter(tag =>
 
         // 检查 tag.name 数组中的任何一个项是否存在于 foundTags 中
-        tag.name.some(n => foundTags.some(match => match[0] === n)),
+        tag.name.some(n =>
+          foundTags.some(match => match[0].toLowerCase().includes(n.toLowerCase())),
+        ),
       )
 
     // 返回去重后的匹配标签对象数组

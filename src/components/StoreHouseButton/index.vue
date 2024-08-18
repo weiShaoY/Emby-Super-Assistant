@@ -175,7 +175,7 @@ async function mainBtnHandler() {
 
         directoryPath: [...fileData.directoryPath, file.name],
 
-        tagArray: getTagArray(file.name),
+        tagArray: getTagArray(file.name.substring(0, file.name.lastIndexOf('.'))),
 
         resolution: nfoContent.resolution || '',
 

@@ -20,8 +20,6 @@ const props = defineProps({
 
 const torrentList = ref<TorrentType[]>(props.torrentList)
 
-console.log('%c Line:22 🍩 torrentList', 'color:#fca650', torrentList)
-
 /**
  *  有中文字幕的数量
  */
@@ -225,10 +223,10 @@ main()
 
                 <!-- 左边第二列 -->
                 <div
-                  v-if="torrent.size"
                   class="m-l-3 w-30 group-hover:text-#fff"
                 >
                   <span
+                    v-if="torrent.size"
                     class="text-4 font-700"
                   >
                     {{
@@ -237,6 +235,7 @@ main()
                   </span>
 
                   <span
+                    v-if="torrent.size"
                     class="font-600"
                   >
                     GB
