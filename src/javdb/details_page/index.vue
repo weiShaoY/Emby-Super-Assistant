@@ -155,7 +155,7 @@ onMounted(() => {
   </Teleport>
 
   <div
-    class="fixed left-2 top-60 w-60"
+    class="fixed left-2 top-60 w-70"
   >
     <UpdateChineseButton
       v-if="isShowUpdateChineseButton"

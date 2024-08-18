@@ -64,6 +64,11 @@ namespace VideoType {
      */
     size: string
 
+    /**
+     *  分辨率
+     */
+    resolution: string
+
   }
 
   /**

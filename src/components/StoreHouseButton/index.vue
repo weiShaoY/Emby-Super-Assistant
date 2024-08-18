@@ -3,7 +3,7 @@ import { Notification } from '@arco-design/web-vue'
 
 import DuplicatesModel from './components/duplicatesModel.vue'
 
-import { getTagArray, videoManager } from '@/utils'
+import { getTagArray, parseNfoContent, videoManager } from '@/utils'
 
 import { videoConfig } from '@/config'
 
@@ -49,35 +49,18 @@ type FileData = {
    *  父目录的句柄，用于访问父目录的内容
    */
   parentDirectoryHandle: FileSystemDirectoryHandle
+
+  /**
+   *  nfo 文件内容
+   */
+  nfoContent: string
+
 }
 
 /**
  * 视频文件集
  */
 const videoFileSet: Set<VideoType.Video> = new Set([])
-
-/**
- * 查找视频文件名
- * @param {FileSystemDirectoryHandle} directoryHandle - 当前目录句柄
- * @returns {Promise<string>} 找到的视频文件名或空字符串
- */
-async function findVideoFileName(
-  directoryHandle: FileSystemDirectoryHandle,
-): Promise<string> {
-  for await (const [name, handle] of (directoryHandle as any).entries()) {
-    if (handle.kind === 'file') {
-      const extension = videoConfig.extensionArray.find(ext =>
-        name.endsWith(`.${ext}`),
-      )
-
-      if (extension) {
-        return name
-      }
-    }
-  }
-
-  return ''
-}
 
 /**
  * 递归获取目录下的所有文件
@@ -95,11 +78,25 @@ async function* getFiles(
     try {
       //   判断当前条目是否为文件，并且文件扩展名是否在 videoConfig.extensionArray 中
       if (handle.kind === 'file' && videoConfig.extensionArray.some(ext => name.endsWith(`.${ext}`))) {
+        let nfoContent = ''
+
+        // 尝试查找同级目录下的同名 .nfo 文件
+        const baseName = name.substring(0, name.lastIndexOf('.'))
+
+        const nfoHandle = await directoryHandle.getFileHandle(`${baseName}.nfo`, { create: false }).catch(() => null)
+
+        if (nfoHandle) {
+          const file = await nfoHandle.getFile()
+
+          nfoContent = await file.text()
+        }
+
         // 生成一个包含文件数据的对象
         yield {
           fileHandle: handle,
           directoryPath: [...directoryPath],
           parentDirectoryHandle: directoryHandle,
+          nfoContent,
         }
       }
 
@@ -155,14 +152,10 @@ async function mainBtnHandler() {
        */
       const file = await fileData.fileHandle.getFile()
 
-      // const fileContent = await file.text()
-
       /**
-       *   根据文件的父目录获取视频文件的完整名称
+       *  解析后的Nfo文件内容
        */
-      const fullName = await findVideoFileName(
-        fileData.parentDirectoryHandle,
-      )
+      const nfoContent = parseNfoContent(fileData.nfoContent)
 
       // 创建一个包含视频信息的对象
       const item: VideoType.Video = {
@@ -180,17 +173,17 @@ async function mainBtnHandler() {
 
         extensionName: file.name.replace(/^.*\./, ''),
 
-        directoryPath: [...fileData.directoryPath, fullName],
+        directoryPath: [...fileData.directoryPath, file.name],
 
-        tagArray: getTagArray(fullName),
+        tagArray: getTagArray(file.name),
 
-        isChinese:
-          fullName.includes('-c') || fullName.includes('-C'),
+        resolution: nfoContent.resolution || '',
+
+        isChinese: file.name.includes('-c') || file.name.includes('-C'),
       }
 
       // 将该视频信息对象添加到 Set 中
       videoFileSet.add(item)
-      console.log('%c Line:223 🥓 item', 'color:#b03734', item)
     }
 
     // 将收集到的所有视频信息存储到 videoManager 中

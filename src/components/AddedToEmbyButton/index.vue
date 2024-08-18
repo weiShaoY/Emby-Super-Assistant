@@ -97,7 +97,7 @@ function directoryStructureCopyToClipboard(event: any) {
 
 <template>
   <div
-    class="group relative z-1000 m-x-auto m-t-2 w-[90%]"
+    class="group relative z-1000 m-x-auto m-t-2 w-[95%]"
     :class="props.class"
 
     :style="{
@@ -132,6 +132,30 @@ function directoryStructureCopyToClipboard(event: any) {
         <div
           class="flex-center"
         >
+          <div
+            class="m-r-2 flex flex-col text-3"
+          >
+            <span
+              class="m-b-1"
+            >
+              {{ video.resolution }}
+            </span>
+
+            <span>
+              {{ video.size }}
+
+            </span>
+
+          </div>
+
+          <img
+            v-for="item in video.tagArray"
+            :key="item.url"
+            :src="item.url"
+            class="m-r-1 !h-5 !w-5 !rounded-0"
+            alt="复制"
+          >
+
           <img
             v-if="!isShowCopy"
             :src="copySvg"

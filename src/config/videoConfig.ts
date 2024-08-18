@@ -40,12 +40,7 @@ export const videoConfig: VideoType.VideoConfig = {
       ],
       url: 'https://vitejs.dev/logo.svg',
     },
-    {
-      name: [
-        '破解',
-      ],
-      url: 'https://vitejs.dev/logo.svg',
-    },
+
   ],
 
   tagRegex: undefined as any, // 初始化为 undefined，稍后在对象定义后设置
