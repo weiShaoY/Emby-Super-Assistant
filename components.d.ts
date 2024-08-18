@@ -12,7 +12,6 @@ declare module 'vue' {
     copy: typeof import('./src/components/TorrentList/index copy.vue')['default']
     DuplicatesModel: typeof import('./src/components/StoreHouseButton/components/duplicatesModel.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
-    'Index copy': typeof import('./src/components/TorrentList/index copy.vue')['default']
     Personality: typeof import('./src/components/Personality/index.vue')['default']
     Personality_button: typeof import('./src/components/Personality/personality_button/index.vue')['default']
     Personality_button_eight: typeof import('./src/components/Personality/personality_button/personality_button_eight.vue')['default']

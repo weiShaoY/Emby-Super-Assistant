@@ -177,7 +177,7 @@ function directoryStructureCopyToClipboard(event: any) {
 
     <!-- /////////////////// -->
     <div
-      class="absolute bottom-14 left-0 z-800 w-full origin-left scale-0 cursor-pointer select-text border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
+      class="absolute bottom-[130%] left-0 z-800 w-full origin-left scale-0 cursor-pointer select-text border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
       @click="directoryStructureCopyToClipboard"
     >
       <div>
