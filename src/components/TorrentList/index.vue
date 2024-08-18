@@ -246,12 +246,12 @@ main()
                 <div
                   v-for="tag in torrent.tagArray"
                   :key="tag.name"
-                  class="w-auto p-2"
+                  class="m-l-20"
                 >
                   <img
                     :src="tag.url"
-                    alt="高清"
-                    class="h-6 w-6"
+                    :alt="tag.name"
+                    class="h-8 w-8"
                   >
                 </div>
 

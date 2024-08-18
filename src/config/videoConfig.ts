@@ -4,6 +4,8 @@ import chineseSvg from '@/assets/svg/chinese.svg'
 
 import hdSvg from '@/assets/svg/hd.svg'
 
+import wuma from '@/assets/svg/wuma.png'
+
 /**
  * 视频匹配配置
  */
@@ -38,7 +40,7 @@ export const videoConfig: VideoType.VideoConfig = {
       name: [
         '无码',
       ],
-      url: 'https://vitejs.dev/logo.svg',
+      url: wuma,
     },
 
   ],
