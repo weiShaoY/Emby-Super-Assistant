@@ -30,24 +30,9 @@ function videoDuplicateHandle(event: any) {
 
 // # ////////////////////////////////////////////////////////////////////////////////////////////
 
-/**
- *  表示文件数据的类型
- */
 type FileData = {
-
-  /**
-   *  文件的句柄，用于访问文件内容
-   */
   fileHandle: FileSystemFileHandle
-
-  /**
-   *  文件所在的目录名数组，包含层级关系
-   */
-  directoryPath: string[]
-
-  /**
-   *  父目录的句柄，用于访问父目录的内容
-   */
+  folderNames: string[]
   parentDirectoryHandle: FileSystemDirectoryHandle
 }
 
@@ -80,61 +65,57 @@ async function findVideoFileName(
 }
 
 /**
- * 获取视频标签名
- * @param {string} fullName - 视频完整名称（包含扩展名）
- * @returns {string[]} 标签数组，如果未找到匹配的标签，则返回 ['无']
+ * 处理文件名
+ * 去掉 '.nfo'、'-c'、'-C' 和 '-破解' 后缀，并转换为小写
+ * @param {string} fileName - 原始文件名
+ * @returns {string} 处理后的文件名
  */
-function getVideoTagArray(fullName: string): { name: string, url: string }[] {
-  // 使用正则表达式 videoConfig.tagRegex 在 fullName 中查找所有匹配项
-  const foundTags = [...fullName.matchAll(videoConfig.tagRegex)]
+function processFileName(fileName: string): string {
+  return fileName
+    .substring(0, fileName.length - '.nfo'.length)
+    .toLowerCase()
+    .replace(videoConfig.tagRegex, '')
+}
+
+/**
+ * 获取视频标签名
+ * @param videoFullName 视频完整名称 (包含扩展名)
+ */
+function getVideoTagName(videoFullName: string): string[] {
+  const foundTags = [...videoFullName.matchAll(videoConfig.tagRegex)]
 
   if (foundTags.length > 0) {
-    // 从 tagArray 中找到匹配的标签对象
-    const matchingTags = foundTags
-      .map(match =>
-        videoConfig.tagArray.find(tag => tag.name === match[0]),
-      )
-
-      // 去除可能为 undefined 的匹配项
-      .filter((tag, index, self) => tag && self.indexOf(tag) === index) as { name: string, url: string }[]
-
-    // 返回去重后的匹配标签对象数组
-    return matchingTags
+    return foundTags.map(match => match[0])
   }
-
   else {
-    // 如果没有找到匹配的标签，则返回一个默认值
-    return []
+    return ['无']
   }
 }
 
 /**
  * 递归获取目录下的所有文件
  * @param {FileSystemDirectoryHandle} directoryHandle - 当前目录句柄
- * @param {string[]} directoryPath - 目录名数组
+ * @param {string[]} folderNames - 目录名数组
  * @returns {AsyncGenerator<FileData>} 异步生成器，生成每个文件的数据
  */
 async function* getFiles(
   directoryHandle: any,
-  directoryPath: string[] = [],
+  folderNames: string[] = [],
 ): AsyncGenerator<FileData> {
   for await (const entry of directoryHandle.entries()) {
+    console.log('%c Line:90 🥓 entry', 'color:#465975', entry)
     const [name, handle] = entry
 
     try {
-      //   判断当前条目是否为文件，并且文件扩展名是否在 videoConfig.extensionArray 中
-      if (handle.kind === 'file' && videoConfig.extensionArray.some(ext => name.endsWith(`.${ext}`))) {
-        // 生成一个包含文件数据的对象
+      if (handle.kind === 'file' && name.endsWith('.nfo')) {
         yield {
           fileHandle: handle,
-          directoryPath: [...directoryPath],
+          folderNames: [...folderNames],
           parentDirectoryHandle: directoryHandle,
         }
       }
-
-      // 如果当前条目为目录，递归调用 getFiles 函数获取目录下的所有文件
       else if (handle.kind === 'directory') {
-        yield * getFiles(handle, [...directoryPath, name])
+        yield * getFiles(handle, [...folderNames, name])
       }
     }
     catch (e) {
@@ -179,6 +160,8 @@ async function mainBtnHandler() {
     for await (const fileData of getFiles(directoryHandle, [
       directoryHandle.name,
     ])) {
+      console.log('%c Line:150 🍷 fileData', 'color:#e41a6a', fileData)
+
       /**
        *  通过句柄获取文件的 File 对象
        */
@@ -186,49 +169,42 @@ async function mainBtnHandler() {
 
       // const fileContent = await file.text()
 
+      // ///////////////////////////
       /**
        *   根据文件的父目录获取视频文件的完整名称
        */
-      const fullName = await findVideoFileName(
+      const videoFullName = await findVideoFileName(
         fileData.parentDirectoryHandle,
       )
 
       // 创建一个包含视频信息的对象
       const item: VideoType.Video = {
-
-        size: `${(file.size / (1024 ** 3)).toFixed(2)} GB`,
-
-        baseName: file.name.substring(0, file.name.lastIndexOf('.')),
-
-        fullName: file.name,
-
-        processedName:
-          file.name.substring(0, file.name.lastIndexOf('.'))
-            .toLowerCase()
-            .replace(videoConfig.tagRegex, ''),
-
-        extensionName: file.name.replace(/^.*\./, ''),
-
-        directoryPath: [...fileData.directoryPath, fullName],
-
-        tagArray: getVideoTagArray(fullName),
-
+        baseName: file.name.substring(0, file.name.length - '.nfo'.length),
+        fullName: videoFullName,
+        processedName: processFileName(file.name),
+        tagArray: getVideoTagName(videoFullName),
+        extensionName: videoFullName.replace(/^.*\./, ''),
+        directoryPath: [...fileData.folderNames, videoFullName],
         isChinese:
-          fullName.includes('-c') || fullName.includes('-C'),
+          videoFullName.includes('-c') || videoFullName.includes('-C'),
       }
 
       // 将该视频信息对象添加到 Set 中
       videoFileSet.add(item)
-      console.log('%c Line:223 🥓 item', 'color:#b03734', item)
     }
 
     // 将收集到的所有视频信息存储到 videoManager 中
     videoManager.set(videoFileSet)
 
     /**
+     *  结束时间
+     */
+    const endTime = Date.now()
+
+    /**
      *   耗时
      */
-    const time = ((Date.now() - startTime) / 1000).toFixed(2)
+    const time = ((endTime - startTime) / 1000).toFixed(2)
 
     isLoading.value = false
 

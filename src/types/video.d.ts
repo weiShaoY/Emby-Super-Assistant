@@ -11,37 +11,42 @@ namespace VideoType {
     /**
      * 视频名称 (去除扩展名)
      */
-    videoName: string
+    baseName: string
 
     /**
      * 视频完整名称 (包含扩展名)
      */
-    videoFullName: string
+    fullName: string
 
     /**
      * 视频处理后的名称 (去除扩展名，去除视频标签，转换为小写)
      */
-    videoProcessedName: string
+    processedName: string
 
     /**
      * 视频文件标签名
      */
-    videoTagName: string []
+    tagArray: TagArrayItem []
 
     /**
      * 视频扩展名
      */
-    videoExtensionName: string
+    extensionName: string
 
     /**
-     * 目录结构
+     * 文件的目录路径层级
      */
-    directoryStructure: string[]
+    directoryPath: string[]
 
     /**
      * 是否为中文字幕
      */
-    isChineseSubtitle: boolean
+    isChinese: boolean
+
+    /**
+     *  视频大小
+     */
+    size: string
 
   }
 
@@ -64,7 +69,7 @@ namespace VideoType {
   /**
    *  标签列表的每一项
    */
-  type tagMatchArrayItem = {
+  type TagArrayItem = {
 
     /**
      * 标签名
@@ -92,7 +97,7 @@ namespace VideoType {
      * 视频标签名数组
      * @type {string[]}
      */
-    tagArray: string[]
+    tagArray: TagArrayItem[]
 
     /**
      *  视频标签匹配正则（注意：这里使用 `TagArrayType`）
@@ -104,10 +109,6 @@ namespace VideoType {
      */
     torrentListSortingRuleArray: torrentListSortingRuleArrayItem[]
 
-    /**
-     *  标签匹配数组
-     */
-    tagMatchArray: tagMatchArrayItem[]
   }
 
 }

@@ -35,11 +35,11 @@ function main() {
     /**
      *  获取视频名称 (小写，去除空格)
      */
-    const videoName = ele
+    const pageVideoName = ele
       .querySelector('strong')
       ?.textContent?.toLowerCase().replace(/\s+/g, '') as string
 
-    if (!videoName) {
+    if (!pageVideoName) {
       return
     }
 
@@ -47,9 +47,9 @@ function main() {
 
     const tagsElement = ele.querySelector('.tags')
 
-    tagsElement?.classList.add(`btsow_btn_${videoName}`)
+    tagsElement?.classList.add(`btsow_btn_${pageVideoName}`)
 
-    btsowBtnList.value.push(videoName)
+    btsowBtnList.value.push(pageVideoName)
 
     const count = ref (0)
 
@@ -60,23 +60,23 @@ function main() {
 
     videoFileArray.forEach((item: VideoType.Video) => {
       //  当前项的videoName 是否包含在nfo文件中
-      if (item.videoProcessedName.includes(videoName)) {
+      if (item.processedName.includes(pageVideoName)) {
         boxElement?.classList.add('is-highlight')
 
         if (!embyBtnList.value.length) {
-          tagsElement?.classList.add(`emby_btn_${videoName}`)
+          tagsElement?.classList.add(`emby_btn_${pageVideoName}`)
 
-          embyBtnList.value.push(`${videoName}`)
+          embyBtnList.value.push(`${pageVideoName}`)
         }
 
-        boxElement?.classList.add(`added_to_emby_btn_${item.videoName}`)
+        boxElement?.classList.add(`added_to_emby_btn_${item.baseName}`)
 
         addedToInventoryBtnList.value.push(item)
 
         count.value++
 
         // 当前项为中文字幕
-        if (item.isChineseSubtitle) {
+        if (item.isChinese) {
           isEmbyHaveChineseTorrent.value = true
         }
       }
@@ -89,9 +89,9 @@ function main() {
 
     //  如果当前视频有中文磁链可用并且和 Emby中已经存在的视频没有中文磁链 则 添加提示更新中文磁链按钮
     if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent.value && count.value) {
-      tagsElement?.classList.add(`update_chinese_btn_${videoName}`)
+      tagsElement?.classList.add(`update_chinese_btn_${pageVideoName}`)
 
-      updateChineseBtnList.value.push(videoName)
+      updateChineseBtnList.value.push(pageVideoName)
     }
   })
 }
@@ -141,7 +141,7 @@ onMounted(() => {
     :key="item.videoName"
   >
     <Teleport
-      :to="`.added_to_emby_btn_${item.videoName}`"
+      :to="`.added_to_emby_btn_${item.baseName}`"
     >
       <AddedToEmbyButton
         :video="item"

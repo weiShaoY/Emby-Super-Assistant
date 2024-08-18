@@ -100,7 +100,7 @@ main()
         <EmbyButton
           v-for="(item, index) in duplicatesVideoList"
           :key="index"
-          :video-name="item.videoProcessedName"
+          :video-name="item.processedName"
           :is-show-video-name="true"
           :height="40"
           class="m-x-auto m-b-5 !w-80%"

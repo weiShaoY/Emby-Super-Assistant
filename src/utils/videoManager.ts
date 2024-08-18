@@ -73,12 +73,12 @@ export const videoManager = {
       /**
        *  所有重复的影片列表
        */
-      duplicatesVideoList: findDuplicatesByProperty(videoFileArray, 'videoProcessedName'),
+      duplicatesVideoList: findDuplicatesByProperty(videoFileArray, 'processedName'),
 
       /**
        *  Emby去重的影片标题列表
        */
-      duplicatesVideoNameList: getUniqueValuesByProperty(videoFileArray, 'videoProcessedName'),
+      duplicatesVideoNameList: getUniqueValuesByProperty(videoFileArray, 'processedName'),
     }
   },
 }

@@ -56,7 +56,7 @@ function main() {
 
     videoFileArray.forEach((item: VideoType.Video) => {
       //  当前项的videoName 是否包含在nfo文件中
-      if (item.videoProcessedName.includes(videoName)) {
+      if (item.processedName.includes(videoName)) {
         ele?.classList.add('is-highlight')
 
         if (!embyBtnList.value.length) {
@@ -65,14 +65,14 @@ function main() {
           embyBtnList.value.push(`${videoName}`)
         }
 
-        ele?.classList.add(`added_to_emby_btn_${item.videoName}`)
+        ele?.classList.add(`added_to_emby_btn_${item.baseName}`)
 
         addedToInventoryBtnList.value.push(item)
 
         count.value++
 
         // 当前项为中文字幕
-        if (item.isChineseSubtitle) {
+        if (item.isChinese) {
           isEmbyHaveChineseTorrent.value = true
         }
       }
@@ -138,7 +138,7 @@ onMounted(() => {
     :key="item.videoName"
   >
     <Teleport
-      :to="`.added_to_emby_btn_${item.videoName}`"
+      :to="`.added_to_emby_btn_${item.baseName}`"
     >
       <AddedToEmbyButton
         :video="item"

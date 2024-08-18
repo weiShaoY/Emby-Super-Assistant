@@ -23,15 +23,15 @@ type TorrentType = {
    */
   time: string
 
-  /**
-   *  是否高清
-   */
-  isHD: boolean
+  // /**
+  //  *  是否高清
+  //  */
+  // isHD: boolean
 
-  /**
-   *  是否有中文字幕
-   */
-  isChinese: boolean
+  // /**
+  //  *  是否有中文字幕
+  //  */
+  // isChinese: boolean
 
   /**
    *  背景颜色
@@ -39,7 +39,12 @@ type TorrentType = {
   backgroundColor?: string
 
   /**
+   * 视频标签名数组
+   * @type {string[]}
+   */
+  tagArray: VideoType.TagArrayItem[]
+
+  /**
    *  匹配的标签名
    */
-  tag?: string
 }

@@ -54,7 +54,7 @@ function main() {
 
   videoFileArray.forEach((item: VideoType.Video) => {
     //  当前项的videoName 是否包含在nfo文件中
-    if (item.videoProcessedName.includes(videoName.value)) {
+    if (item.processedName.includes(videoName.value)) {
       document.querySelector('.movie')?.classList.add('is-highlight')
 
       addedToEmbyList.value.push(item)
@@ -64,7 +64,7 @@ function main() {
       count.value++
 
       // 当前项为中文字幕
-      if (item.isChineseSubtitle) {
+      if (item.isChinese) {
         isEmbyHaveChineseTorrent.value = true
       }
     }

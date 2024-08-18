@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { sortBtList } from './detailsPageSortBtList'
+import { videoConfig } from '@/config'
 
 import { videoManager } from '@/utils'
 
@@ -11,7 +11,10 @@ const isShowUpdateChineseButton = ref(false)
 
 const isShowEmbyButton = ref(false)
 
-const videoName = ref<string>('')
+/**
+ *  页面视频名称
+ */
+const pageVideoName = ref<string>('')
 
 /**
  *  是否显示自定义磁链列表
@@ -27,7 +30,7 @@ const torrentList = ref<TorrentType[]>([])
  * 获取详情页视频名称
  * @returns 视频标题文本
  */
-function getVideoName(): string {
+function getPageVideoName(): string {
   const strongElements = document.querySelectorAll('.video-detail strong')
 
   if (strongElements.length > 0) {
@@ -41,30 +44,31 @@ function getVideoName(): string {
 }
 
 /**
- * 处理视频文件的匹配和状态更新
- * @param videoFileArray 视频文件数组
+ * 获取磁链标签名
+ * @param {string} name - 视频完整名称（包含扩展名）
+ * @returns {string[]} 标签数组，如果未找到匹配的标签，则返回 ['无']
  */
-function processVideoFiles(videoFileArray: VideoType.Video[]) {
-  const matchedVideos = videoFileArray.filter(item => item.videoProcessedName.includes(videoName.value))
+function getTorrentTagArray(name: string): { name: string, url: string }[] {
+  // 使用正则表达式 videoConfig.tagRegex 在 fullName 中查找所有匹配项
+  const foundTags = [...name.matchAll(videoConfig.tagRegex)]
 
-  const count = matchedVideos.length
+  if (foundTags.length > 0) {
+    // 从 tagArray 中找到匹配的标签对象
+    const matchingTags = foundTags
+      .map(match =>
+        videoConfig.tagArray.find(tag => tag.name === match[0]),
+      )
 
-  const isEmbyHaveChineseTorrent = matchedVideos.some(item => item.isChineseSubtitle)
+      // 去除可能为 undefined 的匹配项
+      .filter((tag, index, self) => tag && self.indexOf(tag) === index) as { name: string, url: string }[]
 
-  if (count > 0) {
-    document.querySelector('.video-meta-panel')?.classList.add('is-highlight')
-    addedToEmbyList.value.push(...matchedVideos)
-    isShowEmbyButton.value = true
+    // 返回去重后的匹配标签对象数组
+    return matchingTags
   }
 
-  /**
-   *  页面列表当前视频是否含中文磁链
-   */
-  const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
-
-  //  如果当前视频有中文磁链可用并且和 Emby中已经存在的视频没有中文磁链 则 添加提示更新中文磁链按钮
-  if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent && count) {
-    isShowUpdateChineseButton.value = true
+  else {
+    // 如果没有找到匹配的标签，则返回一个默认值
+    return []
   }
 }
 
@@ -94,16 +98,25 @@ function getTorrentList() {
 
     const time = item.querySelector('.time')?.textContent?.trim() || ''
 
-    const isHD = !!item.querySelector('.is-primary')
+    const tagArray = getTorrentTagArray(name)
 
-    const isChinese = !!item.querySelector('.is-warning')
+    const torrentListItem: TorrentType = { url, name, size, time, tagArray }
 
-    if (name && url && time) {
-      const torrentListItem: TorrentType = { url, name, size, time, isHD, isChinese }
-
-      torrentList.value.push(torrentListItem)
-    }
+    torrentList.value.push(torrentListItem)
   })
+
+  const messageBody = document.querySelector('.message-body')
+
+  if (messageBody) {
+  // messageBody 清空
+
+    messageBody.innerHTML = ''
+
+    // messageBody.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
+    messageBody.insertAdjacentHTML('beforeend', '<div id="TorrentList"></div>')
+
+    isShowTorrentList.value = true
+  }
 }
 
 function main() {
@@ -112,27 +125,39 @@ function main() {
   if (!videoFileArray)
     return
 
-  videoName.value = getVideoName()
-  if (!videoName.value)
+  pageVideoName.value = getPageVideoName()
+
+  if (!pageVideoName.value)
+
     return
 
-  processVideoFiles(videoFileArray)
+  const matchedVideos = videoFileArray.filter(item => item.processedName.includes(pageVideoName.value))
+
+  const count = matchedVideos.length
+
+  const isEmbyHaveChineseTorrent = matchedVideos.some(item => item.isChinese)
+
+  if (count > 0) {
+    document.querySelector('.video-meta-panel')?.classList.add('is-highlight')
+    addedToEmbyList.value.push(...matchedVideos)
+    isShowEmbyButton.value = true
+  }
+
+  /**
+   *  页面列表当前视频是否含中文磁链
+   */
+  const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
+
+  //  如果当前视频有中文磁链可用并且和 Emby中已经存在的视频没有中文磁链 则 添加提示更新中文磁链按钮
+  if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent && count) {
+    isShowUpdateChineseButton.value = true
+  }
 }
 
 onMounted(() => {
-  getTorrentList()
-
   main()
 
-  const columns = document.querySelectorAll('.columns')
-
-  if (columns.length < 4)
-    return
-
-  columns[4].insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
-  columns[5].remove()
-
-  isShowTorrentList.value = true
+  getTorrentList()
 })
 </script>
 
@@ -144,14 +169,14 @@ onMounted(() => {
       class="flex items-center gap-2 p-3"
     >
       <BtsowButton
-        :video-name="videoName"
+        :video-name="pageVideoName"
         :width="100"
         :height="40"
       />
 
       <EmbyButton
         v-if="isShowEmbyButton"
-        :video-name="videoName"
+        :video-name="pageVideoName"
         :width="100"
         :height="40"
       />

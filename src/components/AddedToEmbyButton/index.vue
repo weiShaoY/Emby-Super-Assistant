@@ -15,7 +15,7 @@ const props = defineProps({
    *   视频
    */
   video: {
-    type: Object as () => VideoType,
+    type: Object as () => VideoType.Video,
     required: true,
   },
 
@@ -64,7 +64,7 @@ const props = defineProps({
 /**
  *   视频目录结构
  */
-const videoDirectoryStructure = props.video.directoryStructure.join('\\')
+const videoDirectoryStructure = props.video.directoryPath.join('\\')
 
 const isShowCopy = ref(false)
 
@@ -75,7 +75,7 @@ function videoNameCopyToClipboard(event: any) {
   event.preventDefault()
 
   // 复制到剪切板
-  GM_setClipboard(props.video.videoProcessedName, 'text')
+  GM_setClipboard(props.video.processedName, 'text')
 
   Message.success('视频名称 已复制到剪切板')
 
@@ -126,7 +126,7 @@ function directoryStructureCopyToClipboard(event: any) {
         <span
           class="flex-1 truncate text-start"
         >
-          {{ video.videoName }}
+          {{ video.baseName }}
         </span>
 
         <div

@@ -24,7 +24,9 @@ const torrentList = ref<TorrentType[]>(props.torrentList)
  *  有中文字幕的数量
  */
 const chineseCount = computed(() =>
-  props.torrentList.reduce((count, torrent) => count + (torrent.isChinese ? 1 : 0), 0),
+
+  props.torrentList.filter(item => /-c|-C|_ch/.test(item.name)).length,
+
 )
 
 /**
@@ -44,21 +46,12 @@ async function main() {
       torrent.name.includes(rule.name),
     )
 
-    const isIconSortingRuleArrayIndex = videoConfig.tagMatchArray.findIndex(rule =>
-      torrent.name.includes(rule.name),
-    )
-
     // 初始化一个新的对象，用于存储可能的更新
     const updatedTorrent = { ...torrent }
 
     // 如果找到匹配的背景颜色规则，设置 backgroundColor
     if (inSortingRuleArrayIndex !== -1) {
       updatedTorrent.backgroundColor = videoConfig.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor
-    }
-
-    // 如果找到匹配的标签规则，设置 tag
-    if (isIconSortingRuleArrayIndex !== -1) {
-      updatedTorrent.tag = videoConfig.tagMatchArray[isIconSortingRuleArrayIndex].url
     }
 
     // 返回更新后的对象
@@ -250,39 +243,17 @@ main()
 
                 <!-- 左边第三列 -->
                 <div
-                  v-if="torrent.isHD"
+                  v-for="tag in torrent.tagArray"
+                  :key="tag.name"
                   class="w-auto p-2"
                 >
                   <img
-                    :src="hdSvg"
+                    :src="tag.url"
                     alt="高清"
                     class="h-6 w-6"
                   >
                 </div>
 
-                <!-- 左边第四列 -->
-                <div
-                  v-if="torrent.isChinese"
-                  class="w-auto p-2"
-                >
-                  <img
-                    :src="chineseSvg"
-                    alt="高清"
-                    class="h-6 w-6"
-                  >
-                </div>
-
-                <!-- 左边第五列 -->
-                <div
-                  v-if="torrent.tag"
-                  class="w-auto p-2"
-                >
-                  <img
-                    :src="torrent.tag"
-                    alt=""
-                    class="h-6 w-6"
-                  >
-                </div>
               </div>
 
               <!-- 右边 -->
