@@ -9,6 +9,8 @@ export const videoManager = {
   get(): VideoType.Video[] | null {
     const videoFileJson = localStorage.getItem('videoFile')
 
+    console.log('%c Line:13 🎂 videoFileJson ? JSON.parse(videoFileJson) : null', 'color:#fca650', videoFileJson ? JSON.parse(videoFileJson) : null)
+
     return videoFileJson ? JSON.parse(videoFileJson) : null
   },
 

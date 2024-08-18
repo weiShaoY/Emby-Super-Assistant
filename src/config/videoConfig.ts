@@ -21,23 +21,29 @@ export const videoConfig: VideoType.VideoConfig = {
 
   tagArray: [
     {
-      name: '4k',
+      name: [
+        '4K',
+      ],
       url: fourK.toString(),
     },
     {
-      name: '-c',
+      name: [
+        '-c',
+        '-C',
+        '_ch',
+      ],
       url: chineseSvg,
     },
     {
-      name: '-C',
-      url: chineseSvg,
-    },
-    {
-      name: '无码',
+      name: [
+        '无码',
+      ],
       url: 'https://vitejs.dev/logo.svg',
     },
     {
-      name: '破解',
+      name: [
+        '破解',
+      ],
       url: 'https://vitejs.dev/logo.svg',
     },
   ],
@@ -105,8 +111,11 @@ export const videoConfig: VideoType.VideoConfig = {
 
 // 在对象定义后设置 tagRegex
 videoConfig.tagRegex = new RegExp(
-  videoConfig.tagArray.map(tag => tag.name).join('|'),
-  'gi',
+  videoConfig.tagArray
+    .flatMap(tag => tag.name) // 展开每个 name 数组
+    .map(name => name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')) // 对特殊字符进行转义
+    .join('|'), // 拼接成正则表达式
+  'gi', // 设置全局和忽略大小写标志
 )
 
 export default videoConfig

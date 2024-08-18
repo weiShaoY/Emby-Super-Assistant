@@ -3,7 +3,7 @@ import { Notification } from '@arco-design/web-vue'
 
 import DuplicatesModel from './components/duplicatesModel.vue'
 
-import { videoManager } from '@/utils'
+import { getTagArray, videoManager } from '@/utils'
 
 import { videoConfig } from '@/config'
 
@@ -77,35 +77,6 @@ async function findVideoFileName(
   }
 
   return ''
-}
-
-/**
- * 获取视频标签名
- * @param {string} fullName - 视频完整名称（包含扩展名）
- * @returns {string[]} 标签数组，如果未找到匹配的标签，则返回 ['无']
- */
-function getVideoTagArray(fullName: string): { name: string, url: string }[] {
-  // 使用正则表达式 videoConfig.tagRegex 在 fullName 中查找所有匹配项
-  const foundTags = [...fullName.matchAll(videoConfig.tagRegex)]
-
-  if (foundTags.length > 0) {
-    // 从 tagArray 中找到匹配的标签对象
-    const matchingTags = foundTags
-      .map(match =>
-        videoConfig.tagArray.find(tag => tag.name === match[0]),
-      )
-
-      // 去除可能为 undefined 的匹配项
-      .filter((tag, index, self) => tag && self.indexOf(tag) === index) as { name: string, url: string }[]
-
-    // 返回去重后的匹配标签对象数组
-    return matchingTags
-  }
-
-  else {
-    // 如果没有找到匹配的标签，则返回一个默认值
-    return []
-  }
 }
 
 /**
@@ -211,7 +182,7 @@ async function mainBtnHandler() {
 
         directoryPath: [...fileData.directoryPath, fullName],
 
-        tagArray: getVideoTagArray(fullName),
+        tagArray: getTagArray(fullName),
 
         isChinese:
           fullName.includes('-c') || fullName.includes('-C'),

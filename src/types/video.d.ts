@@ -4,6 +4,22 @@
 namespace VideoType {
 
   /**
+   *  标签列表的每一项
+   */
+  type TagArrayItem = {
+
+    /**
+     * 标签名
+     */
+    name: string[]
+
+    /**
+     * 标签链接
+     */
+    url: string
+  }
+
+  /**
    *  每个视频的类型
    */
   type Video = {
@@ -64,22 +80,6 @@ namespace VideoType {
      * 匹配上的背景颜色
      */
     backgroundColor: string
-  }
-
-  /**
-   *  标签列表的每一项
-   */
-  type TagArrayItem = {
-
-    /**
-     * 标签名
-     */
-    name: string
-
-    /**
-     * 标签链接
-     */
-    url: string
   }
 
   /**

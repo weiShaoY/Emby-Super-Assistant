@@ -42,7 +42,7 @@ type TorrentType = {
    * 视频标签名数组
    * @type {string[]}
    */
-  tagArray: VideoType.TagArrayItem[]
+  tagArray: VideoType.VideoTagArrayItem[]
 
   /**
    *  匹配的标签名

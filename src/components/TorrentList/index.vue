@@ -20,6 +20,8 @@ const props = defineProps({
 
 const torrentList = ref<TorrentType[]>(props.torrentList)
 
+console.log('%c Line:22 🍩 torrentList', 'color:#fca650', torrentList)
+
 /**
  *  有中文字幕的数量
  */
