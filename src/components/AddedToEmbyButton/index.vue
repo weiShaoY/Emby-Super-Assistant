@@ -189,7 +189,7 @@ function directoryStructureCopyToClipboard(event: any) {
               v-for="item in video.tagArray"
               :key="item.url"
               :src="item.url"
-              class="m-r-1 !h-10 !w-10 !rounded-0"
+              class="m-r-1 !h-9 !w-9 !rounded-0"
             >
           </div>
 
@@ -197,7 +197,7 @@ function directoryStructureCopyToClipboard(event: any) {
             class="flex flex-col items-end gap-0 text-white"
           >
             <div
-              class="text-5 text-[#e6683c] font-700"
+              class="text-4 text-[#e6683c] font-700"
             >
               {{ video.size }}
               <!-- {{ video.resolution }} -->

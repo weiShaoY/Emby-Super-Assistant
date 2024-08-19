@@ -76,15 +76,27 @@ function getTorrentList() {
     torrentList.value.push(torrentListItem)
   })
 
-  const messageBody = document.querySelector('.message-body')
+  // const messageBody = document.querySelector('.message-body')
 
-  if (messageBody) {
-  // messageBody 清空
+  // if (messageBody) {
+  // // messageBody 清空
 
-    messageBody.innerHTML = ''
+  //   messageBody.innerHTML = ''
+
+  //   // messageBody.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
+  //   messageBody.insertAdjacentHTML('beforeend', '<div id="TorrentList"></div>')
+
+  //   isShowTorrentList.value = true
+  // }
+  const noBottom = document.querySelector('.no-bottom')
+
+  if (noBottom) {
+    // messageBody 清空
+
+    // noBottom.innerHTML = ''
 
     // messageBody.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
-    messageBody.insertAdjacentHTML('beforeend', '<div id="TorrentList"></div>')
+    noBottom.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
 
     isShowTorrentList.value = true
   }
