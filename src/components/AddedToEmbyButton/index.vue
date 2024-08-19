@@ -56,8 +56,7 @@ const props = defineProps({
    */
   style: {
     type: Object as () => CSSProperties,
-    default: () => ({
-    }),
+    default: () => ({}),
   },
 })
 
@@ -99,7 +98,6 @@ function directoryStructureCopyToClipboard(event: any) {
   <div
     class="group relative z-1000 m-x-auto m-t-2 w-[95%]"
     :class="props.class"
-
     :style="{
       borderRadius: `${radius}px`,
       height: typeof height === 'number' ? `${height}px` : `${height}`,
@@ -109,7 +107,6 @@ function directoryStructureCopyToClipboard(event: any) {
   >
     <button
       class="relative w-full cursor-pointer touch-manipulation border-none bg-transparent p-0 outline-offset-[4px] transition-filter duration-250 ease-in-out focus-visible:outline-none focus:outline-none hover:brightness-[110%]"
-
       @click="videoNameCopyToClipboard"
     >
       <span
@@ -143,9 +140,7 @@ function directoryStructureCopyToClipboard(event: any) {
 
             <span>
               {{ video.size }}
-
             </span>
-
           </div>
 
           <img
@@ -170,9 +165,7 @@ function directoryStructureCopyToClipboard(event: any) {
             alt="已复制"
           >
         </div>
-
       </div>
-
     </button>
 
     <!-- /////////////////// -->
@@ -188,10 +181,7 @@ function directoryStructureCopyToClipboard(event: any) {
         {{ videoDirectoryStructure }}
       </span>
     </div>
-
   </div>
 </template>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
