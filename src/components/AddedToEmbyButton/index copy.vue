@@ -168,56 +168,18 @@ function directoryStructureCopyToClipboard(event: any) {
       </div>
     </button>
 
+    <!-- /////////////////// -->
     <div
-      class="absolute bottom-[110%] origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff px-3 py-2 transition-all duration-300 ease-in-out group-hover:scale-100"
-      :style="{
-        boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
-      }"
+      class="absolute bottom-[130%] left-0 z-800 w-full origin-left scale-0 cursor-pointer select-text border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
       @click="directoryStructureCopyToClipboard"
     >
-      <div
-        class="border border-[#52382f] rounded-3 bg-[#2a2b2f] p-3"
-      >
-        <div
-          class="flex justify-between"
-        >
-
-          <div
-            class="flex items-center gap-3"
-          >
-            <img
-              v-for="item in video.tagArray"
-              :key="item.url"
-              :src="item.url"
-              class="m-r-1 !h-10 !w-10 !rounded-0"
-            >
-          </div>
-
-          <div
-            class="flex flex-col items-end gap-0 text-white"
-          >
-            <div
-              class="text-5 text-[#e6683c] font-700"
-            >
-              {{ video.size }}
-              <!-- {{ video.resolution }} -->
-            </div>
-
-            <div>
-              <!-- {{ video.size }} -->
-              {{ video.resolution }}
-
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="pt-[5px] text-[#ccc]"
-        >
-          {{ videoDirectoryStructure }}
-        </div>
+      <div>
+        视频位置为
       </div>
 
+      <span>
+        {{ videoDirectoryStructure }}
+      </span>
     </div>
   </div>
 </template>

@@ -7,11 +7,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    2: typeof import('./src/components/AddedToEmbyButton/index copy 2.vue')['default']
+    Aaa: typeof import('./src/components/aaa/index.vue')['default']
     AddedToEmbyButton: typeof import('./src/components/AddedToEmbyButton/index.vue')['default']
     BtsowButton: typeof import('./src/components/BtsowButton/index.vue')['default']
-    copy: typeof import('./src/components/TorrentList/index copy.vue')['default']
+    copy: typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
     DuplicatesModel: typeof import('./src/components/StoreHouseButton/components/duplicatesModel.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
+    'Index copy': typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
     Personality: typeof import('./src/components/Personality/index.vue')['default']
     Personality_button: typeof import('./src/components/Personality/personality_button/index.vue')['default']
     Personality_button_eight: typeof import('./src/components/Personality/personality_button/personality_button_eight.vue')['default']
@@ -37,6 +40,7 @@ declare module 'vue' {
     Personality_tooltips: typeof import('./src/components/Personality/personality_tooltips/index.vue')['default']
     Personality_tooltips_one: typeof import('./src/components/Personality/personality_tooltips/personality_tooltips_one.vue')['default']
     StoreHouseButton: typeof import('./src/components/StoreHouseButton/index.vue')['default']
+    Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
     TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']
     UpdateChineseButton: typeof import('./src/components/UpdateChineseButton/index.vue')['default']
   }
