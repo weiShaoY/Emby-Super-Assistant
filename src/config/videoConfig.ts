@@ -10,40 +10,21 @@ import wuMaSvg from '@/assets/svg/wuma.png'
  * 视频匹配配置
  */
 export const videoConfig: VideoType.VideoConfig = {
-
-  extensionArray: [
-    'mp4',
-    'mkv',
-    'avi',
-    'flv',
-    'wmv',
-    'mov',
-    'rmvb',
-  ],
+  extensionArray: ['mp4', 'mkv', 'avi', 'flv', 'wmv', 'mov', 'rmvb'],
 
   tagArray: [
     {
-      name: [
-        '4K',
-      ],
+      name: ['4K'],
       url: fourK.toString(),
     },
     {
-      name: [
-        '-c',
-        '-C',
-        '_ch',
-      ],
+      name: ['-c', '-C', '_ch'],
       url: chineseSvg,
     },
     {
-      name: [
-        '无码',
-        '破解',
-      ],
+      name: ['无码', '破解'],
       url: wuMaSvg,
     },
-
   ],
 
   tagRegex: undefined as any, // 初始化为 undefined，稍后在对象定义后设置
@@ -51,7 +32,7 @@ export const videoConfig: VideoType.VideoConfig = {
   torrentListSortingRuleArray: [
     {
       name: '-UC.torrent.无码破解',
-      backgroundColor: '#03AED2',
+      backgroundColor: '#00FFFF',
     },
     {
       name: '破解-c',
@@ -64,24 +45,23 @@ export const videoConfig: VideoType.VideoConfig = {
 
     {
       name: '-c',
-      backgroundColor: '#FF1493',
-    },
-    {
-      name: '-C.torrent',
       backgroundColor: '#FF6347',
     },
     {
+      name: '-C.torrent',
+      backgroundColor: '#FF1166',
+    },
+    {
       name: '-C',
-      backgroundColor: '#1A4D2E',
+      backgroundColor: '#2233AA',
     },
     {
       name: 'ch',
-      backgroundColor: '#00FFFF',
+      backgroundColor: '#2A9D8F',
     },
     {
       name: 'ThZu.Cc',
       backgroundColor: '#FF4900',
-
     },
     {
       name: '4K-破解',
@@ -93,18 +73,18 @@ export const videoConfig: VideoType.VideoConfig = {
     },
     {
       name: '无码破解',
-      backgroundColor: '#F4CE14',
+      backgroundColor: '#DDDD22',
     },
     {
       name: '无码',
       backgroundColor: '#95D2B3',
     },
-    {
-      name: 'torrent',
-      backgroundColor: '#006989',
-    },
-  ],
 
+    // {
+    //   name: 'torrent',
+    //   backgroundColor: '#006989',
+    // },
+  ],
 }
 
 // 在对象定义后设置 tagRegex

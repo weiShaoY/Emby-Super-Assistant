@@ -182,14 +182,16 @@ main()
               class="group relative z-0 h-[6em] flex cursor-pointer items-center justify-between overflow-hidden rounded-[1em] p-2"
               :style="{
                 backgroundColor: torrent.backgroundColor,
-                color: torrent.backgroundColor ? '#fff' : '#000',
+                // color: torrent.backgroundColor ? '#fff' : '#000',
+                // boxShadow: `2px 2px 35px ${torrent.backgroundColor} inset`,
               }"
             >
               <!-- 悬浮动画 -->
               <div
                 class="absolute z-[-1] h-[5em] w-[5em] rounded-full duration-500 -left-[4.5em] -top-[4.5em] group-hover:scale-[4500%]"
                 :style="{
-                  background: 'linear-gradient(to right,#00DFA2,#E8DC49)',
+                  // background: 'linear-gradient(to right,#00DFA2,#ADFF2F)',
+                  background: 'linear-gradient(to right,#2233AA,#ADFF2F)',
                 }"
               />
 
