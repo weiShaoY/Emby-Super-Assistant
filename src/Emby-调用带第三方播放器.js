@@ -50,7 +50,7 @@
       iconClass,
       buttonText,
       onClick,
-      iconUrl
+      iconUrl,
     }) {
       const divContent = document.createElement('div')
 
@@ -84,8 +84,8 @@
 
       button.id = id
       button.type = 'button'
-      button.className =
-        'detailButton emby-button emby-button-backdropfilter raised-backdropfilter detailButton-primary'
+      button.className
+        = 'detailButton emby-button emby-button-backdropfilter raised-backdropfilter detailButton-primary'
       button.title = title
       button.onclick = onClick
 
@@ -104,8 +104,8 @@
     const container = document.createElement('div')
 
     container.id = 'ExternalPlayersBtns'
-    container.className =
-      'detailButtons flex align-items-flex-start flex-wrap-wrap'
+    container.className
+      = 'detailButtons flex align-items-flex-start flex-wrap-wrap'
 
     // 按钮数据
     const buttonData = [
@@ -116,7 +116,7 @@
         buttonText: 'PotPlayer',
         onClick: embyOpenPotPlayer,
         iconUrl:
-          'https://fastly.jsdelivr.net/gh/bpking1/embyExternalUrl@0.0.5/embyWebAddExternalUrl/icons/icon-PotPlayer.webp'
+          'https://fastly.jsdelivr.net/gh/bpking1/embyExternalUrl@0.0.5/embyWebAddExternalUrl/icons/icon-PotPlayer.webp',
       },
       {
         id: 'embyCopyUrl',
@@ -125,7 +125,7 @@
         buttonText: '复制链接',
         onClick: embyCopyUrl,
         iconUrl:
-          'https://fastly.jsdelivr.net/gh/bpking1/embyExternalUrl@0.0.5/embyWebAddExternalUrl/icons/icon-Copy.webp'
+          'https://fastly.jsdelivr.net/gh/bpking1/embyExternalUrl@0.0.5/embyWebAddExternalUrl/icons/icon-Copy.webp',
       },
       {
         id: 'embyOpenJavdb',
@@ -133,8 +133,8 @@
         iconClass: 'icon-Javdb',
         buttonText: 'Javdb',
         onClick: embyOpenJavdb,
-        iconUrl: 'https://www.javdb.com/favicon.ico'
-      }
+        iconUrl: 'https://www.javdb.com/favicon.ico',
+      },
     ]
 
     // 创建并添加按钮
@@ -146,7 +146,7 @@
 
     // 将按钮容器插入到指定位置
     const mainDetailButtons = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) .mainDetailButtons"
+      'div[is=\'emby-scroller\']:not(.hide) .mainDetailButtons',
     )
 
     mainDetailButtons.insertAdjacentElement('afterend', container)
@@ -158,7 +158,7 @@
    */
   function showFlag() {
     const mainDetailButtons = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) .mainDetailButtons"
+      'div[is=\'emby-scroller\']:not(.hide) .mainDetailButtons',
     )
 
     if (!mainDetailButtons) {
@@ -166,7 +166,7 @@
     }
 
     const videoElement = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) .selectVideoContainer"
+      'div[is=\'emby-scroller\']:not(.hide) .selectVideoContainer',
     )
 
     if (videoElement && videoElement.classList.contains('hide')) {
@@ -174,7 +174,7 @@
     }
 
     const audioElement = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) .selectAudioContainer"
+      'div[is=\'emby-scroller\']:not(.hide) .selectAudioContainer',
     )
 
     return !(audioElement && audioElement.classList.contains('hide'))
@@ -195,7 +195,7 @@
     if (response.Type == 'Series') {
       const seriesNextUpItems = await ApiClient.getNextUpEpisodes({
         SeriesId: itemId,
-        UserId: userId
+        UserId: userId,
       })
 
       return await ApiClient.getItem(userId, seriesNextUpItems.Items[0].Id)
@@ -229,8 +229,8 @@
     let minutes = (ticks -= 36e9 * hours) / 6e8
 
     ;(ticks -= 6e8 * (minutes = Math.floor(minutes))),
-      minutes < 10 && hours && (minutes = `0${minutes}`),
-      parts.push(minutes)
+    minutes < 10 && hours && (minutes = `0${minutes}`),
+    parts.push(minutes)
     let seconds = ticks / 1e7
 
     return (
@@ -247,7 +247,7 @@
    */
   function getSubPath(mediaSource) {
     const selectSubtitles = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) select.selectSubtitles"
+      'div[is=\'emby-scroller\']:not(.hide) select.selectSubtitles',
     )
 
     let subTitlePath = ''
@@ -255,7 +255,7 @@
     // 返回选中的外挂字幕
     if (selectSubtitles && selectSubtitles.value > 0) {
       const SubIndex = mediaSource.MediaStreams.findIndex(
-        (m) => m.Index == selectSubtitles.value && m.IsExternal
+        m => m.Index == selectSubtitles.value && m.IsExternal,
       )
 
       if (SubIndex > -1) {
@@ -263,20 +263,22 @@
 
         subTitlePath = `/${mediaSource.Id}/Subtitles/${selectSubtitles.value}/Stream.${subtitleCodec}`
       }
-    } else {
+    }
+    else {
       // 默认尝试返回第一个外挂中文字幕
       const chiSubIndex = mediaSource.MediaStreams.findIndex(
-        (m) => m.Language == 'chi' && m.IsExternal
+        m => m.Language == 'chi' && m.IsExternal,
       )
 
       if (chiSubIndex > -1) {
         const subtitleCodec = mediaSource.MediaStreams[chiSubIndex].Codec
 
         subTitlePath = `/${mediaSource.Id}/Subtitles/${chiSubIndex}/Stream.${subtitleCodec}`
-      } else {
+      }
+      else {
         // 尝试返回第一个外挂字幕
         const externalSubIndex = mediaSource.MediaStreams.findIndex(
-          (m) => m.IsExternal
+          m => m.IsExternal,
         )
 
         if (externalSubIndex > -1) {
@@ -300,7 +302,7 @@
     let mediaSourceId = itemInfo.MediaSources[0].Id
 
     const selectSource = document.querySelector(
-      "div[is='emby-scroller']:not(.hide) select.selectSource"
+      'div[is=\'emby-scroller\']:not(.hide) select.selectSource',
     )
 
     if (selectSource && selectSource.value.length > 0) {
@@ -308,14 +310,14 @@
     }
 
     // let selectAudio = document.querySelector("div[is='emby-scroller']:not(.hide) select.selectAudio");
-    const mediaSource = itemInfo.MediaSources.find((m) => m.Id == mediaSourceId)
+    const mediaSource = itemInfo.MediaSources.find(m => m.Id == mediaSourceId)
 
     const domain = `${ApiClient._serverAddress}/emby/videos/${itemInfo.Id}`
 
     const subPath = getSubPath(mediaSource)
 
-    const subUrl =
-      subPath.length > 0
+    const subUrl
+      = subPath.length > 0
         ? `${domain}${subPath}?api_key=${ApiClient.accessToken()}`
         : ''
 
@@ -324,7 +326,7 @@
     }?api_key=${ApiClient.accessToken()}&Static=true&MediaSourceId=${mediaSourceId}`
 
     const position = Number.parseInt(
-      itemInfo.UserData.PlaybackPositionTicks / 10000
+      itemInfo.UserData.PlaybackPositionTicks / 10000,
     )
 
     const intent = await getIntent(mediaSource, position)
@@ -332,7 +334,7 @@
     return {
       streamUrl,
       subUrl,
-      intent
+      intent,
     }
   }
 
@@ -346,7 +348,7 @@
     const title = mediaSource.Path.split('/').pop()
 
     const externalSubs = mediaSource.MediaStreams.filter(
-      (m) => m.IsExternal == true
+      m => m.IsExternal == true,
     )
 
     const subs = '' // 要求是android.net.uri[] ?
@@ -358,8 +360,8 @@
     const subs_enable = ''
 
     if (externalSubs) {
-      subs_name = externalSubs.map((s) => s.DisplayTitle)
-      subs_filename = externalSubs.map((s) => s.Path.split('/').pop())
+      subs_name = externalSubs.map(s => s.DisplayTitle)
+      subs_filename = externalSubs.map(s => s.Path.split('/').pop())
     }
 
     return {
@@ -368,7 +370,7 @@
       subs,
       subs_name,
       subs_filename,
-      subs_enable
+      subs_enable,
     }
   }
 
@@ -381,7 +383,7 @@
     const intent = mediaInfo.intent
 
     const poturl = `potplayer://${encodeURI(
-      mediaInfo.streamUrl
+      mediaInfo.streamUrl,
     )} /sub=${encodeURI(mediaInfo.subUrl)} /current /title="${
       intent.title
     }" /seek=${getSeek(intent.position)}`
@@ -401,7 +403,7 @@
     const result = videoTitle
       .substring(
         videoTitle.lastIndexOf('\\') + 1,
-        videoTitle.indexOf('.', videoTitle.lastIndexOf('\\'))
+        videoTitle.indexOf('.', videoTitle.lastIndexOf('\\')),
       )
       .toLowerCase()
       .replace(videoTagRegex, '')
@@ -452,7 +454,7 @@
       mutation.observe(document.body, {
         childList: true,
         characterData: true,
-        subtree: true
+        subtree: true,
       })
     }
   })

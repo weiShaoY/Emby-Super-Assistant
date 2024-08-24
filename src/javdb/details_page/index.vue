@@ -27,6 +27,15 @@ const isShowTorrentList = ref(false)
 const torrentList = ref<TorrentType[]>([])
 
 /**
+ * 为指定元素添加高亮类名
+ * @param {Element | null} element - 需要高亮的元素
+ * @description 高亮类名为 'is-highlight'
+ */
+function highlightElement(element: Element | null) {
+  element?.classList.add('is-highlight')
+}
+
+/**
  * 获取详情页视频名称
  * @returns 视频标题文本
  */
@@ -76,26 +85,9 @@ function getTorrentList() {
     torrentList.value.push(torrentListItem)
   })
 
-  // const messageBody = document.querySelector('.message-body')
-
-  // if (messageBody) {
-  // // messageBody 清空
-
-  //   messageBody.innerHTML = ''
-
-  //   // messageBody.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
-  //   messageBody.insertAdjacentHTML('beforeend', '<div id="TorrentList"></div>')
-
-  //   isShowTorrentList.value = true
-  // }
   const noBottom = document.querySelector('.no-bottom')
 
   if (noBottom) {
-    // messageBody 清空
-
-    // noBottom.innerHTML = ''
-
-    // messageBody.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
     noBottom.insertAdjacentHTML('afterend', '<div id="TorrentList"></div>')
 
     isShowTorrentList.value = true
@@ -108,31 +100,33 @@ function main() {
   if (!videoFileArray)
     return
 
+  // 获取视频名称 (小写，去除空格)
   pageVideoName.value = getPageVideoName()
 
   if (!pageVideoName.value)
-
     return
 
-  const matchedVideos = videoFileArray.filter(item => item.processedName.includes(pageVideoName.value))
+  // 当前视频名称已入库的视频列表
+  const matchedVideoList = videoFileArray.filter(item =>
+    item.processedName.includes(pageVideoName.value),
+  )
 
-  const count = matchedVideos.length
+  const isEmbyHaveChineseTorrent = matchedVideoList.some(item => item.isChinese)
 
-  const isEmbyHaveChineseTorrent = matchedVideos.some(item => item.isChinese)
+  const videoMetaPanel = document.querySelector('.video-meta-panel')
 
-  if (count > 0) {
-    document.querySelector('.video-meta-panel')?.classList.add('is-highlight')
-    addedToEmbyList.value.push(...matchedVideos)
+  const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
+
+  if (matchedVideoList.length) {
+    highlightElement(videoMetaPanel)
+
+    addedToEmbyList.value.push(...matchedVideoList)
+
     isShowEmbyButton.value = true
   }
 
-  /**
-   *  页面列表当前视频是否含中文磁链
-   */
-  const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
-
-  //  如果当前视频有中文磁链可用并且和 Emby中已经存在的视频没有中文磁链 则 添加提示更新中文磁链按钮
-  if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent && count) {
+  // 如果当前视频有中文磁链可用并且 Emby 中已经存在的视频没有中文磁链，则添加提示更新中文磁链按钮
+  if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent && matchedVideoList.length) {
     isShowUpdateChineseButton.value = true
   }
 }
@@ -171,14 +165,12 @@ onMounted(() => {
   >
     <UpdateChineseButton
       v-if="isShowUpdateChineseButton"
-      class="tag m-b-15"
-      :height="40"
-      width="100%"
+      class="w-full"
     />
 
     <div
       v-if="addedToEmbyList.length"
-      class="z-index-3 w-full rounded-2 bg-#FF8400 p-y-1"
+      class="w-full rounded-2 bg-#FF8400 p-2"
     >
       <AddedToEmbyButton
         v-for="(item, index) in addedToEmbyList"
@@ -188,6 +180,7 @@ onMounted(() => {
     </div>
   </div>
 
+  <!-- 磁链列表 -->
   <Teleport
     v-if="isShowTorrentList"
     to="#TorrentList"

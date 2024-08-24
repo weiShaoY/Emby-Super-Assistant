@@ -196,11 +196,21 @@ async function mainBtnHandler() {
 
     isLoading.value = false
 
+    const duplicate = videoManager.duplicate()
+
+    console.log('%c Line:22 🍊 所有重复的影片列表', 'color:#b03734', duplicate.duplicatesVideoList)
+
+    console.log('%c Line:26 🍕 Emby去重的影片标题列表', 'color:#7f2b82', duplicate.duplicatesVideoNameList)
+
     Notification.success({
       title: `读取文件夹: \u00A0\u00A0\u00A0${directoryHandle.name}\u00A0\u00A0\u00A0成功`,
-      content: `耗时\u00A0 ${time}\u00A0 秒 \u00A0 \u00A0共读取\u00A0 ${videoFileSet.size}\u00A0 个视频`,
+      content: `耗时\u00A0 ${time}\u00A0 秒 \u00A0 \u00A0共读取\u00A0 ${videoFileSet.size}\u00A0 个视频 \u00A0 共发现 ${duplicate.duplicatesVideoList.length} 个重复视频 \u00A0 去重后 ${duplicate.duplicatesVideoNameList.length}个`,
       duration: 300000,
       closable: true,
+      onClose() {
+        // 刷新页面
+        window.location.reload()
+      },
     })
   }
   catch (error) {
