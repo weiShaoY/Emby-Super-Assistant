@@ -9,66 +9,6 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import { videoConfig } from '@/config'
 
-const isShow = ref(false)
-
-/**
- * 初始化函数，在主详细按钮后插入一个挂载点并设置显示标志。
- */
-function init() {
-  const mainDetailButtons = document.querySelector(
-    'div[is=\'emby-scroller\']:not(.hide) .mainDetailButtons',
-  )
-
-  if (mainDetailButtons) {
-    mainDetailButtons.insertAdjacentHTML('afterend', '<div id="mountPoint"></div>')
-  }
-
-  isShow.value = true
-}
-
-/**
- * 检查是否显示外部播放器按钮的条件。
- * @returns {boolean} 如果主详细按钮存在且视频或音频容器不隐藏，则返回true，否则返回false。
- */
-function showFlag(): boolean {
-  const mainDetailButtons = document.querySelector(
-    'div[is=\'emby-scroller\']:not(.hide) .mainDetailButtons',
-  )
-
-  if (!mainDetailButtons)
-    return false
-
-  const videoElement = document.querySelector(
-    'div[is=\'emby-scroller\']:not(.hide) .selectVideoContainer',
-  )
-
-  if (videoElement && videoElement.classList.contains('hide'))
-    return false
-
-  const audioElement = document.querySelector(
-    'div[is=\'emby-scroller\']:not(.hide) .selectAudioContainer',
-  )
-
-  return !(audioElement && audioElement.classList.contains('hide'))
-}
-
-document.addEventListener('viewbeforeshow', (e: any) => {
-  if (e.detail.contextPath.startsWith('/item?id=')) {
-    const mutation = new MutationObserver(() => {
-      if (showFlag()) {
-        init()
-        mutation.disconnect()
-      }
-    })
-
-    mutation.observe(document.body, {
-      childList: true,
-      characterData: true,
-      subtree: true,
-    })
-  }
-})
-
 /**
  * 表示媒体流信息的类型。
  */
@@ -406,27 +346,58 @@ async function embyCopyUrl() {
  *  在Javdb搜索当前影片
  */
 async function embyOpenJavdb() {
-  const mediaInfo = await getEmbyMediaInfo()
+  const { intent: { title } } = await getEmbyMediaInfo()
 
-  const videoName = mediaInfo.intent.title
-
-  // 提取最后一个反斜杠之后到第一个点之间的部分
-  const result = videoName
-    .substring(
-      videoName.lastIndexOf('\\') + 1,
-      videoName.indexOf('.', videoName.lastIndexOf('\\')),
-    )
-    .toLowerCase()
+  const result = title.substring(title.lastIndexOf('\\') + 1, title.indexOf('.', title.lastIndexOf('\\'))).toLowerCase()
     .replace(videoConfig.tagRegex, '')
 
   window.open(`https://javdb.com/search?q=${result}&f=all`, '_blank')
 }
+
+/**
+ *  是否为详情页
+ */
+const isDetailsPage = ref(false)
+
+/**
+ *  地址栏是否变化
+ */
+document.addEventListener('viewbeforeshow', async (e: any) => {
+  // 重置 isDetailsPage 状态
+  isDetailsPage.value = false
+
+  // 检查是否为详情页
+  if (e.detail.contextPath.startsWith('/item?id=')) {
+    setTimeout(() => {
+      // const videoElement = document.querySelector(
+      //   'div[is=\'emby-scroller\']:not(.hide) .detailTextContainer',
+      // )
+      const videoElement = document.querySelector(
+        '.itemView:not(.hide) .detailTextContainer',
+      )
+
+      if (videoElement) {
+      // 移除 videoElement 内所有 id 为 btnTool 的元素
+        document.querySelectorAll('#targetNode').forEach(element => element.remove())
+
+        // 创建并添加新按钮元素
+        const div = document.createElement('div')
+
+        div.id = 'targetNode'
+        videoElement.appendChild(div)
+
+        // 设置 isDetailsPage 状态
+        isDetailsPage.value = true
+      }
+    }, 200)
+  }
+})
 </script>
 
 <template>
   <Teleport
-    v-if="isShow"
-    to="#mountPoint"
+    v-if="isDetailsPage"
+    to="#targetNode"
   >
     <div
       class="flex gap-2"

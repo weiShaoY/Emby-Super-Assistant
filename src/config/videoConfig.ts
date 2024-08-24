@@ -22,7 +22,7 @@ export const videoConfig: VideoType.VideoConfig = {
       url: chineseSvg,
     },
     {
-      name: ['无码', '破解'],
+      name: ['-无码', '-破解'],
       url: wuMaSvg,
     },
   ],

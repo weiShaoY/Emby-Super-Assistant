@@ -1,6 +1,8 @@
 <!-- eslint-disable lines-around-comment -->
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
+import DetailsPage from './details_page/index.vue'
+
 /**
  *  判断是否为来自Javdb的视频
  */
@@ -46,9 +48,7 @@ checkIfReferredFromJavdb()
 </script>
 
 <template>
-  <div
-    class=""
-  />
+  <DetailsPage />
 </template>
 
 <style lang="less" scoped>
