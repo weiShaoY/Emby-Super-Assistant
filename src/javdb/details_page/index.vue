@@ -144,6 +144,15 @@ onMounted(() => {
   getTorrentList()
 
   main()
+
+  // 网上滚动200px
+  // 获取 #TorrentList 元素
+  const torrentListElement = document.querySelector('#TorrentList')
+
+  // 检查元素是否存在，然后滚动到该元素
+  if (torrentListElement) {
+    torrentListElement.scrollIntoView({ behavior: 'smooth' })
+  }
 })
 </script>
 
