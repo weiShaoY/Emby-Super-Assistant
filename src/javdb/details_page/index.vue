@@ -27,6 +27,11 @@ const isShowTorrentList = ref(false)
 const torrentList = ref<TorrentType[]>([])
 
 /**
+ *  是否显示 提示更新中文磁链按钮
+ */
+const isVideoHaveChineseTorrent = ref(false)
+
+/**
  * 为指定元素添加高亮类名
  * @param {Element | null} element - 需要高亮的元素
  * @description 高亮类名为 'is-highlight'
@@ -83,6 +88,10 @@ function getTorrentList() {
     const torrentListItem: TorrentType = { url, name, size, time, tagArray }
 
     torrentList.value.push(torrentListItem)
+
+    if (name.includes('-c') || name.includes('-C')) {
+      isVideoHaveChineseTorrent.value = true
+    }
   })
 
   const noBottom = document.querySelector('.no-bottom')
@@ -115,7 +124,7 @@ function main() {
 
   const videoMetaPanel = document.querySelector('.video-meta-panel')
 
-  const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
+  // const isVideoHaveChineseTorrent = !!document.querySelector('.is-warning')
 
   if (matchedVideoList.length) {
     highlightElement(videoMetaPanel)
@@ -126,15 +135,15 @@ function main() {
   }
 
   // 如果当前视频有中文磁链可用并且 Emby 中已经存在的视频没有中文磁链，则添加提示更新中文磁链按钮
-  if (isVideoHaveChineseTorrent && !isEmbyHaveChineseTorrent && matchedVideoList.length) {
+  if (isVideoHaveChineseTorrent.value && !isEmbyHaveChineseTorrent && matchedVideoList.length) {
     isShowUpdateChineseButton.value = true
   }
 }
 
 onMounted(() => {
-  main()
-
   getTorrentList()
+
+  main()
 })
 </script>
 
