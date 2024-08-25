@@ -7,7 +7,9 @@ import potPlayerSvg from '@/assets/svg/potPlayer.svg'
 
 import copySvg from '@/assets/svg/copy.svg'
 
-import { videoConfig } from '@/config'
+import folderSvg from '@/assets/svg/folder.svg'
+
+import { quickerConfig, videoConfig } from '@/config'
 
 /**
  * 表示媒体流信息的类型。
@@ -339,8 +341,18 @@ async function embyCopyUrl() {
 }
 
 /**
- *  复制视频位置到剪切板
+ *  打开文件夹
  */
+async function embyOpenFolder() {
+  const { intent } = await getEmbyMediaInfo()
+
+  const url = intent.title
+
+  console.log('%c Line:352 🥪 url', 'color:#465975', url)
+  const directoryPath = intent.title.substring(0, intent.title.lastIndexOf('\\'))
+
+  quickerConfig.openFolder(directoryPath, true)
+}
 
 /**
  *  在Javdb搜索当前影片
@@ -428,6 +440,20 @@ document.addEventListener('viewbeforeshow', async (e: any) => {
         />
 
         <span> 复制视频链接 </span>
+      </button>
+
+      <button
+        class="btnPlay btnMainPlay raised detailButton emby-button detailButton-primary detailButton-stacked"
+        @click="embyOpenFolder"
+      >
+        <i
+          class="m-r-2 h-6 w-6 bg-cover bg-no-repeat"
+          :style="{
+            backgroundImage: `url(${folderSvg})`,
+          }"
+        />
+
+        <span> 打开文件夹 </span>
       </button>
 
       <button

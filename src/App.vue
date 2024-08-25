@@ -29,6 +29,13 @@ if (bodyElement) {
     bodyElement.classList.add('emby')
   }
 }
+
+// function openFolder() {
+//   // const filePath = 'file:///C:/系统图标'
+
+//   // GM_openInTab(filePath, { active: true, insert: true })
+
+// }
 </script>
 
 <template>
