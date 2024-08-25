@@ -176,7 +176,7 @@ function directoryStructureCopyToClipboard(event: any) {
     </button>
 
     <div
-      class="absolute bottom-[110%] origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff px-3 py-2 transition-all duration-300 ease-in-out group-hover:scale-100"
+      class="absolute bottom-[110%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff px-3 py-2 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
         boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
       }"
