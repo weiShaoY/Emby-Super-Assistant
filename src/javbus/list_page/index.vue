@@ -36,7 +36,6 @@ function main() {
       .trim()
       .toLowerCase()
 
-    console.log('%c Line:47 🍅 videoName', 'color:#ea7e5c', videoName)
     if (!videoName) {
       return
     }

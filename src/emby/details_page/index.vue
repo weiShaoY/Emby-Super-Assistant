@@ -346,9 +346,6 @@ async function embyCopyUrl() {
 async function embyOpenFolder() {
   const { intent } = await getEmbyMediaInfo()
 
-  const url = intent.title
-
-  console.log('%c Line:352 🥪 url', 'color:#465975', url)
   const directoryPath = intent.title.substring(0, intent.title.lastIndexOf('\\'))
 
   quickerConfig.openFolder(directoryPath, true)

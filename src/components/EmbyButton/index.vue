@@ -71,8 +71,6 @@ function embyBtnHandler(event: MouseEvent) {
 
   // 可以在这里添加其他逻辑
 
-  console.log('%c Line:17 🥛 props.videoName', 'color:#7f2b82', props.videoName)
-
   /**
    * 构建 Emby 请求 URL
    * @param  embyConfig - Emby 配置
@@ -111,8 +109,6 @@ function embyBtnHandler(event: MouseEvent) {
         try {
           // 将 JSON 字符串转换为 JSON 对象
           const result = JSON.parse(response.responseText)
-
-          console.log('%c Line:542 🍣 result', 'color:#4fff4B', result)
 
           if (result.Items.length === 1) {
             const id = result.Items[0].Id
