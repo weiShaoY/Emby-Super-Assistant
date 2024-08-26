@@ -7,7 +7,7 @@ import { getTagArray, parseNfoContent, videoManager } from '@/utils'
 
 import { videoConfig } from '@/config'
 
-import storeHouseSvg from '@/assets/svg/storeHouse.svg'
+import embySvg from '@/assets/svg/emby.svg'
 
 /**
  *  全局的加载状态
@@ -244,7 +244,7 @@ async function mainBtnHandler() {
         >
           <img
             v-if="!isLoading"
-            :src="storeHouseSvg"
+            :src="embySvg"
             alt="仓库"
           >
 

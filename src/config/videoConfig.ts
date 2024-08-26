@@ -1,10 +1,12 @@
-import fourK from '@/assets/svg/fourK.svg'
-
 import chineseSvg from '@/assets/svg/chinese.svg'
 
 import hdSvg from '@/assets/svg/hd.svg'
 
-import wuMaSvg from '@/assets/svg/wuma.png'
+import noCodeSvg from '@/assets/svg/noCode.svg'
+
+import fourKSvg from '@/assets/svg/fourK.svg'
+
+import crackingSvg from '@/assets/svg/cracking.svg'
 
 /**
  * 视频匹配配置
@@ -15,15 +17,19 @@ export const videoConfig: VideoType.VideoConfig = {
   tagArray: [
     {
       name: ['4K'],
-      url: fourK.toString(),
+      url: fourKSvg.toString(),
     },
     {
       name: ['-c', '-C', '_ch'],
       url: chineseSvg,
     },
     {
-      name: ['-无码', '-破解'],
-      url: wuMaSvg,
+      name: ['无码'],
+      url: noCodeSvg,
+    },
+    {
+      name: ['破解'],
+      url: crackingSvg,
     },
   ],
 
@@ -90,10 +96,13 @@ export const videoConfig: VideoType.VideoConfig = {
 // 在对象定义后设置 tagRegex
 videoConfig.tagRegex = new RegExp(
   videoConfig.tagArray
-    .flatMap(tag => tag.name) // 展开每个 name 数组
-    .map(name => name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')) // 对特殊字符进行转义
-    .join('|'), // 拼接成正则表达式
-  'gi', // 设置全局和忽略大小写标志
+    .flatMap(tag => tag.name)
+    .map(name => name.includes('-')
+      ? name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
+      : `-?${name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}`, // 对于不包含 `-` 的情况，添加可选的 `-`
+    )
+    .join('|'),
+  'gi',
 )
 
 export default videoConfig

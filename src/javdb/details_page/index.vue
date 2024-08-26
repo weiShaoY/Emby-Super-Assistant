@@ -179,7 +179,7 @@ onMounted(() => {
   </Teleport>
 
   <div
-    class="fixed left-2 top-60 w-70"
+    class="fixed left-2 top-60 w-100"
   >
     <UpdateChineseButton
       v-if="isShowUpdateChineseButton"
@@ -188,7 +188,7 @@ onMounted(() => {
 
     <div
       v-if="addedToEmbyList.length"
-      class="w-full rounded-2 bg-#FF8400 p-2"
+      class="w-full bg-#FF8400 p-2"
     >
       <AddedToEmbyButton
         v-for="(item, index) in addedToEmbyList"

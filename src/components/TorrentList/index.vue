@@ -4,10 +4,6 @@ import { Message } from '@arco-design/web-vue'
 
 import { videoConfig } from '../../config'
 
-import hdSvg from '@/assets/svg/hd.svg'
-
-import chineseSvg from '@/assets/svg/chinese.svg'
-
 const props = defineProps({
   /**
    *  种子列表
@@ -199,7 +195,7 @@ main()
               <div
                 class="flex items-center"
               >
-                <!-- 左边第一列 -->
+                <!-- 左边第一列  磁链名称 -->
                 <div
                   class="w-100 p-2"
                 >
@@ -223,7 +219,7 @@ main()
                   </div>
                 </div>
 
-                <!-- 左边第二列 -->
+                <!-- 左边第二列 文件大小 -->
                 <div
                   class="m-l-3 w-30 group-hover:text-#fff"
                 >
@@ -244,11 +240,11 @@ main()
                   </span>
                 </div>
 
-                <!-- 左边第三列 -->
+                <!-- 左边第三列  图标 -->
                 <div
                   v-for="tag in torrent.tagArray"
                   :key="tag.name"
-                  class="m-l-20"
+                  class="p-x-3"
                 >
                   <img
                     :src="tag.url"

@@ -2,9 +2,13 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 
+import { Message } from '@arco-design/web-vue'
+
 import { embyConfig } from '@/config'
 
 import { GM_getValue, GM_setValue, GM_xmlhttpRequest } from '$'
+
+import embySvg from '@/assets/svg/emby.svg'
 
 const props = defineProps({
   /**
@@ -92,6 +96,18 @@ function embyBtnHandler(event: MouseEvent) {
     return `${embyConfig.url}/emby/Users/${embyConfig.userId}/Items?${queryString}`
   }
 
+  // 设置超时时间为2秒
+  const timeoutDuration = 2000
+
+  const timeoutId = setTimeout(() => {
+    Message.error({
+      content: '请求超时, 请检查 Emby 服务器',
+
+      duration: 5000,
+
+    })
+  }, timeoutDuration)
+
   GM_xmlhttpRequest({
     method: 'GET',
     url: buildEmbyRequestUrl(embyConfig),
@@ -105,6 +121,9 @@ function embyBtnHandler(event: MouseEvent) {
       'X-Emby-Language': embyConfig.language,
     },
     onload: (response: any) => {
+      // 请求成功，清除超时计时器
+      clearTimeout(timeoutId)
+
       if (response.status >= 200 && response.status < 300) {
         try {
           // 将 JSON 字符串转换为 JSON 对象
@@ -135,8 +154,8 @@ function embyBtnHandler(event: MouseEvent) {
         console.error(`HTTP 错误: ${response.status}`)
       }
     },
-    onerror: (error: any) => {
-      console.error('Request failed:', error)
+    onerror: () => {
+      Message.error(`请求失败, 请检查 Emby 服务器`)
     },
   })
 }
@@ -160,7 +179,11 @@ onMounted(async () => {
     }"
     @click="embyBtnHandler"
   >
-
+    <img
+      :src="embySvg"
+      alt=""
+      class="h-7 w-7"
+    >
     {{ isShowVideoName ? videoName : 'Emby' }}
   </div>
 </template>

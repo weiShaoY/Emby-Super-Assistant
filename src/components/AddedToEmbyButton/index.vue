@@ -42,7 +42,7 @@ const props = defineProps({
    */
   radius: {
     type: [String, Number],
-    default: 10,
+    default: 0,
   },
 
   /**
@@ -155,22 +155,26 @@ function directoryStructureCopyToClipboard(event: any) {
             :key="item.url"
             :src="item.url"
             class="m-r-1 !h-5 !w-5 !rounded-0"
-            alt="复制"
           >
 
-          <img
-            v-if="!isShowCopy"
-            :src="copySvg"
-            class="!h-5 !w-5"
-            alt="复制"
+          <!-- 复制 已复制 -->
+          <div
+            class="m-l-1"
           >
+            <img
+              v-if="!isShowCopy"
+              :src="copySvg"
+              class="!h-5 !w-5 !rounded-0"
+              alt="复制"
+            >
 
-          <img
-            v-if="isShowCopy"
-            :src="finishSvg"
-            class="!h-5 !w-5"
-            alt="已复制"
-          >
+            <img
+              v-if="isShowCopy"
+              :src="finishSvg"
+              class="!h-5 !w-5 !rounded-0"
+              alt="已复制"
+            >
+          </div>
         </div>
       </div>
     </button>

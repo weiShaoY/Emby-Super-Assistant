@@ -9,6 +9,8 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import folderSvg from '@/assets/svg/folder.svg'
 
+import JavdbSvg from '@/assets/svg/Javdb.svg'
+
 import { quickerConfig, videoConfig } from '@/config'
 
 /**
