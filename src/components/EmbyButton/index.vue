@@ -10,6 +10,8 @@ import { GM_getValue, GM_setValue, GM_xmlhttpRequest } from '$'
 
 import embySvg from '@/assets/svg/emby.svg'
 
+import embyHoverSvg from '@/assets/svg/emby-hover.svg'
+
 const props = defineProps({
   /**
    *  @description  视频名称
@@ -169,7 +171,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#52B54B] bg-transparent text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#52B54B] !text-[#52B54B] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
+    class="group relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#52B54B] bg-transparent p-x-1 text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#52B54B] !text-[#52B54B] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
     :class="props.class"
     :style="{
       borderRadius: `${radius}px`,
@@ -179,12 +181,26 @@ onMounted(async () => {
     }"
     @click="embyBtnHandler"
   >
-    <img
-      :src="embySvg"
-      alt=""
-      class="h-7 w-7"
+    <span
+      v-if="isShowVideoName"
     >
-    {{ isShowVideoName ? videoName : 'Emby' }}
+      Emby
+    </span>
+
+    <div
+      v-else
+      class="m-x-auto h-full p-1"
+    >
+      <img
+        :src="embySvg"
+        class="max-h-full max-w-full object-contain group-hover:hidden"
+      >
+
+      <img
+        :src="embyHoverSvg"
+        class="hidden max-h-full max-w-full object-contain group-hover:block"
+      >
+    </div>
   </div>
 </template>
 
