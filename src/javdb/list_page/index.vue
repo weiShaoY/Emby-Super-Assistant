@@ -53,7 +53,7 @@ function main() {
     /**
      * 当前视频名称已入库的视频列表
      */
-    const matchedVideoList = videoFileArray.filter(item => item.processedName.includes(itemVideoName))
+    const matchedVideoList = videoFileArray.filter(sub => sub.processedName.includes(itemVideoName))
 
     if (matchedVideoList.length) {
       //  添加高亮

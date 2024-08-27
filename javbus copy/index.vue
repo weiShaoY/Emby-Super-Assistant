@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ListPage from './list_page/index.vue'
+// import ListPage from './list_page/index.vue'
 
 // import DetailsPage from './details_page/index.vue'
 
@@ -21,12 +21,12 @@ else {
 
 <template>
   <StoreHouseButton />
-
-  <ListPage
+  11111111111111111111111111111111111111111111111111111111111
+  <!-- <ListPage
     v-if="isListPage"
   />
 
-  <!-- <DetailsPage
+  <DetailsPage
     v-else
   /> -->
 </template>

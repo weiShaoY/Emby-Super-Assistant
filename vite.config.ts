@@ -42,10 +42,9 @@ export default defineConfig({
         icon: 'https://vitejs.dev/logo.svg',
         namespace: 'npm/vite-plugin-monkey',
 
-        // '*://*.javbus.com/*',
         match: [
-          'https://www.google.com/',
           '*://*.javdb.com/*',
+          '*://*.javbus.com/*',
           '*/web/index.html',
           '192.168.*',
         ],

@@ -27,30 +27,33 @@ const updateChineseBtnList = ref<string[]>([])
 function main() {
   const videoFileArray = videoManager.get()
 
-  console.log('%c Line:27 🍒 videoFileArray', 'color:#ffdd4d', videoFileArray)
-
   if (!videoFileArray) {
     return
   }
 
-  const itemList = document.querySelectorAll('#waterfall .movie-box')
-
-  console.log('%c Line:33 🍯 itemList', 'color:#2eafb0', itemList)
+  const itemList = document.querySelectorAll('#waterfall .item')
 
   itemList.forEach((item: any) => {
-    console.log('%c Line:37 🍌 item', 'color:#42b983', item)
+    const aElement = item.querySelector('.movie-box')
+
+    console.log('%c Line:38 🍖 aElement', 'color:#4fff4B', aElement)
 
     /**
      *  获取视频名称 (小写，去除空格)
      */
-    const itemVideoName = item
-      .getAttribute('href')?.substring(item.getAttribute('href').lastIndexOf('/') + 1)
+    const itemVideoName = aElement
+      .getAttribute('href')?.substring(aElement.getAttribute('href').lastIndexOf('/') + 1)
       .trim()
       .toLowerCase()
 
+    console.log('%c Line:49 🍎 itemVideoName', 'color:#ea7e5c', itemVideoName)
     if (!itemVideoName) {
       return
     }
+
+    // const boxElement = item.querySelector('.box')
+
+    // const tagsElement = item.querySelector('.tags')
 
     // 添加 Btsow 按钮的类名并更新列表
     addClassAndUpdateList(item, `btsow_btn_${itemVideoName}`, btsowBtnList, itemVideoName)
@@ -61,9 +64,9 @@ function main() {
 
     const matchedVideoList = videoFileArray.filter(sub => sub.processedName.includes(itemVideoName))
 
-    // 创建一个空数组来存放匹配的视频文件
+    console.log('%c Line:65 🥪 matchedVideoList', 'color:#3f7cff', matchedVideoList)
 
-    console.log('%c Line:63 🍿 matchedVideoList', 'color:#fca650', matchedVideoList)
+    // 创建一个空数组来存放匹配的视频文件
 
     if (matchedVideoList.length) {
       // 添加高亮
@@ -160,7 +163,7 @@ onMounted(() => {
       <AddedToEmbyButton
         :video="item"
         :is-wrap="true"
-        class="m-x-auto !w-90% !color-#fff"
+        class="m-x-auto !color-#fff"
       />
     </Teleport>
   </template>
