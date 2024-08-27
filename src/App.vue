@@ -13,15 +13,6 @@ const isJavdb = currentUrl.includes('javdb')
 const isJavbus = currentUrl.includes('javbus')
 
 const isEmby = currentUrl.includes('8096/web/index.html')
-
-const bodyElement = document.querySelector('body')
-
-// 给每个页面的 body 添加类名
-if (bodyElement) {
-  if (isEmby) {
-    bodyElement.classList.add('emby')
-  }
-}
 </script>
 
 <template>
