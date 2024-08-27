@@ -219,6 +219,7 @@ onMounted(() => {
   <TorrentList
     v-if="isShowTorrentList"
     to="#TorrentList"
+    scroll-target="#sample-waterfall"
     :torrent-list="torrentList"
   />
 </template>

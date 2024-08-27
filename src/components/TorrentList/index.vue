@@ -138,11 +138,20 @@ function scrollToElement() {
     return
   }
 
+  const offset = -200 // 向上偏移量
+
   if (props.scrollTarget) {
     const element = document.querySelector(props.scrollTarget)
 
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      // element.scrollIntoView({ behavior: 'smooth' })
+
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+
+      window.scrollTo({
+        top: elementPosition + offset,
+        behavior: 'smooth',
+      })
     }
   }
   else {
@@ -150,7 +159,14 @@ function scrollToElement() {
     const element = document.querySelector(props.to)
 
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      // element.scrollIntoView({ behavior: 'smooth' })
+
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+
+      window.scrollTo({
+        top: elementPosition + offset,
+        behavior: 'smooth',
+      })
     }
   }
 }

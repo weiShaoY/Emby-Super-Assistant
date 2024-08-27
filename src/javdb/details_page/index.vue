@@ -193,6 +193,7 @@ onMounted(() => {
   <TorrentList
     v-if="isShowTorrentList"
     to="#TorrentList"
+    scroll-target=".video-panel"
     :torrent-list="torrentList"
   />
 </template>
