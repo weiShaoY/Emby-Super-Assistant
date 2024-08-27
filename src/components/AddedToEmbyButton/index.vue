@@ -108,6 +108,7 @@ function directoryStructureCopyToClipboard(event: any) {
 </script>
 
 <template>
+  <!-- 详情页 -->
   <div
     v-if="!isWrap"
     class="group relative z-1000 m-x-auto m-t-2 w-[95%]"
@@ -152,7 +153,9 @@ function directoryStructureCopyToClipboard(event: any) {
               {{ video.resolution }}
             </span>
 
-            <span>
+            <span
+              class="text-[#e6683c] font-700"
+            >
               {{ video.size }}
             </span>
           </div>
@@ -186,6 +189,7 @@ function directoryStructureCopyToClipboard(event: any) {
       </div>
     </button>
 
+    <!-- 详情页  悬浮层 -->
     <div
       class="absolute bottom-[110%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff px-3 py-2 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
@@ -197,40 +201,32 @@ function directoryStructureCopyToClipboard(event: any) {
         class="border border-[#52382f] rounded-3 bg-[#2a2b2f] p-3"
       >
         <div
-          class="flex justify-between"
+          class="m-b-1 flex flex-wrap items-center gap-3"
         >
-
-          <div
-            class="flex items-center gap-3"
+          <img
+            v-for="item in video.tagArray"
+            :key="item.url"
+            :src="item.url"
+            class="m-r-1 !h-9 !w-9 !rounded-0"
           >
-            <img
-              v-for="item in video.tagArray"
-              :key="item.url"
-              :src="item.url"
-              class="m-r-1 !h-9 !w-9 !rounded-0"
-            >
+        </div>
+
+        <div
+          class="flex items-center justify-between text-white"
+        >
+          <div
+            class="text-4 text-[#e6683c] font-700"
+          >
+            {{ video.size }}
           </div>
 
-          <div
-            class="flex flex-col items-end gap-0 text-white"
-          >
-            <div
-              class="text-4 text-[#e6683c] font-700"
-            >
-              {{ video.size }}
-              <!-- {{ video.resolution }} -->
-            </div>
-
-            <div>
-              <!-- {{ video.size }} -->
-              {{ video.resolution }}
-
-            </div>
+          <div>
+            {{ video.resolution }}
           </div>
         </div>
 
         <div
-          class="pt-[5px] text-[#ccc]"
+          class="p-t-1 text-[#ccc]"
         >
           {{ directoryPath }}
         </div>
@@ -239,7 +235,7 @@ function directoryStructureCopyToClipboard(event: any) {
     </div>
   </div>
 
-  <!-- 换行样式 -->
+  <!-- 列表页 -->
   <div
     v-else
     class="group relative z-1000 m-x-auto m-t-2 w-[95%]"
@@ -289,19 +285,19 @@ function directoryStructureCopyToClipboard(event: any) {
         <div
           class="flex items-center justify-between text-3"
         >
-          <span
+          <div
+            class="text-[#e6683c] font-700"
+          >
+            {{ video.size }}
+
+          </div>
+
+          <div
             class=""
           >
             {{ video.resolution }}
 
-          </span>
-
-          <span
-            class=""
-          >
-            {{ video.size }}
-
-          </span>
+          </div>
 
           <div>
             <img
@@ -323,6 +319,7 @@ function directoryStructureCopyToClipboard(event: any) {
       </div>
     </button>
 
+    <!-- 列表页  悬浮层 -->
     <div
       class="absolute bottom-[100%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff p-x-2 p-y-2 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
@@ -353,16 +350,16 @@ function directoryStructureCopyToClipboard(event: any) {
         <div
           class="flex justify-between text-white"
         >
-          <span
+          <div
             class="text-4 text-#e6683c font-700"
           >
             {{ video.size }}
-          </span>
+          </div>
 
-          <span>
+          <div>
             {{ video.resolution }}
 
-          </span>
+          </div>
         </div>
 
         <div
