@@ -2,15 +2,32 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 
-import { videoConfig } from '../../config'
+import { isDetailsPageScroll, videoConfig } from '@/config'
 
 const props = defineProps({
+
+  /**
+   *  挂载点
+   */
+  to: {
+    type: String,
+    required: true,
+  },
+
   /**
    *  种子列表
    */
   torrentList: {
     type: Array as PropType<TorrentType[]>,
     default: (): TorrentType[] => [],
+  },
+
+  /**
+   *  滚动的目标元素
+   */
+  scrollTarget: {
+    type: String,
+    default: '',
   },
 })
 
@@ -115,175 +132,200 @@ async function main() {
   })
 }
 
+function scrollToElement() {
+  //  如果配置 详情页 不 滚动，则直接返回
+  if (!isDetailsPageScroll) {
+    return
+  }
+
+  if (props.scrollTarget) {
+    const element = document.querySelector(props.scrollTarget)
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+  else {
+    //  滚动到 to
+    const element = document.querySelector(props.to)
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+}
+
 main()
+
+scrollToElement()
 </script>
 
 <template>
-  <div
-    class="w-full"
+  <Teleport
+    :to="props.to"
   >
     <div
-      class="mx-auto container"
+      class="mx-auto w-full border rounded-md bg-white p-6 pb-1"
     >
       <div
-        class="shadow-dashboard mx-auto border rounded-md bg-white p-6 pb-1"
+        class="flex flex-wrap items-center justify-between -m-2"
       >
+
         <div
-          class="m-b-5 flex flex-wrap items-center justify-between -m-2"
+          class="flex-center text-4 font-600 text-stroke-black"
         >
 
-          <div
-            class="flex-center text-4 font-600 text-stroke-black"
+          <span>
+            共
+          </span>
+
+          <span
+            class="m-x-2 text-6 text-#000 font-700"
           >
+            {{ torrentList.length }}
+          </span>
 
-            <span>
-              共
-            </span>
-
-            <span
-              class="m-x-2 text-6 text-#000 font-700"
-            >
-              {{ torrentList.length }}
-            </span>
-
-            <span>
-              部
-            </span>
-          </div>
-
-          <div
-            v-if="chineseCount"
-            class="flex-center text-4 text-#F59E0B font-600"
-          >
-            <span
-              class="m-x-2 text-6 text-#FF8400 font-700"
-            >
-              {{ chineseCount }}
-            </span>
-
-            <span>
-              部有中文字幕
-            </span>
-          </div>
-
+          <span>
+            部
+          </span>
         </div>
 
-        <div>
-          <!-- # -----------------------------------------------  列表循环  Start  ------------------------------------------------->
-          <div
-            v-for="(torrent, index) in torrentList"
-            :key="index"
+        <div
+          v-if="chineseCount"
+          class="flex-center text-4 text-#F59E0B font-600"
+        >
+          <span
+            class="m-x-2 text-6 text-#FF8400 font-700"
           >
+            {{ chineseCount }}
+          </span>
+
+          <span>
+            部有中文字幕
+          </span>
+        </div>
+
+      </div>
+
+      <div
+        class="m-y-5"
+      >
+        <!-- # -----------------------------------------------  列表循环  Start  ------------------------------------------------->
+        <div
+          v-for="(torrent, index) in torrentList"
+          :key="index"
+        >
+          <div
+            class="group relative z-0 h-[6em] flex cursor-pointer items-center justify-between overflow-hidden rounded-[1em] p-2"
+            :style="{
+              backgroundColor: torrent.backgroundColor,
+              // color: torrent.backgroundColor ? '#fff' : '#000',
+              // boxShadow: `2px 2px 35px ${torrent.backgroundColor} inset`,
+            }"
+          >
+            <!-- 悬浮动画 -->
             <div
-              class="group relative z-0 h-[6em] flex cursor-pointer items-center justify-between overflow-hidden rounded-[1em] p-2"
+              class="absolute z-[-1] h-[5em] w-[5em] rounded-full duration-500 -left-[4.5em] -top-[4.5em] group-hover:scale-[4500%]"
               :style="{
-                backgroundColor: torrent.backgroundColor,
-                // color: torrent.backgroundColor ? '#fff' : '#000',
-                // boxShadow: `2px 2px 35px ${torrent.backgroundColor} inset`,
+                // background: 'linear-gradient(to right,#00DFA2,#ADFF2F)',
+                background: 'linear-gradient(to right,#2233AA,#ADFF2F)',
               }"
-            >
-              <!-- 悬浮动画 -->
-              <div
-                class="absolute z-[-1] h-[5em] w-[5em] rounded-full duration-500 -left-[4.5em] -top-[4.5em] group-hover:scale-[4500%]"
-                :style="{
-                  // background: 'linear-gradient(to right,#00DFA2,#ADFF2F)',
-                  background: 'linear-gradient(to right,#2233AA,#ADFF2F)',
-                }"
-              />
+            />
 
-              <!-- 左边 -->
-              <div
-                class="flex items-center"
-              >
-                <!-- 左边第一列  磁链名称 -->
-                <div
-                  class="w-100 p-2"
-                >
-                  <div
-                    class="truncate text-4 font-700 group-hover:text-#fff"
-                  >
-                    {{
-                      torrent.name
-                    }}
-                  </div>
-
-                  <div
-                    class="m-t-1 text-3 font-600 !group-hover:text-#fff"
-                    :style="{
-                      color: torrent.backgroundColor ? '#fff' : '#9CA3AF',
-                    }"
-                  >
-                    {{
-                      torrent.time
-                    }}
-                  </div>
-                </div>
-
-                <!-- 左边第二列 文件大小 -->
-                <div
-                  class="m-l-3 w-30 group-hover:text-#fff"
-                >
-                  <span
-                    v-if="torrent.size"
-                    class="text-4 font-700"
-                  >
-                    {{
-                      torrent.size
-                    }}
-                  </span>
-
-                  <span
-                    v-if="torrent.size"
-                    class="font-600"
-                  >
-                    GB
-                  </span>
-                </div>
-
-                <!-- 左边第三列  图标 -->
-                <div
-                  v-for="tag in torrent.tagArray"
-                  :key="tag.name"
-                  class="p-x-3"
-                >
-                  <img
-                    :src="tag.url"
-                    :alt="tag.name"
-                    class="h-8 w-8"
-                  >
-                </div>
-
-              </div>
-
-              <!-- 右边 -->
-              <div
-                class="w-auto p-2"
-              >
-
-                <button
-                  class="cursor-pointer rounded from-[#EB3349] to-[#F45C43] bg-gradient-to-r px-3 py-2 text-white font-semibold shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-1px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset] transition-shadow focus:shadow-[inset_-12px_-8px_40px_#46464620] hover:shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-10px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset]"
-                  @click="copyTorrentUrl(torrent)"
-                >
-                  复制
-                </button>
-              </div>
-            </div>
-
+            <!-- 左边 -->
             <div
-              v-if="index !== torrentList.length - 1"
-              class="m-y-2 h-[1px] rounded bg-#9CA3AF"
+              class="flex items-center"
             >
-              <!-- 分割线 -->
+              <!-- 左边第一列  磁链名称 -->
+              <div
+                class="w-100 p-2"
+              >
+                <div
+                  class="truncate text-4 font-700 group-hover:text-#fff"
+                  :style="{
+                    color: torrent.backgroundColor ? '#fff' : '#000',
+                  }"
+                >
+                  {{
+                    torrent.name
+                  }}
+                </div>
+
+                <div
+                  class="m-t-1 text-3 font-600 !group-hover:text-#fff"
+                  :style="{
+                    color: torrent.backgroundColor ? '#fff' : '#9CA3AF',
+                  }"
+                >
+                  {{
+                    torrent.time
+                  }}
+                </div>
+              </div>
+
+              <!-- 左边第二列 文件大小 -->
+              <div
+                class="m-l-3 w-30 group-hover:text-#fff"
+              >
+                <span
+                  v-if="torrent.size"
+                  class="text-4 font-700"
+                >
+                  {{
+                    torrent.size
+                  }}
+                </span>
+
+                <span
+                  v-if="torrent.size"
+                  class="font-600"
+                >
+                  GB
+                </span>
+              </div>
+
+              <!-- 左边第三列  图标 -->
+              <div
+                v-for="tag in torrent.tagArray"
+                :key="tag.name"
+                class="p-x-3"
+              >
+                <img
+                  :src="tag.url"
+                  :alt="tag.name"
+                  class="h-8 w-8"
+                >
+              </div>
+
             </div>
 
+            <!-- 右边 -->
+            <div
+              class="w-auto p-2"
+            >
+
+              <button
+                class="cursor-pointer rounded from-[#EB3349] to-[#F45C43] bg-gradient-to-r px-3 py-2 text-white font-semibold shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-1px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset] transition-shadow focus:shadow-[inset_-12px_-8px_40px_#46464620] hover:shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-10px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset]"
+                @click="copyTorrentUrl(torrent)"
+              >
+                复制
+              </button>
+            </div>
           </div>
-          <!-- # -----------------------------------------------  列表循环  End  ------------------------------------------------->
+
+          <div
+            v-if="index !== torrentList.length - 1"
+            class="m-y-2 h-[1px] rounded bg-#9CA3AF"
+          >
+            <!-- 分割线 -->
+          </div>
 
         </div>
+        <!-- # -----------------------------------------------  列表循环  End  ------------------------------------------------->
+
       </div>
     </div>
-
-  </div>
+  </Teleport>
 </template>
 
 <style lang="less" scoped>

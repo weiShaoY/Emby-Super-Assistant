@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import ListPage from './list_page/index.vue'
 
-// import DetailsPage from './details_page/index.vue'
+import DetailsPage from './details_page/index.vue'
 
 /**
  * 判断是列表页还是详情页
@@ -26,9 +26,9 @@ else {
     v-if="isListPage"
   />
 
-  <!-- <DetailsPage
+  <DetailsPage
     v-else
-  /> -->
+  />
 </template>
 
 <style lang="less" scoped></style>

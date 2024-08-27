@@ -59,7 +59,7 @@ export const videoConfig: VideoType.VideoConfig = {
     },
     {
       name: '-C',
-      backgroundColor: '#2233AA',
+      backgroundColor: '#2668B5',
     },
     {
       name: 'ch',
