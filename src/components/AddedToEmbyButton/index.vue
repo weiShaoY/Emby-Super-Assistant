@@ -77,6 +77,8 @@ const isShowCopy = ref(false)
  */
 const directoryPath = props.video.directoryPath.join('\\')
 
+console.log('%c Line:79 🥥 props.video', 'color:#7f2b82', props.video)
+
 /**
  *   视频名称复制到 剪切板
  */
@@ -147,17 +149,17 @@ function directoryStructureCopyToClipboard(event: any) {
           <div
             class="m-r-2 flex flex-col text-3"
           >
-            <span
+            <div
               class="m-b-1"
             >
               {{ video.resolution }}
-            </span>
+            </div>
 
-            <span
+            <div
               class="text-[#e6683c] font-700"
             >
               {{ video.size }}
-            </span>
+            </div>
           </div>
 
           <img
@@ -235,7 +237,7 @@ function directoryStructureCopyToClipboard(event: any) {
     </div>
   </div>
 
-  <!-- 列表页 -->
+  <!--  Javbus 列表页 -->
   <div
     v-else
     class="group relative z-1000 m-x-auto m-t-2 w-[95%]"
@@ -278,7 +280,7 @@ function directoryStructureCopyToClipboard(event: any) {
         <div
           class="m-b-1 text-start text-14px"
         >
-          {{ video.baseName }}
+          {{ video.baseName }}11111111111111111111111
 
         </div>
 
@@ -319,7 +321,7 @@ function directoryStructureCopyToClipboard(event: any) {
       </div>
     </button>
 
-    <!-- 列表页  悬浮层 -->
+    <!--  Javbus 列表页  悬浮层 -->
     <div
       class="absolute bottom-[100%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff p-x-2 p-y-2 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
