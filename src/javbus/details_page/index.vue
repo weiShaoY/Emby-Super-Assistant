@@ -205,7 +205,7 @@ onMounted(() => {
 
     <div
       v-if="addedToEmbyList.length"
-      class="w-full bg-#FF8400 p-2"
+      class="w-full rounded-2 bg-#FF8400 p-2"
     >
       <AddedToEmbyButton
         v-for="(item, index) in addedToEmbyList"
