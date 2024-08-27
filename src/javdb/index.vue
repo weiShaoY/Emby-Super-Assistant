@@ -10,11 +10,17 @@ const isListPage = ref(false)
 
 const movieListElement = document.querySelector('.movie-list')
 
+const bodyElement = document.querySelector('body')
+
 // 检查 movieListElement 是否有元素
 if (movieListElement) {
+  bodyElement?.classList.add('javdb', 'javdb-list-page')
+
   isListPage.value = true
 }
 else {
+  bodyElement?.classList.add('javdb', 'javdb-details-page')
+
   isListPage.value = false
 }
 </script>

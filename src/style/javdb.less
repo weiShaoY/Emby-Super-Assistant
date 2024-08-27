@@ -6,7 +6,15 @@
   #footer {
     display: none;
   }
+}
 
+// 列表页
+.javdb-list-page {
+  .tags {
+    .tag {
+      margin-right: 10px !important;
+    }
+  }
 
   // 盒子高亮
   .is-highlight {
@@ -14,10 +22,7 @@
 
     border-radius: 10px;
 
-    // background-color: #FF407D;
-    // background-color: #74E291;
-    background-color: #EA1179;
-
+    background-color: #ea1179;
 
     .cover {
       border-radius: 10px;
@@ -28,7 +33,6 @@
       border-radius: 10px;
     }
 
-    // /////////////// 列表页
     strong {
       color: #fff !important;
 
@@ -46,9 +50,27 @@
     .meta {
       color: #fff !important;
     }
+  }
+}
 
+// 详情页
+.javdb-details-page {
 
-    // /////////////// 详情页
+  // 盒子高亮
+  .is-highlight {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ea1179;
+
+    .cover {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    img {
+      border-radius: 10px;
+    }
+
     .panel-block {
       strong {
         color: #363636 !important;
@@ -56,16 +78,6 @@
       }
     }
   }
-
-  // # /////////////////////////////////////  列表页  /////////////////////////////////////
-  .tags {
-    .tag {
-      margin-right: 10px !important;
-    }
-  }
-
-
-  // $ /////////////////////////////////////  详情页  /////////////////////////////////////
 
   //  影片信息
   .video-meta-panel {
@@ -85,7 +97,6 @@
         text-decoration: none;
       }
 
-
       .first-block {
         .value {
           font-size: 24px !important;
@@ -95,11 +106,8 @@
 
       // 第8个
       .panel-block {
-
         &:nth-child(9) {
-
           .value {
-
             font-size: 0;
 
             a {
@@ -112,7 +120,7 @@
             }
 
             strong::after {
-              content: "\A";
+              content: '\A';
               /* 添加换行符 */
               white-space: pre;
               /* 保留空白符（包括换行符） */
@@ -125,18 +133,16 @@
         }
       }
     }
-
   }
 
-
-
-  // 种子列表
+  //  种子列表
+  // 磁链  短评  相关清单
   .tabs.no-bottom {
     display: none;
   }
 
+  //  官方App JavDB公告(Telegram频道）
   .top-meta {
     display: none;
   }
-
 }
