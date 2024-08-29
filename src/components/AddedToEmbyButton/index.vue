@@ -77,8 +77,6 @@ const isShowCopy = ref(false)
  */
 const directoryPath = props.video.directoryPath.join('\\')
 
-console.log('%c Line:79 🥥 props.video', 'color:#7f2b82', props.video)
-
 /**
  *   视频名称复制到 剪切板
  */
@@ -127,15 +125,15 @@ function directoryStructureCopyToClipboard(event: any) {
       @click="videoNameCopyToClipboard"
     >
       <span
-        class="cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] absolute left-0 top-0 h-full w-full translate-y-[2px] transform rounded-[12px] bg-black/25 shadow transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[1px] hover:translate-y-[4px] active:transition-transform hover:transition-transform"
+        class="absolute left-0 top-0 h-full w-full translate-y-[2px] transform rounded-[12px] bg-black/25 shadow transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[1px] hover:translate-y-[4px] active:transition-transform hover:transition-transform"
       />
 
       <span
-        class="edge absolute left-0 top-0 h-full w-full rounded-[12px] from-[hsl(167deg,65%,13%)] via-[hsl(340deg,100%,32%)] to-[hsl(167deg,65%,13%)] bg-gradient-to-l"
+        class="absolute left-0 top-0 h-full w-full rounded-[12px] from-[hsl(167deg,65%,13%)] via-[hsl(340deg,100%,32%)] to-[hsl(167deg,65%,13%)] bg-gradient-to-l"
       />
 
       <div
-        class="front cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] relative block flex translate-y-[-4px] transform items-center justify-between rounded-[12px] bg-[#219C90] p-[12px_27px] text-[1.1rem] transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] !text-white active:transition-transform hover:transition-transform"
+        class="relative block flex translate-y-[-4px] transform items-center justify-between rounded-[12px] bg-[#219C90] p-[12px_27px] text-[1.1rem] transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] !text-white active:transition-transform hover:transition-transform"
       >
         <span
           class="flex-1 truncate text-start"
@@ -254,15 +252,15 @@ function directoryStructureCopyToClipboard(event: any) {
       @click="videoNameCopyToClipboard"
     >
       <span
-        class="cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] absolute left-0 top-0 h-full w-full translate-y-[2px] transform rounded-[12px] bg-black/25 shadow transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[1px] hover:translate-y-[4px] active:transition-transform hover:transition-transform"
+        class="absolute left-0 top-0 h-full w-full translate-y-[2px] transform rounded-[12px] bg-black/25 shadow transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[1px] hover:translate-y-[4px] active:transition-transform hover:transition-transform"
       />
 
       <span
-        class="edge absolute left-0 top-0 h-full w-full rounded-[12px] from-[hsl(167deg,65%,13%)] via-[hsl(340deg,100%,32%)] to-[hsl(167deg,65%,13%)] bg-gradient-to-l"
+        class="absolute left-0 top-0 h-full w-full rounded-[12px] from-[hsl(167deg,65%,13%)] via-[hsl(340deg,100%,32%)] to-[hsl(167deg,65%,13%)] bg-gradient-to-l"
       />
 
       <div
-        class="front cubic-bezier-[.3,.7,.4,1] cubic-bezier-[.3,.7,.4,1.5] relative block translate-y-[-4px] transform rounded-[12px] bg-[#219C90] p-x-3 p-y-2 transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] !text-white active:transition-transform hover:transition-transform"
+        class="relative block translate-y-[-4px] transform rounded-[12px] bg-[#219C90] p-x-3 p-y-2 transition-transform duration-[250ms] duration-[34ms] duration-[600ms] will-change-transform active:translate-y-[-2px] hover:translate-y-[-6px] !text-white active:transition-transform hover:transition-transform"
       >
 
         <div
