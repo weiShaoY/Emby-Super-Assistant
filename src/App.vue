@@ -27,7 +27,8 @@ const isEmby = currentUrl.includes('8096/web/index.html')
   <Emby
     v-else-if="isEmby"
   />
-  <!-- <Personality /> -->1
+
+  <!-- <Personality /> -->
 </template>
 
 <style scoped lang="less">

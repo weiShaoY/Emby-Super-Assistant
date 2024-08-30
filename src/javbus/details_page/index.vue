@@ -215,6 +215,13 @@ onMounted(() => {
     </div>
   </div>
 
+  <Teleport
+    to=".screencap"
+  >
+    <!-- 在线观看 -->
+    <OnlinePlayVideo />
+  </Teleport>
+
   <!-- 磁链列表 -->
   <TorrentList
     v-if="isShowTorrentList"

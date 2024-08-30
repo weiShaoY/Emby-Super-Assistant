@@ -167,6 +167,8 @@ onMounted(() => {
         :height="40"
       />
     </div>
+    <!-- :video-name="pageVideoName" -->
+
   </Teleport>
 
   <div
@@ -188,6 +190,13 @@ onMounted(() => {
       />
     </div>
   </div>
+
+  <Teleport
+    to=".column-video-cover"
+  >
+    <!-- 在线观看 -->
+    <OnlinePlayVideo />
+  </Teleport>
 
   <!-- 磁链列表 -->
   <TorrentList

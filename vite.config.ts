@@ -21,6 +21,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+
+    // open: false, // 自动打开浏览器
+  },
+
   plugins: [
     AutoImport(
       {
@@ -36,26 +41,6 @@ export default defineConfig({
 
     vue(),
 
-    monkey({
-      entry: 'src/main.ts',
-      userscript: {
-        icon: 'https://vitejs.dev/logo.svg',
-        namespace: 'npm/vite-plugin-monkey',
-
-        match: [
-          '*://*.javdb.com/*',
-          '*://*.javbus.com/*',
-          '*/web/index.html',
-          '192.168.*',
-        ],
-      },
-      build: {
-        externalGlobals: {
-          vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
-        },
-      },
-    }),
-
     UnoCSS(),
 
     // https://github.com/antfu/vite-plugin-components
@@ -68,6 +53,65 @@ export default defineConfig({
 
     //  Arco 按需引入
     vitePluginForArco({
+    }),
+
+    monkey({
+      entry: 'src/main.ts',
+      userscript: {
+        icon: 'https://vitejs.dev/logo.svg',
+        name: 'Emby超级助手',
+        author: 'weiShao',
+        version: '0.0.1',
+        license: 'MIT',
+        namespace: 'npm/vite-plugin-monkey',
+        description: '为Emby在Jav网站监测是否入库,是否可更新,Emby调用带第三方播放器,为 JavDB、JavBus、JavLibrary 这三个站点添加跳转在线观看的链接',
+        match: [
+          '*://*.javdb.com/*',
+          '*://*.javbus.com/*',
+          '*/web/index.html',
+          '192.168.*',
+        ],
+
+        /**
+         *  此标签定义允许通过GM_xmlhttpRequest检索的域（无顶级域），包括子域
+         */
+        connect: [
+          'jable.tv',
+          'missav.com',
+          'missav123.com',
+          'njav.tv',
+          'supjav.com',
+          'netflav5.com',
+          'avgle.com',
+          'javhhh.com',
+          'bestjavporn.com',
+          'javmenu.com',
+          'jav.guru',
+          'javmost.cx',
+          'hayav.com',
+          'avjoy.me',
+          'javfc2.net',
+          'paipancon.com',
+          'ggjav.com',
+          'www.av01.tv',
+          '18sex.org',
+          'highporn.net',
+          'evojav.pro',
+          '18av.mm-cg.com',
+          'javgo.to',
+          'javbus.com',
+          'javdb.com',
+          'javlibrary.com',
+          'javdb008.com',
+          'g64w.com',
+        ],
+      },
+
+      build: {
+        externalGlobals: {
+          vue: cdn.jsdelivr('Vue', 'dist/vue.global.prod.js'),
+        },
+      },
     }),
   ],
 })
