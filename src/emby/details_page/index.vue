@@ -11,7 +11,7 @@ import folderSvg from '@/assets/svg/folder.svg'
 
 import JavdbSvg from '@/assets/svg/Javdb.svg'
 
-import { quickerConfig, videoConfig } from '@/config'
+import { config, videoConfig } from '@/config'
 
 /**
  * 表示媒体流信息的类型。
@@ -350,7 +350,7 @@ async function embyOpenFolder() {
 
   const directoryPath = intent.title.substring(0, intent.title.lastIndexOf('\\'))
 
-  quickerConfig.openFolder(directoryPath, true)
+  config.quicker.openFolder(directoryPath, true)
 }
 
 /**

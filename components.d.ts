@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddedToEmbyButton: typeof import('./src/components/AddedToEmbyButton/index.vue')['default']
     BtsowButton: typeof import('./src/components/BtsowButton/index.vue')['default']
+    copy: typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
     DuplicatesModel: typeof import('./src/components/StoreHouseButton/components/duplicatesModel.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
     'Index copy': typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']

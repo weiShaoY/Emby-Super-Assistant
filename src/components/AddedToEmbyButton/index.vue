@@ -8,7 +8,7 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import finishSvg from '@/assets/svg/finish.svg'
 
-import { quickerConfig } from '@/config'
+import { config } from '@/config'
 
 import { GM_setClipboard } from '$'
 
@@ -103,7 +103,7 @@ function directoryStructureCopyToClipboard(event: any) {
   // Message.success('视频位置 已复制到剪切板')
 
   //  通过 Quicker打开文件夹
-  quickerConfig.openFolder(props.video.directoryPath.slice(0, -1).join('\\'))
+  config.quicker.openFolder(props.video.directoryPath.slice(0, -1).join('\\'))
 }
 </script>
 
@@ -278,7 +278,7 @@ function directoryStructureCopyToClipboard(event: any) {
         <div
           class="m-b-1 text-start text-14px"
         >
-          {{ video.baseName }}11111111111111111111111
+          {{ video.baseName }}
 
         </div>
 
