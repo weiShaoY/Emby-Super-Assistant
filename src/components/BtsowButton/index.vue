@@ -59,8 +59,7 @@ const props = defineProps({
 function btsowBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  // window.open(`${btsowUrl}${props.videoName}`, '_blank')
-  config.btsow.search(props.videoName)
+  config.web.btsow.search(props.videoName)
 }
 </script>
 
@@ -77,12 +76,12 @@ function btsowBtnHandler(event: MouseEvent) {
     @click="btsowBtnHandler"
   >
     <img
-      :src="config.btsow.icon"
+      :src="config.web.btsow.icon"
       class="max-h-full max-w-full object-contain group-hover:hidden"
     >
 
     <img
-      :src="config.btsow.iconHover"
+      :src="config.web.btsow.iconHover"
       class="hidden max-h-full max-w-full object-contain !group-hover:block"
     >
   </div>

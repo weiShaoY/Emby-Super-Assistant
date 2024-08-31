@@ -242,7 +242,7 @@ async function mainBtnHandler() {
         >
           <img
             v-if="!isLoading"
-            :src="config.emby.icon"
+            :src="config.web.emby.icon"
             alt="仓库"
           >
 

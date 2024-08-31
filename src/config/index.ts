@@ -1,29 +1,21 @@
-import emby from './emby'
-
 import video from './video'
 
 import quicker from './quicker'
 
-import javdb from './javdb'
+import emby from './web/emby'
 
-import btsow from './btsow'
+import javdb from './web/javdb'
+
+import btsow from './web/btsow'
 
 /**
  *  是否是详情页滚动
  */
 const isDetailsPageScroll = true
 
-export {
-  isDetailsPageScroll,
-}
+export { isDetailsPageScroll }
 
 export const config = {
-
-  /**
-   *  emby 配置
-   */
-  emby,
-
   /**
    *  quicker 配置
    */
@@ -34,9 +26,25 @@ export const config = {
    */
   video,
 
-  javdb,
+  /**
+   *  web 配置
+   */
+  web: {
+    /**
+     *  emby 配置
+     */
+    emby,
 
-  btsow,
+    /**
+     *  btsow 配置
+     */
+    btsow,
+
+    /**
+     *  javdb 配置
+     */
+    javdb,
+  },
 }
 
 export default config

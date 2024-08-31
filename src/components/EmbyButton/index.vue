@@ -71,7 +71,7 @@ const props = defineProps({
 function embyBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  config.emby.openEmby(props.videoName)
+  config.web.emby.openEmby(props.videoName)
 }
 
 const mounted = ref(false)
@@ -104,12 +104,12 @@ onMounted(async () => {
       class="m-x-auto h-full"
     >
       <img
-        :src="config.emby.icon"
+        :src="config.web.emby.icon"
         class="max-h-full max-w-full object-contain group-hover:hidden"
       >
 
       <img
-        :src="config.emby.iconHover"
+        :src="config.web.emby.iconHover"
         class="hidden max-h-full max-w-full object-contain !group-hover:block"
       >
     </div>
