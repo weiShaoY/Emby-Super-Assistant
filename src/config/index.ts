@@ -42,6 +42,8 @@ export const config = {
    */
   quicker,
 
+  video: videoConfig,
+
 }
 
 export default config

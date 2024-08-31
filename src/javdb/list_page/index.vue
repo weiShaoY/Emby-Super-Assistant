@@ -118,7 +118,6 @@ onMounted(() => {
         :width="50"
         :height="24"
         :radius="0"
-        is-show-video-name
         class="tag"
       />
     </Teleport>

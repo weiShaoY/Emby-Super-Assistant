@@ -100,12 +100,12 @@ onMounted(async () => {
     <span
       v-if="isShowVideoName"
     >
-      Emby
+      {{ videoName }}
     </span>
 
     <div
       v-else
-      class="m-x-auto h-full p-1"
+      class="m-x-auto h-full"
     >
       <img
         :src="embySvg"
