@@ -8,10 +8,6 @@ import { config } from '@/config'
 
 import { GM_getValue, GM_setValue, GM_xmlhttpRequest } from '$'
 
-import embySvg from '@/assets/svg/emby.svg'
-
-import embyHoverSvg from '@/assets/svg/emby-hover.svg'
-
 const props = defineProps({
   /**
    *  @description  视频名称
@@ -108,12 +104,12 @@ onMounted(async () => {
       class="m-x-auto h-full"
     >
       <img
-        :src="embySvg"
+        :src="config.emby.icon"
         class="max-h-full max-w-full object-contain group-hover:hidden"
       >
 
       <img
-        :src="embyHoverSvg"
+        :src="config.emby.iconHover"
         class="hidden max-h-full max-w-full object-contain !group-hover:block"
       >
     </div>

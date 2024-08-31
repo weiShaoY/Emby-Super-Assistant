@@ -4,18 +4,9 @@ import video from './video'
 
 import quicker from './quicker'
 
-const btsowUrl = 'https://btsow.com/search/'
+import javdb from './javdb'
 
-const javdb = {
-  name: 'JavDB',
-  hostname: 'javdb.com',
-  url: 'https://javdb.com/search?q={{code}}',
-  fetchType: 'parser',
-  domQuery: {
-    linkQuery: '.movie-list>.item:first-child>a',
-    titleQuery: '.video-title',
-  },
-}
+import btsow from './btsow'
 
 /**
  *  是否是详情页滚动
@@ -23,9 +14,7 @@ const javdb = {
 const isDetailsPageScroll = true
 
 export {
-  btsowUrl,
   isDetailsPageScroll,
-  javdb,
 }
 
 export const config = {
@@ -45,6 +34,9 @@ export const config = {
    */
   video,
 
+  javdb,
+
+  btsow,
 }
 
 export default config

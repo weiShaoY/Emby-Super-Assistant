@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 
-import { btsowUrl } from '@/config'
+import config from '@/config'
 
 const props = defineProps({
   /**
@@ -11,6 +11,14 @@ const props = defineProps({
   videoName: {
     type: String,
     required: true,
+  },
+
+  /**
+   *  是否显示视频名称
+   */
+  isShowVideoName: {
+    type: Boolean,
+    default: false,
   },
 
   /**
@@ -59,7 +67,8 @@ const props = defineProps({
 function btsowBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  window.open(`${btsowUrl}${props.videoName}`, '_blank')
+  // window.open(`${btsowUrl}${props.videoName}`, '_blank')
+  config.btsow.search(props.videoName)
 }
 </script>
 

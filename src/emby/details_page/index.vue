@@ -9,8 +9,6 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import folderSvg from '@/assets/svg/folder.svg'
 
-import JavdbSvg from '@/assets/svg/Javdb.svg'
-
 import { config } from '@/config'
 
 /**
@@ -362,7 +360,7 @@ async function embyOpenJavdb() {
   const result = title.substring(title.lastIndexOf('\\') + 1, title.indexOf('.', title.lastIndexOf('\\'))).toLowerCase()
     .replace(config.video.tagRegex, '')
 
-  window.open(`https://javdb.com/search?q=${result}&f=all`, '_blank')
+  config.javdb.search(result)
 }
 
 /**
@@ -482,7 +480,7 @@ setTimeout(() => {
         <i
           class="m-r-2 h-6 w-6 bg-cover bg-no-repeat"
           :style="{
-            backgroundImage: `url(https://www.javdb.com/favicon.ico)`,
+            backgroundImage: `url(${config.javdb.icon})`,
           }"
         />
 

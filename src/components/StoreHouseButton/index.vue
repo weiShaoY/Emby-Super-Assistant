@@ -7,8 +7,6 @@ import { getTagArray, parseNfoContent, videoManager } from '@/utils'
 
 import { config } from '@/config'
 
-import embySvg from '@/assets/svg/emby.svg'
-
 /**
  *  全局的加载状态
  */
@@ -244,7 +242,7 @@ async function mainBtnHandler() {
         >
           <img
             v-if="!isLoading"
-            :src="embySvg"
+            :src="config.emby.icon"
             alt="仓库"
           >
 

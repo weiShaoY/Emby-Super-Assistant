@@ -1,9 +1,17 @@
 import Message from '@arco-design/web-vue/es/message'
 
+import embySvg from '@/assets/svg/web/emby.svg'
+
+import embyHoverSvg from '@/assets/svg/web/emby-hover.svg'
+
 /**
  *  Emby 配置
  */
 export const emby = {
+  icon: embySvg,
+
+  iconHover: embyHoverSvg,
+
   /**
    * Emby 服务器的 URL。
    */
