@@ -190,7 +190,6 @@ onMounted(() => {
         :video-name="pageVideoName"
         :width="100"
         :height="40"
-        is-show-video-name
       />
     </div>
   </Teleport>

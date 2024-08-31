@@ -114,7 +114,7 @@ onMounted(async () => {
 
       <img
         :src="embyHoverSvg"
-        class="hidden max-h-full max-w-full object-contain group-hover:block"
+        class="hidden max-h-full max-w-full object-contain !group-hover:block"
       >
     </div>
   </div>

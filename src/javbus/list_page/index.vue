@@ -128,7 +128,6 @@ onMounted(() => {
         :width="50"
         :height="24"
         :radius="0"
-        is-show-video-name
         class="m-x-auto m-t-2 !w-90%"
       />
     </Teleport>
