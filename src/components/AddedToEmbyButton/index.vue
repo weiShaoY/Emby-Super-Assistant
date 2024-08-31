@@ -191,7 +191,7 @@ function directoryStructureCopyToClipboard(event: any) {
 
     <!-- 详情页  悬浮层 -->
     <div
-      class="absolute bottom-[110%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff px-3 py-2 transition-all duration-300 ease-in-out group-hover:scale-100"
+      class="absolute bottom-[110%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff p-3 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
         boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
       }"
@@ -321,7 +321,7 @@ function directoryStructureCopyToClipboard(event: any) {
 
     <!--  Javbus 列表页  悬浮层 -->
     <div
-      class="absolute bottom-[100%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff p-x-2 p-y-2 transition-all duration-300 ease-in-out group-hover:scale-100"
+      class="absolute bottom-[100%] w-full origin-left scale-0 cursor-pointer select-text rounded-lg bg-#fff p-2 transition-all duration-300 ease-in-out group-hover:scale-100"
       :style="{
         boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
       }"

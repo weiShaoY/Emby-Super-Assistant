@@ -43,7 +43,7 @@ function changeCheck(item: SiteItem, isHidden: boolean) {
 
 <template>
   <button
-    class="group relative h-12 w-12 overflow-hidden border-2 border-black rounded-2 duration-500 hover:border-green-500"
+    class="group relative h-12 w-12 overflow-hidden border-2 border-black rounded-2 bg-white duration-500 hover:border-green-500"
     type="button"
     @click="visible = true"
   >

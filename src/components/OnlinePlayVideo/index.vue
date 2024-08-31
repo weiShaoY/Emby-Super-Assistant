@@ -79,30 +79,38 @@ main()
 <template>
   <!-- 定义一个容器 div，包含站点按钮列表 -->
   <div
-    class="m-x-auto flex"
+    class="flex border-gray-300 rounded-2 bg-white p-3 shadow-md ease-in-out"
+    :style="{
+      boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #EBEBEB',
+    }"
   >
     <!-- 遍历站点列表，根据条件渲染 SiteBtn 组件 -->
 
     <div
-      class="flex flex-1 flex-wrap gap-3"
+      class="flex rounded-2 bg-[#2a2b2f] p-3"
     >
-      <template
-        v-for="siteItem in siteList"
+      <div
+        class="m-r-3 flex flex-1 flex-wrap gap-3"
       >
-        <SiteBtn
-          v-if="shouldShowSiteBtn(siteItem)"
-          :key="siteItem.name"
-          :site-item="siteItem"
-          :code="code"
-        />
-      </template>
+        <template
+          v-for="siteItem in siteList"
+        >
+          <SiteBtn
+            v-if="shouldShowSiteBtn(siteItem)"
+            :key="siteItem.name"
+            :site-item="siteItem"
+            :code="code"
+          />
+        </template>
+      </div>
+
+      <Setting
+        :site-list="siteList"
+        :set-disables="setDisables"
+        :disables="disables"
+      />
     </div>
 
-    <Setting
-      :site-list="siteList"
-      :set-disables="setDisables"
-      :disables="disables"
-    />
   </div>
 </template>
 

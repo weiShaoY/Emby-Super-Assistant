@@ -137,8 +137,8 @@ function go() {
   <div
     class="group relative flex flex-center cursor-pointer justify-center rounded-2"
   >
-    <button
-      class="h-9 w-auto flex items-center gap-1 border-1 rounded-2 p-x-1 focus:outline-none"
+    <div
+      class="h-9 w-auto flex items-center gap-1 border-1 rounded-2 bg-white p-x-1"
       :style="{
         border: `4px solid ${bgColor}`,
       }"
@@ -161,7 +161,7 @@ function go() {
       >
         {{ siteItem.name }}
       </div>
-    </button>
+    </div>
 
     <span
       class="absolute left-1/2 z-20 scale-0 transform rounded-lg bg-gray-900 p-x-4 p-y-2 text-sm text-white font-bold shadow-lg transition-transform duration-300 ease-in-out -top-9 -translate-x-1/2 group-hover:scale-100"
