@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 
-import { isDetailsPageScroll, videoConfig } from '@/config'
+import { config, isDetailsPageScroll } from '@/config'
 
 const props = defineProps({
 
@@ -55,7 +55,7 @@ async function main() {
    * 设置背景颜色和标签
    */
   torrentList.value = torrentList.value.map((torrent: TorrentType) => {
-    const inSortingRuleArrayIndex = videoConfig.torrentListSortingRuleArray.findIndex(rule =>
+    const inSortingRuleArrayIndex = config.video.torrentListSortingRuleArray.findIndex(rule =>
       torrent.name.includes(rule.name),
     )
 
@@ -64,7 +64,7 @@ async function main() {
 
     // 如果找到匹配的背景颜色规则，设置 backgroundColor
     if (inSortingRuleArrayIndex !== -1) {
-      updatedTorrent.backgroundColor = videoConfig.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor
+      updatedTorrent.backgroundColor = config.video.torrentListSortingRuleArray[inSortingRuleArrayIndex].backgroundColor
     }
 
     // 返回更新后的对象
@@ -75,12 +75,12 @@ async function main() {
   /**
    *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
    */
-    const indexA = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoA.name.includes(rule.name))
+    const indexA = config.video.torrentListSortingRuleArray.findIndex(rule => videoA.name.includes(rule.name))
 
     /**
      *   视频B在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexB = videoConfig.torrentListSortingRuleArray.findIndex(rule => videoB.name.includes(rule.name))
+    const indexB = config.video.torrentListSortingRuleArray.findIndex(rule => videoB.name.includes(rule.name))
 
     // 1.在规则数组中，按数组里关键词的顺序排序,如果关键词的顺序一样了,按文件大小排序
 

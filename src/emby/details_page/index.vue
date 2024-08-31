@@ -11,7 +11,7 @@ import folderSvg from '@/assets/svg/folder.svg'
 
 import JavdbSvg from '@/assets/svg/Javdb.svg'
 
-import { config, videoConfig } from '@/config'
+import { config } from '@/config'
 
 /**
  * 表示媒体流信息的类型。
@@ -360,7 +360,7 @@ async function embyOpenJavdb() {
   const { intent: { title } } = await getEmbyMediaInfo()
 
   const result = title.substring(title.lastIndexOf('\\') + 1, title.indexOf('.', title.lastIndexOf('\\'))).toLowerCase()
-    .replace(videoConfig.tagRegex, '')
+    .replace(config.video.tagRegex, '')
 
   window.open(`https://javdb.com/search?q=${result}&f=all`, '_blank')
 }

@@ -5,7 +5,7 @@ import DuplicatesModel from './components/duplicatesModel.vue'
 
 import { getTagArray, parseNfoContent, videoManager } from '@/utils'
 
-import { videoConfig } from '@/config'
+import { config } from '@/config'
 
 import embySvg from '@/assets/svg/emby.svg'
 
@@ -76,8 +76,8 @@ async function* getFiles(
     const [name, handle] = entry
 
     try {
-      //   判断当前条目是否为文件，并且文件扩展名是否在 videoConfig.extensionArray 中
-      if (handle.kind === 'file' && videoConfig.extensionArray.some(ext => name.endsWith(`.${ext}`))) {
+      //   判断当前条目是否为文件，并且文件扩展名是否在 config.video.extensionArray 中
+      if (handle.kind === 'file' && config.video.extensionArray.some(ext => name.endsWith(`.${ext}`))) {
         let nfoContent = ''
 
         // 尝试查找同级目录下的同名 .nfo 文件
@@ -169,7 +169,7 @@ async function mainBtnHandler() {
         processedName:
           file.name.substring(0, file.name.lastIndexOf('.'))
             .toLowerCase()
-            .replace(videoConfig.tagRegex, ''),
+            .replace(config.video.tagRegex, ''),
 
         extensionName: file.name.replace(/^.*\./, ''),
 

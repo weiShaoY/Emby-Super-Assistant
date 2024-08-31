@@ -1,6 +1,6 @@
 import emby from './emby'
 
-import videoConfig from './videoConfig'
+import video from './video'
 
 import quicker from './quicker'
 
@@ -24,8 +24,6 @@ const isDetailsPageScroll = true
 
 export {
   btsowUrl,
-  videoConfig,
-  quicker as quickerConfig,
   isDetailsPageScroll,
   javdb,
 }
@@ -42,7 +40,10 @@ export const config = {
    */
   quicker,
 
-  video: videoConfig,
+  /**
+   *  视频配置
+   */
+  video,
 
 }
 

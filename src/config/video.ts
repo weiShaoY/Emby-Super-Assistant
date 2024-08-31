@@ -11,7 +11,7 @@ import crackingSvg from '@/assets/svg/cracking.svg'
 /**
  * 视频匹配配置
  */
-export const videoConfig: VideoType.VideoConfig = {
+export const video: VideoType.VideoConfig = {
   extensionArray: ['mp4', 'mkv', 'avi', 'flv', 'wmv', 'mov', 'rmvb'],
 
   tagArray: [
@@ -94,8 +94,8 @@ export const videoConfig: VideoType.VideoConfig = {
 }
 
 // 在对象定义后设置 tagRegex
-videoConfig.tagRegex = new RegExp(
-  videoConfig.tagArray
+video.tagRegex = new RegExp(
+  video.tagArray
     .flatMap(tag => tag.name)
     .map(name => name.includes('-')
       ? name.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -105,4 +105,4 @@ videoConfig.tagRegex = new RegExp(
   'gi',
 )
 
-export default videoConfig
+export default video

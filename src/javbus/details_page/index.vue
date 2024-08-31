@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { videoConfig } from '@/config'
-
 import { getTagArray, videoManager } from '@/utils'
 
 const addedToEmbyList = ref<VideoType.Video[]>([])
