@@ -1,4 +1,4 @@
-import embyConfig from './embyConfig'
+import emby from './emby'
 
 import videoConfig from './videoConfig'
 
@@ -24,7 +24,6 @@ const isDetailsPageScroll = true
 
 export {
   btsowUrl,
-  embyConfig,
   videoConfig,
   quicker as quickerConfig,
   isDetailsPageScroll,
@@ -33,7 +32,10 @@ export {
 
 export const config = {
 
-  emby: embyConfig,
+  /**
+   *  emby 配置
+   */
+  emby,
 
   /**
    *  quicker 配置

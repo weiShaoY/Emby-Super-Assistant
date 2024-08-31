@@ -4,7 +4,7 @@ import type { CSSProperties } from 'vue'
 
 import { Message } from '@arco-design/web-vue'
 
-import { embyConfig } from '@/config'
+import { config } from '@/config'
 
 import { GM_getValue, GM_setValue, GM_xmlhttpRequest } from '$'
 
@@ -75,91 +75,7 @@ const props = defineProps({
 function embyBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  // 可以在这里添加其他逻辑
-
-  /**
-   * 构建 Emby 请求 URL
-   * @param  embyConfig - Emby 配置
-   * @returns {string} - 完整的请求 URL
-   */
-  const buildEmbyRequestUrl = (embyConfig: any) => {
-    const queryParams = {
-      ...embyConfig.queryParams,
-      SearchTerm: props.videoName,
-    }
-
-    const queryString = Object.entries(queryParams)
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value as string)}`,
-      )
-      .join('&')
-
-    return `${embyConfig.url}/emby/Users/${embyConfig.userId}/Items?${queryString}`
-  }
-
-  // 设置超时时间为2秒
-  const timeoutDuration = 2000
-
-  const timeoutId = setTimeout(() => {
-    Message.error({
-      content: '请求超时, 请检查 Emby 服务器',
-
-      duration: 5000,
-
-    })
-  }, timeoutDuration)
-
-  GM_xmlhttpRequest({
-    method: 'GET',
-    url: buildEmbyRequestUrl(embyConfig),
-    headers: {
-      'Accept': 'application/json',
-      'X-Emby-Client': 'Emby Web',
-      'X-Emby-Device-Name': embyConfig.deviceName,
-      'X-Emby-Device-Id': embyConfig.deviceId,
-      'X-Emby-Client-Version': embyConfig.clientVersion,
-      'X-Emby-Token': embyConfig.token,
-      'X-Emby-Language': embyConfig.language,
-    },
-    onload: (response: any) => {
-      // 请求成功，清除超时计时器
-      clearTimeout(timeoutId)
-
-      if (response.status >= 200 && response.status < 300) {
-        try {
-          // 将 JSON 字符串转换为 JSON 对象
-          const result = JSON.parse(response.responseText)
-
-          if (result.Items.length === 1) {
-            const id = result.Items[0].Id
-
-            const serverId = result.Items[0].ServerId
-
-            window.open(
-              `${embyConfig.url}/web/index.html#!/item?id=${id}&serverId=${serverId}`,
-              '_blank',
-            )
-
-            GM_setValue('EMBY-BTN-VALUE', '')
-          }
-          else {
-            GM_setValue('EMBY-BTN-VALUE', props.videoName)
-            window.open(`${embyConfig.url}/web/index.html#!/home`, '_blank')
-          }
-        }
-        catch (e) {
-          console.error('请求失败:', e)
-        }
-      }
-      else {
-        console.error(`HTTP 错误: ${response.status}`)
-      }
-    },
-    onerror: () => {
-      Message.error(`请求失败, 请检查 Emby 服务器`)
-    },
-  })
+  config.emby.openEmby(props.videoName)
 }
 
 const mounted = ref(false)
