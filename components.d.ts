@@ -7,11 +7,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    1: typeof import('./src/components/OnlinePlayVideo/1.vue')['default']
-    Aaa: typeof import('./src/components/OnlinePlayVideo/aaa/index.vue')['default']
     AddedToEmbyButton: typeof import('./src/components/AddedToEmbyButton/index.vue')['default']
     BtsowButton: typeof import('./src/components/BtsowButton/index.vue')['default']
-    copy: typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
     DuplicatesModel: typeof import('./src/components/StoreHouseButton/components/duplicatesModel.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
     'Index copy': typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
@@ -43,11 +40,8 @@ declare module 'vue' {
     Setting: typeof import('./src/components/OnlinePlayVideo/setting.vue')['default']
     SiteBtn: typeof import('./src/components/OnlinePlayVideo/siteBtn.vue')['default']
     StoreHouseButton: typeof import('./src/components/StoreHouseButton/index.vue')['default']
-    Test: typeof import('./src/components/OnlinePlayVideo/aaa/test.vue')['default']
     Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
     TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']
     UpdateChineseButton: typeof import('./src/components/UpdateChineseButton/index.vue')['default']
-    WatchOnline: typeof import('./src/components/watchOnline/index.vue')['default']
-    Wrap: typeof import('./src/components/OnlinePlayVideo/aaa/wrap.vue')['default']
   }
 }
