@@ -23,16 +23,6 @@ type TorrentType = {
    */
   time: string
 
-  // /**
-  //  *  是否高清
-  //  */
-  // isHD: boolean
-
-  // /**
-  //  *  是否有中文字幕
-  //  */
-  // isChinese: boolean
-
   /**
    *  背景颜色
    */
@@ -44,7 +34,20 @@ type TorrentType = {
    */
   tagArray: VideoType.VideoTagArrayItem[]
 
-  /**
-   *  匹配的标签名
-   */
 }
+
+  /**
+   * 种子列表排序规则数组的每一项
+   */
+  type torrentListSortingRuleArrayItem = {
+
+    /**
+     * 匹配名称
+     */
+    name: string
+
+    /**
+     * 匹配上的背景颜色
+     */
+    backgroundColor: string
+  }

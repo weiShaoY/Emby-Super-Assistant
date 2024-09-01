@@ -72,22 +72,6 @@ namespace VideoType {
   }
 
   /**
-   * 种子列表排序规则数组的每一项
-   */
-  type torrentListSortingRuleArrayItem = {
-
-    /**
-     * 匹配名称
-     */
-    name: string
-
-    /**
-     * 匹配上的背景颜色
-     */
-    backgroundColor: string
-  }
-
-  /**
    * 完整的视频配置类型
    */
   type VideoConfig = {
@@ -108,11 +92,6 @@ namespace VideoType {
      *  视频标签匹配正则（注意：这里使用 `TagArrayType`）
      */
     tagRegex: RegExp
-
-    /**
-     *  种子列表排序规则数组
-     */
-    torrentListSortingRuleArray: torrentListSortingRuleArrayItem[]
 
   }
 

@@ -4,6 +4,11 @@
 export const torrentList = {
 
   /**
+   *  是否滚动到当前位置
+   */
+  isScrollToCurrentPosition: true,
+
+  /**
    *  排序规则数组
    */
   SortingRuleArray: [
@@ -65,3 +70,5 @@ export const torrentList = {
   ],
 
 }
+
+export default torrentList

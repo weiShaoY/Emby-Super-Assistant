@@ -8,12 +8,7 @@ import javdb from './web/javdb'
 
 import btsow from './web/btsow'
 
-/**
- *  是否是详情页滚动
- */
-const isDetailsPageScroll = true
-
-export { isDetailsPageScroll }
+import torrentList from './torrentList'
 
 export const config = {
   /**
@@ -25,6 +20,8 @@ export const config = {
    *  视频配置
    */
   video,
+
+  torrentList,
 
   /**
    *  web 配置
@@ -44,6 +41,7 @@ export const config = {
      *  javdb 配置
      */
     javdb,
+
   },
 }
 
