@@ -1,3 +1,15 @@
+import javdbSvg from '@/assets/svg/web/javdb.svg'
+
+import javbusSvg from '@/assets/svg/web/javbus.svg'
+
+import javbleSvg from '@/assets/svg/web/javble.svg'
+
+import missavSvg from '@/assets/svg/web/missav.svg'
+
+import javmostSvg from '@/assets/svg/web/javmost.svg'
+
+import javfc2Svg from '@/assets/svg/web/javfc2.svg'
+
 export type DomQuery_parser = {
 
   /**
@@ -37,8 +49,15 @@ export type DomQuery_get = {
 
 type SiteItemBase = {
 
-  /** 站点名称 */
+  /**
+   * 站点名称
+   */
   name: string
+
+  /**
+   *  图标
+   */
+  icon?: string
 
   /**
    * [已废弃] 用户自定义的禁用选项
@@ -122,7 +141,32 @@ export type SiteItem = SiteItem_get | SiteItem_parser | SiteItem_post
 /** 在线网站列表 */
 export const siteList: SiteItem[] = [
   {
+    name: 'JavDB',
+    icon: javdbSvg,
+    disableLibItemName: 'javdb',
+    hostname: 'javdb.com',
+    url: 'https://javdb.com/search?q={{code}}',
+    fetchType: 'parser',
+    domQuery: {
+      linkQuery: '.movie-list>.item:first-child>a',
+      titleQuery: '.video-title',
+    },
+  },
+  {
+    name: 'JavBus',
+    icon: javbusSvg,
+    disableLibItemName: 'javbus',
+    hostname: 'javbus.com',
+    url: 'https://javbus.com/{{code}}',
+    fetchType: 'get',
+    domQuery: {},
+
+    // codeFormater: preCode => (preCode.startsWith('MIUM') ? `${SP_PREFIX}${preCode}` : preCode),
+  },
+
+  {
     name: 'Jable',
+    icon: javbleSvg,
     hostname: 'jable.tv',
     url: 'https://jable.tv/videos/{{code}}/',
     fetchType: 'get',
@@ -133,6 +177,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'MISSAV',
+    icon: missavSvg,
     hostname: 'missav.com',
     url: 'https://missav.com/{{code}}/',
     fetchType: 'get',
@@ -145,7 +190,8 @@ export const siteList: SiteItem[] = [
     },
   },
   {
-    name: 'MISSAV_',
+    name: 'MISSAV_123',
+    icon: missavSvg,
     hostname: 'missav123.com',
     url: 'https://missav123.com/{{code}}/',
     fetchType: 'get',
@@ -159,6 +205,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'njav',
+    icon: missavSvg,
     hostname: 'njav.tv',
     url: 'https://njav.tv/zh/v/{{code}}',
     fetchType: 'get',
@@ -187,26 +234,28 @@ export const siteList: SiteItem[] = [
       titleQuery: '.grid_cell>a>.grid_title',
     },
   },
-  {
-    name: 'Avgle',
-    hostname: 'avgle.com',
-    url: 'https://avgle.com/search/videos?search_query={{code}}&search_type=videos',
-    fetchType: 'parser',
-    domQuery: {
-      linkQuery: '.container>.row .row .well>a[href]',
-      titleQuery: '.container>.row .row .well .video-title',
-    },
-  },
-  {
-    name: 'JAVHHH',
-    hostname: 'javhhh.com',
-    url: 'https://javhhh.com/v/?wd={{code}}',
-    fetchType: 'parser',
-    domQuery: {
-      linkQuery: '.typelist>.i-container>a[href]',
-      titleQuery: '.typelist>.i-container>a[href]',
-    },
-  },
+
+  // {
+  //   name: 'Avgle',
+  //   hostname: 'avgle.com',
+  //   url: 'https://avgle.com/search/videos?search_query={{code}}&search_type=videos',
+  //   fetchType: 'parser',
+  //   domQuery: {
+  //     linkQuery: '.container>.row .row .well>a[href]',
+  //     titleQuery: '.container>.row .row .well .video-title',
+  //   },
+  // },
+
+  // {
+  //   name: 'JAVHHH',
+  //   hostname: 'javhhh.com',
+  //   url: 'https://javhhh.com/v/?wd={{code}}',
+  //   fetchType: 'parser',
+  //   domQuery: {
+  //     linkQuery: '.typelist>.i-container>a[href]',
+  //     titleQuery: '.typelist>.i-container>a[href]',
+  //   },
+  // },
   {
     name: 'BestJP',
     hostname: 'bestjavporn.com',
@@ -234,6 +283,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'JAVMOST',
+    icon: javmostSvg,
     hostname: 'javmost.cx',
     url: 'https://javmost.cx/search/{{code}}/',
     fetchType: 'parser',
@@ -263,6 +313,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'JAVFC2',
+    icon: javfc2Svg,
     hostname: 'javfc2.net',
     url: 'https://javfc2.net/?s={{code}}',
     fetchType: 'parser',
@@ -339,26 +390,7 @@ export const siteList: SiteItem[] = [
     fetchType: 'get',
     domQuery: {},
   },
-  {
-    name: 'JavBus',
-    disableLibItemName: 'javbus',
-    hostname: 'javbus.com',
-    url: 'https://javbus.com/{{code}}',
-    fetchType: 'get',
-    domQuery: {},
-    codeFormater: preCode => (preCode.startsWith('MIUM') ? `${SP_PREFIX}${preCode}` : preCode),
-  },
-  {
-    name: 'JavDB',
-    disableLibItemName: 'javdb',
-    hostname: 'javdb.com',
-    url: 'https://javdb.com/search?q={{code}}',
-    fetchType: 'parser',
-    domQuery: {
-      linkQuery: '.movie-list>.item:first-child>a',
-      titleQuery: '.video-title',
-    },
-  },
+
   {
     name: 'JAVLib',
     disableLibItemName: 'javlib',

@@ -138,7 +138,7 @@ function go() {
     class="group relative flex flex-center cursor-pointer justify-center rounded-2"
   >
     <div
-      class="h-9 w-auto flex items-center gap-1 border-1 rounded-2 bg-white p-x-1"
+      class="h-14 w-auto flex items-center gap-1 border-1 rounded-2 bg-white p-x-1"
       :style="{
         border: `4px solid ${bgColor}`,
       }"
@@ -157,9 +157,21 @@ function go() {
       >
 
       <div
-        class="text-dark font-600"
+        class="m-x-2 w-auto text-dark font-600"
       >
-        {{ siteItem.name }}
+
+        <img
+          v-if="siteItem.icon"
+          :src="siteItem.icon"
+          class="!h-10 !min-h-10 !min-w-10 !w-10"
+        >
+
+        <span
+          v-else
+        >
+          {{ siteItem.name }}
+        </span>
+
       </div>
     </div>
 

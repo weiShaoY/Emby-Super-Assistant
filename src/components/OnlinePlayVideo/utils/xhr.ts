@@ -73,7 +73,13 @@ function serachPageParser(
     = linkNode && titleNode && matchCode && isCaseInsensitiveEqual(matchCode[0], CODE) // 判断链接和标题是否存在且代码匹配
 
   if (isSuccess) {
-    const targetLinkText = linkNode.href.replace(linkNode.hostname, siteHostName) // 替换目标链接的主机名
+    // const targetLinkText = linkNode.href.replace(linkNode.hostname, siteHostName) // 替换目标链接的主机名
+
+    const targetLinkText = linkNode.href.replace(linkNode.host, siteHostName) // 替换目标链接的主机名
+
+    // if (siteHostName.includes('javdb')) {
+
+    // }
 
     return {
       isSuccess: true, // 成功标志
@@ -105,6 +111,7 @@ export async function handleFetch(siteItem: SiteItem, targetLink: string, CODE: 
 
     if (siteItem.fetchType === 'get') {
       // 直接 get 网页，成功，需要进一步解析 videoPage，获取字幕等信息
+
       return {
         ...videoPageParser(response.responseText, siteItem.domQuery), // 解析视频播放页
         targetLink, // 返回目标链接
