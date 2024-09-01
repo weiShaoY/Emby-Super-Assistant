@@ -61,8 +61,6 @@ function serachPageParser(
 
   const linkNode = linkQuery ? doc.querySelectorAll<HTMLAnchorElement>(linkQuery)[listIndex] : null // 查找指定索引的链接节点
 
-  console.log('%c Line:63 🌰 linkNode', 'color:#ea7e5c', linkNode)
-
   const titleNode = titleQuery ? doc.querySelectorAll(titleQuery)[listIndex] : null // 查找指定索引的标题节点
 
   const titleNodeText = titleNode ? titleNode?.outerHTML : '' // 获取标题节点的 HTML 内容
@@ -76,10 +74,6 @@ function serachPageParser(
 
   if (isSuccess) {
     const targetLinkText = linkNode.href.replace(linkNode.hostname, siteHostName) // 替换目标链接的主机名
-
-    console.log('%c Line:77 🥓 siteHostName', 'color:#ea7e5c', siteHostName)
-
-    console.log('%c Line:77 🌽 targetLinkText', 'color:#33a5ff', targetLinkText)
 
     return {
       isSuccess: true, // 成功标志
@@ -123,7 +117,7 @@ export async function handleFetch(siteItem: SiteItem, targetLink: string, CODE: 
     }
   }
   catch (error) {
-    console.log('%c Line:120 🥛 error', 'color:#7f2b82', error)
+    console.error(error)
     return {
       isSuccess: false, // 请求失败
       targetLink, // 返回原始目标链接
