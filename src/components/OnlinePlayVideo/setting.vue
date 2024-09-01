@@ -28,15 +28,26 @@ const props = defineProps<{
 const visible = ref(false)
 
 function changeCheck(item: SiteItem, isHidden: boolean) {
-  console.log('%c Line:32 🌽 isHidden', 'color:#ed9ec7', isHidden)
-
-  // 根据 isHidden 状态更新 disables 列表
+  /**
+   *  根据 isHidden 状态更新 disables 列表
+   */
   const newDisables = isHidden
     ? props.disables.filter(disItem => disItem !== item.name) // 如果 isHidden 为 true，则从 disables 列表中移除该项
     : [...props.disables, item.name] // 否则，将该项添加到 disables 列表中
 
-  console.log('%c Line:39 🍉 newDisables', 'color:#e41a6a', newDisables)
   props.setDisables(newDisables) // 调用 setDisables 更新 disables 列表
+}
+
+function go(e: any, item: SiteItem) {
+  // 阻止冒泡
+  e.preventDefault()
+
+  /**
+   *  添加协议
+   */
+  const fullUrl = `https://${item.hostname}`
+
+  window.open(fullUrl, '_blank')
 }
 </script>
 
@@ -57,27 +68,27 @@ function changeCheck(item: SiteItem, isHidden: boolean) {
     </div>
 
     <span
-      class="absolute left-0 top-12 h-full w-full rotate-45 bg-green-500 duration-500 group-hover:top-9"
+      class="absolute left-0 top-12 h-full w-full rotate-45 bg-#67C23A duration-500 group-hover:top-9"
     />
 
     <span
-      class="absolute left-12 top-0 h-full w-full rotate-45 bg-green-500 duration-500 group-hover:left-9"
+      class="absolute left-12 top-0 h-full w-full rotate-45 bg-#67C23A duration-500 group-hover:left-9"
     />
 
     <span
-      class="absolute right-12 top-0 h-full w-full rotate-45 bg-green-500 duration-500 group-hover:right-9"
+      class="absolute right-12 top-0 h-full w-full rotate-45 bg-#67C23A duration-500 group-hover:right-9"
     />
 
     <span
-      class="absolute bottom-12 right-0 h-full w-full rotate-45 bg-green-500 duration-500 group-hover:bottom-9"
+      class="absolute bottom-12 right-0 h-full w-full rotate-45 bg-#67C23A duration-500 group-hover:bottom-9"
     />
   </button>
 
   <a-modal
     v-if="visible"
     v-model:visible="visible"
-    modal-class="modal_class"
     :footer="false"
+    width="auto"
     @cancel="visible = false"
   >
     <template
@@ -91,7 +102,7 @@ function changeCheck(item: SiteItem, isHidden: boolean) {
     </template>
 
     <div
-      class="grid grid-cols-4 gap-3"
+      class="grid grid-cols-4 gap-2 p-2"
     >
       <a-checkbox
         v-for="item in props.siteList"
@@ -99,14 +110,29 @@ function changeCheck(item: SiteItem, isHidden: boolean) {
         :model-value="!disables.includes(item.name)"
         @change="changeCheck(item, disables.includes(item.name))"
       >
-        <!-- {{ !disables.includes(item.name) }} -->
-        {{ item.name }}
+
+        <a-link
+          class="!flex !p-2"
+          @click="go($event, item)"
+        >
+          <img
+            v-if="item.icon"
+            :src="item.icon"
+            class="m-r-2 !h-10 !min-h-10 !min-w-10 !w-10"
+          >
+
+          <span>
+            {{ item.hostname }}
+          </span>
+        </a-link>
       </a-checkbox>
     </div>
 
   </a-modal>
 </template>
 
-<style lang="less" scoped>
-
+<style>
+.arco-checkbox-checked .arco-checkbox-icon {
+  background-color: #67c23a !important;
+}
 </style>
