@@ -188,10 +188,13 @@ onMounted(() => {
   </div>
 
   <Teleport
+    v-if="pageVideoName"
     to=".column-video-cover"
   >
     <!-- 在线观看 -->
-    <OnlinePlayVideo />
+    <OnlinePlayVideo
+      :video-name="pageVideoName"
+    />
   </Teleport>
 
   <!-- 磁链列表 -->

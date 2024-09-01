@@ -157,7 +157,7 @@ function go() {
       >
 
       <div
-        class="font-600"
+        class="text-dark font-600"
       >
         {{ siteItem.name }}
       </div>

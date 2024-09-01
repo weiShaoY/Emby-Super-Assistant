@@ -17,6 +17,17 @@ import { getCode } from './utils'
 
 import { GM_getValue, GM_setValue } from '$' // 导入 GM_getValue 和 GM_setValue 方法
 
+const props = defineProps({
+  /**
+   *  @description  视频名称
+   */
+  videoName: {
+    type: String,
+    required: true,
+  },
+
+})
+
 /**
  *  从 libSites 中找到匹配当前 URL 的图书馆站点
  */
@@ -40,7 +51,9 @@ function main() {
   }
 
   // 获取当前图书馆站点的代码
-  code.value = getCode(libItem)
+  // code.value = getCode(libItem)
+
+  code.value = props.videoName
 
   // 执行对于当前图书馆站的特殊适配，如单独的样式改动
   libItem.method() // 调用 libItem 中定义的适配方法
@@ -52,7 +65,10 @@ function main() {
  * @returns 是否显示 `SiteBtn` 组件的布尔值
  */
 function shouldShowSiteBtn(siteItem: SiteItem): boolean {
-  const hidden = disables.value.find(disItem => disItem === siteItem.name) === undefined
+  /**
+   *  是否显示
+   */
+  const isShow = disables.value.find(disItem => disItem === siteItem.name) === undefined
 
   /**
    * 判断当前站点是否与指定的 `LibItem` 不同
@@ -62,7 +78,7 @@ function shouldShowSiteBtn(siteItem: SiteItem): boolean {
   /**
    * 返回综合判断结果，决定是否显示 `SiteBtn` 组件
    */
-  return sameSite && hidden
+  return sameSite && isShow
 }
 
 /**
@@ -87,7 +103,7 @@ main()
     <!-- 遍历站点列表，根据条件渲染 SiteBtn 组件 -->
 
     <div
-      class="flex rounded-2 bg-[#2a2b2f] p-3"
+      class="w-full flex rounded-2 bg-[#2a2b2f] p-3"
     >
       <div
         class="m-r-3 flex flex-1 flex-wrap gap-3"
@@ -99,7 +115,7 @@ main()
             v-if="shouldShowSiteBtn(siteItem)"
             :key="siteItem.name"
             :site-item="siteItem"
-            :code="code"
+            :code="videoName"
           />
         </template>
       </div>

@@ -47,14 +47,14 @@ export function getCode(libItem: LibItem): string {
   const codeText
     = libItem.name === 'javdb'
       ? (codeNode.dataset.clipboardText as string) // 如果站点名为 "javdb"，则从 data-clipboard-text 属性中获取代码文本
-      : codeNode.innerText.replace('复制', '') // 否则，从节点的 innerText 中去除 "复制" 字符
+      : codeNode?.textContent?.replace('复制', '') // 否则，从节点的 innerText 中去除 "复制" 字符
 
-  if (codeText.includes('FC2'))
+  if (codeText?.includes('FC2'))
     return codeText.split('-')[1] // 如果代码文本包含 "FC2"，返回代码的后半部分
-  if (codeText.startsWith(SP_PREFIX))
+  if (codeText?.startsWith(SP_PREFIX))
     return codeText.substring(3) // 如果代码文本以 SP_PREFIX 开头，去除前缀后返回代码
 
-  return codeText // 返回提取的代码文本
+  return codeText || '' // 返回提取的代码文本
 }
 
 // 定义 GM_xmlhttpRequest 的响应接口类型

@@ -12,6 +12,11 @@ import folderSvg from '@/assets/svg/folder.svg'
 import { config } from '@/config'
 
 /**
+ *  页面视频名称
+ */
+const pageVideoName = ref<string>('')
+
+/**
  * 表示媒体流信息的类型。
  */
  type MediaStream = {
@@ -401,6 +406,12 @@ const isDetailsPage = ref(false)
 //     }, 200)
 //   }
 // })
+async function main() {
+  const { intent: { title } } = await getEmbyMediaInfo()
+
+  pageVideoName.value = title.substring(title.lastIndexOf('\\') + 1, title.indexOf('.', title.lastIndexOf('\\'))).toLowerCase()
+    .replace(config.video.tagRegex, '')
+}
 
 setTimeout(() => {
   const videoElement = document.querySelector(
@@ -417,6 +428,8 @@ setTimeout(() => {
     div.id = 'targetNode'
     videoElement.appendChild(div)
 
+    main()
+
     // 设置 isDetailsPage 状态
     isDetailsPage.value = true
   }
@@ -429,7 +442,7 @@ setTimeout(() => {
     to="#targetNode"
   >
     <div
-      class="flex gap-2"
+      class="m-b-5 flex gap-2"
     >
       <button
         class="btnPlay btnMainPlay raised detailButton emby-button detailButton-primary detailButton-stacked"
@@ -487,6 +500,13 @@ setTimeout(() => {
         <span> Javdb </span>
       </button>
     </div>
+
+    <!-- 在线观看 -->
+    <OnlinePlayVideo
+      v-if="pageVideoName"
+      :video-name="pageVideoName"
+    />
+
   </Teleport>
 </template>
 

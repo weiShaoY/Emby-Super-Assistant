@@ -22,7 +22,6 @@ const props = defineProps<{
   disables: SiteItem['name'][]
 }>()
 
-console.log('%c Line:25 🍧 props', 'color:#3f7cff', props.siteList)
 /**
  *    是否显示设置弹窗
  */

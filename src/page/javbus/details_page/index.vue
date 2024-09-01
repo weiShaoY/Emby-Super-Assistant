@@ -213,10 +213,13 @@ onMounted(() => {
   </div>
 
   <Teleport
+    v-if="pageVideoName"
     to=".screencap"
   >
     <!-- 在线观看 -->
-    <OnlinePlayVideo />
+    <OnlinePlayVideo
+      :video-name="pageVideoName"
+    />
   </Teleport>
 
   <!-- 磁链列表 -->

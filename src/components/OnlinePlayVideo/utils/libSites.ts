@@ -4,7 +4,7 @@ export type LibItem = {
   /**
    * 站点名称
    */
-  name: 'javdb' | 'javbus' | 'javlib'
+  name: 'javdb' | 'javbus' | 'javlib' | 'emby'
 
   /**
    * 是否启用该站点
@@ -43,6 +43,17 @@ export type LibItem = {
  */
 export const libSites: LibItem[] = [
   {
+    name: 'emby',
+    enable: true,
+    href: /^https?:\/\/192\.168\.0\.4:8096\/.*$/,
+    querys: {
+      panelQueryStr: '.movie>div.info',
+      codeQueryStr: `span[style="color:#CC0000;"]`,
+    },
+    method() {
+    },
+  },
+  {
     name: 'javdb',
     enable: true,
     href: /^https?:\/\/(\w*\.)?javdb(\d)*\.com\/v.*$/,
@@ -51,23 +62,7 @@ export const libSites: LibItem[] = [
       codeQueryStr: `[data-clipboard-text]`,
     },
     method() {
-      // // 针对 javdb 站点的一些样式调整 // 查找视频封面元素
-      // const columnVideoCover = document.querySelector<HTMLElement>('.column-video-cover')
 
-      // // 调整视频封面宽度
-      // if (columnVideoCover) {
-      //   columnVideoCover.style.width = '60%'
-      // }
-
-      // /**
-      //  *  查找面板元素
-      //  */
-      // const panel = document.querySelector<HTMLElement>(
-      //   '.video-meta-panel>.columns.is-desktop>.column:not(.column-video-cover)',
-      // )
-
-      // // 为面板元素添加自定义类名
-      // panel?.classList.add('db-panel')
     },
   },
   {
@@ -90,13 +85,7 @@ export const libSites: LibItem[] = [
       codeQueryStr: `#video_id td.text`, // 代码元素的选择器
     },
     method() {
-      /**
-       * 查找面板元素
-       */
-      const panel = document.querySelector<HTMLElement>('#video_info')
 
-      // 为面板元素添加自定义类名
-      panel?.classList.add('lib-panel')
     },
   },
 ]
