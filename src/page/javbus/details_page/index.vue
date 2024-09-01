@@ -88,7 +88,7 @@ function getTorrentList() {
 
     torrentList.value.push(torrentListItem)
 
-    if (name.includes('-c') || name.includes('-C')) {
+    if (name.includes('-c') || name.includes('-C') || name.includes('ch')) {
       isVideoHaveChineseTorrent.value = true
     }
   })

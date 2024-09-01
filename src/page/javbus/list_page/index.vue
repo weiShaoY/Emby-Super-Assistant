@@ -27,19 +27,13 @@ const updateChineseBtnList = ref<string[]>([])
 function main() {
   const videoFileArray = videoManager.get()
 
-  console.log('%c Line:27 🍒 videoFileArray', 'color:#ffdd4d', videoFileArray)
-
   if (!videoFileArray) {
     return
   }
 
   const itemList = document.querySelectorAll('#waterfall .movie-box')
 
-  console.log('%c Line:33 🍯 itemList', 'color:#2eafb0', itemList)
-
   itemList.forEach((item: any) => {
-    console.log('%c Line:37 🍌 item', 'color:#42b983', item)
-
     /**
      *  获取视频名称 (小写，去除空格)
      */
@@ -62,8 +56,6 @@ function main() {
     const matchedVideoList = videoFileArray.filter(sub => sub.processedName.includes(itemVideoName))
 
     // 创建一个空数组来存放匹配的视频文件
-
-    console.log('%c Line:63 🍿 matchedVideoList', 'color:#fca650', matchedVideoList)
 
     if (matchedVideoList.length) {
       // 添加高亮
