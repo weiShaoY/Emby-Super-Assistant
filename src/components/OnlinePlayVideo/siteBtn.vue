@@ -106,6 +106,18 @@ onMounted(fetchData)
 function go() {
   window.open(finalLink.value, '_blank')
 }
+
+/**
+ *  跳转到官网
+ */
+function goToWebsite(siteItem: SiteItem) {
+  /**
+   *  添加协议
+   */
+  const fullUrl = `https://${siteItem.hostname}`
+
+  window.open(fullUrl, '_blank')
+}
 </script>
 
 <template>
@@ -180,6 +192,7 @@ function go() {
       :style="{
         backgroundColor: `${bgColor}`,
       }"
+      @click="goToWebsite(siteItem)"
     >
       {{ siteItem.name }}
     </span>

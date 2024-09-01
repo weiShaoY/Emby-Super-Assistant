@@ -2,13 +2,31 @@ import javdbSvg from '@/assets/svg/web/javdb.svg'
 
 import javbusSvg from '@/assets/svg/web/javbus.svg'
 
-import javbleSvg from '@/assets/svg/web/javble.svg'
-
 import missavSvg from '@/assets/svg/web/missav.svg'
 
 import javmostSvg from '@/assets/svg/web/javmost.svg'
 
 import javfc2Svg from '@/assets/svg/web/javfc2.svg'
+
+import supjavSvg from '@/assets/svg/web/supjav.svg'
+
+import netflavSvg from '@/assets/svg/web/netflav.svg'
+
+import javmenuSvg from '@/assets/svg/web/javmenu.svg'
+
+import jableSvg from '@/assets/svg/web/jable.svg'
+
+import hayavSvg from '@/assets/svg/web/hayav.svg'
+
+import bestjavpornSvg from '@/assets/svg/web/bestjavporn.svg'
+
+import javGuruSvg from '@/assets/svg/web/javGuru.svg'
+
+import avjoySvg from '@/assets/svg/web/avjoy.svg'
+
+import paipanconSvg from '@/assets/svg/web/paipancon.svg'
+
+import _18avSvg from '@/assets/svg/web/18av.svg'
 
 export type DomQuery_parser = {
 
@@ -166,7 +184,7 @@ export const siteList: SiteItem[] = [
 
   {
     name: 'Jable',
-    icon: javbleSvg,
+    icon: jableSvg,
     hostname: 'jable.tv',
     url: 'https://jable.tv/videos/{{code}}/',
     fetchType: 'get',
@@ -189,20 +207,21 @@ export const siteList: SiteItem[] = [
       // leakQuery: ".order-first div.rounded-md a[href]:last-child",
     },
   },
-  {
-    name: 'MISSAV_123',
-    icon: missavSvg,
-    hostname: 'missav123.com',
-    url: 'https://missav123.com/{{code}}/',
-    fetchType: 'get',
-    domQuery: {
-      // 标签区的第一个一般是字幕标签
-      subQuery: '.space-y-2 a.text-nord13[href="https://missav123.com/chinese-subtitle"]',
 
-      // 有个「切換無碼」按钮，藏在分享按钮旁边……
-      leakQuery: '.order-first div.rounded-md a[href]:last-child',
-    },
-  },
+  // {
+  //   name: 'MISSAV_123',
+  //   icon: missavSvg,
+  //   hostname: 'missav123.com',
+  //   url: 'https://missav123.com/{{code}}/',
+  //   fetchType: 'get',
+  //   domQuery: {
+  //     // 标签区的第一个一般是字幕标签
+  //     subQuery: '.space-y-2 a.text-nord13[href="https://missav123.com/chinese-subtitle"]',
+
+  //     // 有个「切換無碼」按钮，藏在分享按钮旁边……
+  //     leakQuery: '.order-first div.rounded-md a[href]:last-child',
+  //   },
+  // },
   {
     name: 'njav',
     icon: missavSvg,
@@ -216,6 +235,7 @@ export const siteList: SiteItem[] = [
   {
     // 有可能搜出仨：leakage subtitle 4k
     name: 'Supjav',
+    icon: supjavSvg,
     hostname: 'supjav.com',
     url: 'https://supjav.com/zh/?s={{code}}',
     fetchType: 'parser',
@@ -226,6 +246,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'NETFLAV',
+    icon: netflavSvg,
     hostname: 'netflav5.com',
     url: 'https://netflav5.com/search?type=title&keyword={{code}}',
     fetchType: 'parser',
@@ -258,6 +279,7 @@ export const siteList: SiteItem[] = [
   // },
   {
     name: 'BestJP',
+    icon: bestjavpornSvg,
     hostname: 'bestjavporn.com',
     url: 'https://www3.bestjavporn.com/search/{{code}}',
     fetchType: 'parser',
@@ -265,6 +287,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'JAVMENU',
+    icon: javmenuSvg,
     hostname: 'javmenu.com',
     url: 'https://javmenu.com/{{code}}',
     fetchType: 'get',
@@ -276,6 +299,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'Jav.Guru',
+    icon: javGuruSvg,
     hostname: 'jav.guru',
     url: 'https://jav.guru/?s={{code}}',
     fetchType: 'parser',
@@ -294,6 +318,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'HAYAV',
+    icon: hayavSvg,
     hostname: 'hayav.com',
     url: 'https://hayav.com/video/{{code}}/',
     fetchType: 'get',
@@ -303,6 +328,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'AvJoy',
+    icon: avjoySvg,
     hostname: 'avjoy.me',
     url: 'https://avjoy.me/search/videos/{{code}}',
     fetchType: 'parser',
@@ -324,6 +350,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'baihuse',
+    icon: paipanconSvg,
     hostname: 'paipancon.com',
     url: 'https://paipancon.com/search/{{code}}',
     fetchType: 'parser',
@@ -355,13 +382,14 @@ export const siteList: SiteItem[] = [
     fetchType: 'parser',
     domQuery: { linkQuery: 'div[id].well-sm>a', titleQuery: '.video-views>.pull-left' },
   },
-  {
-    name: '18sex',
-    hostname: '18sex.org',
-    url: 'https://www.18sex.org/cn/search/{{code}}/',
-    fetchType: 'parser',
-    domQuery: { linkQuery: '.white_link[href]', titleQuery: '.white_link>.card-title' },
-  },
+
+  // {
+  //   name: '18sex',
+  //   hostname: '18sex.org',
+  //   url: 'https://www.18sex.org/cn/search/{{code}}/',
+  //   fetchType: 'parser',
+  //   domQuery: { linkQuery: '.white_link[href]', titleQuery: '.white_link>.card-title' },
+  // },
   {
     name: 'highporn',
     hostname: 'highporn.net',
@@ -378,6 +406,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: '18av',
+    icon: _18avSvg,
     hostname: '18av.mm-cg.com',
     url: 'https://18av.mm-cg.com/zh/fc_search/all/{{code}}/1.html',
     fetchType: 'parser',

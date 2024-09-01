@@ -65,7 +65,7 @@ function btsowBtnHandler(event: MouseEvent) {
 
 <template>
   <div
-    class="group relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#ff8400] bg-transparent text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#ff8400] !text-[#ff8400] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
+    class="group relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#2E2E2E] bg-transparent text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#2E2E2E] !text-[#2E2E2E] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
     :class="props.class"
     :style="{
       borderRadius: `${radius}px`,

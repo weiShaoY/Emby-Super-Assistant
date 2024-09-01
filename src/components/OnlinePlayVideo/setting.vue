@@ -102,7 +102,7 @@ function go(e: any, item: SiteItem) {
     </template>
 
     <div
-      class="grid grid-cols-4 gap-2 p-2"
+      class="grid grid-cols-4 gap-4 p-2"
     >
       <a-checkbox
         v-for="item in props.siteList"
@@ -115,11 +115,15 @@ function go(e: any, item: SiteItem) {
           class="!flex !p-2"
           @click="go($event, item)"
         >
-          <img
-            v-if="item.icon"
-            :src="item.icon"
+          <div
             class="m-r-2 !h-10 !min-h-10 !min-w-10 !w-10"
           >
+            <img
+              v-if="item.icon"
+              :src="item.icon"
+              class="!h-10 !min-h-10 !min-w-10 !w-10"
+            >
+          </div>
 
           <span>
             {{ item.hostname }}
