@@ -192,7 +192,7 @@ onMounted(() => {
     to=".column-video-cover"
   >
     <!-- 在线观看 -->
-    <OnlinePlayVideo
+    <OnlinePlay
       :video-name="pageVideoName"
     />
   </Teleport>

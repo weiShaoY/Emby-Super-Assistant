@@ -217,7 +217,7 @@ onMounted(() => {
     to=".screencap"
   >
     <!-- 在线观看 -->
-    <OnlinePlayVideo
+    <OnlinePlay
       :video-name="pageVideoName"
     />
   </Teleport>

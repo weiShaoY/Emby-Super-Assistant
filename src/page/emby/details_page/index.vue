@@ -502,7 +502,7 @@ setTimeout(() => {
     </div>
 
     <!-- 在线观看 -->
-    <OnlinePlayVideo
+    <OnlinePlay
       v-if="pageVideoName"
       :video-name="pageVideoName"
     />
