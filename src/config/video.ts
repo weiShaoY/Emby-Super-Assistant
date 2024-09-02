@@ -1,12 +1,12 @@
-import chineseSvg from '@/assets/svg/chinese.svg'
+import hdSvg from '@/assets/svg/tag/hd.svg'
 
-import hdSvg from '@/assets/svg/hd.svg'
+import subtitleSvg from '@/assets/svg/tag/subtitle.svg'
 
-import noCodeSvg from '@/assets/svg/noCode.svg'
+import noCodeSvg from '@/assets/svg/tag/noCode.svg'
 
-import fourKSvg from '@/assets/svg/fourK.svg'
+import fourKSvg from '@/assets/svg/tag/fourK.svg'
 
-import crackingSvg from '@/assets/svg/cracking.svg'
+import crackingSvg from '@/assets/svg/tag/cracking.svg'
 
 /**
  * 视频匹配配置
@@ -21,7 +21,7 @@ export const video: VideoType.VideoConfig = {
     },
     {
       name: ['-c', '-C', '_ch'],
-      url: chineseSvg,
+      url: subtitleSvg,
     },
     {
       name: ['无码'],
