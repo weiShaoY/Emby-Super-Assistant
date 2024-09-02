@@ -6,9 +6,9 @@ import { handleFetch, handleFetchJavBle } from './utils/xhr' // 导入数据获�
 
 import type { SiteItem } from './utils/siteList' // 导入站点项的类型定义
 
-import chineseSvg from '@/assets/svg/chinese.svg'
+import subtitleSvg from '@/assets/svg/tag/subtitle.svg'
 
-import noCodeSvg from '@/assets/svg/noCode.svg'
+import noCodeSvg from '@/assets/svg/tag/noCode.svg'
 
 const props = defineProps({
   /**
@@ -158,7 +158,7 @@ function goToWebsite(siteItem: SiteItem) {
     >
       <img
         v-if="status.hasSubtitle"
-        :src="chineseSvg"
+        :src="subtitleSvg"
         class="h-6 w-6"
       >
 
