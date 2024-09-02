@@ -28,6 +28,12 @@ import paipanconSvg from '@/assets/svg/web/paipancon.svg'
 
 import _18avSvg from '@/assets/svg/web/18av.svg'
 
+import av01Svg from '@/assets/svg/web/av01.svg'
+
+import njavSvg from '@/assets/svg/web/njav.svg'
+
+import missAvSvg from '@/assets/svg/web/missAv.svg'
+
 export type DomQuery_parser = {
 
   /**
@@ -195,7 +201,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'MISSAV',
-    icon: missavSvg,
+    icon: missAvSvg,
     hostname: 'missav.com',
     url: 'https://missav.com/{{code}}/',
     fetchType: 'get',
@@ -224,7 +230,7 @@ export const siteList: SiteItem[] = [
   // },
   {
     name: 'njav',
-    icon: missavSvg,
+    icon: njavSvg,
     hostname: 'njav.tv',
     url: 'https://njav.tv/zh/v/{{code}}',
     fetchType: 'get',
@@ -377,6 +383,7 @@ export const siteList: SiteItem[] = [
 
   {
     name: 'AV01',
+    icon: av01Svg,
     hostname: 'www.av01.tv',
     url: 'https://www.av01.tv/search/videos?search_query={{code}}',
     fetchType: 'parser',
