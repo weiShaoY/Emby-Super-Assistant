@@ -228,10 +228,10 @@ async function mainBtnHandler() {
   />
 
   <div
-    class="group fixed bottom-2 left-2 z-1000 flex items-center justify-center border border-2 border-white/80 rounded-full p-1 shadow-2xl"
+    class="group fixed bottom-2 left-2 flex items-center justify-center border border-2 border-white/80 rounded-full p-1 shadow-2xl"
   >
     <button
-      class="group relative h-20 w-20 inline-flex cursor-pointer overflow-visible rounded-full bg-[linear-gradient(#e7e9e9,#e9e9e9_50%,#fff)] p-1 transition-all duration-300"
+      class="group relative z-1000 h-20 w-20 inline-flex cursor-pointer overflow-visible rounded-full bg-[linear-gradient(#e7e9e9,#e9e9e9_50%,#fff)] p-1 transition-all duration-300"
     >
       <div
         class="h-full w-full overflow-hidden rounded-full bg-[linear-gradient(to_top,#ececec,#fff)] p-1 shadow-[0_0_1px_rgba(0,0,0,0.07),0_0_1px_rgba(0,0,0,0.05),0_3px_3px_rgba(0,0,0,0.25),0_1px_3px_rgba(0,0,0,0.12)] duration-300 hover:shadow-none"

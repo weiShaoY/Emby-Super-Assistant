@@ -24,7 +24,7 @@ else {
 </script>
 
 <template>
-  <StoreHouseButton />
+  <EmbyStoreHouse />
 
   <ListPage
     v-if="isListPage"
