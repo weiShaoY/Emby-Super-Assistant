@@ -412,13 +412,14 @@ export const siteList: SiteItem[] = [
     fetchType: 'parser',
     domQuery: { linkQuery: '.posts h3>a[href]', titleQuery: '.posts h3>a[href]' },
   },
-  {
-    name: 'javgo',
-    hostname: 'javgo.to',
-    url: 'https://javgo.to/zh/v/{{code}}',
-    fetchType: 'get',
-    domQuery: {},
-  },
+
+  // {
+  //   name: 'javgo',
+  //   hostname: 'javgo.to',
+  //   url: 'https://javgo.to/zh/v/{{code}}',
+  //   fetchType: 'get',
+  //   domQuery: {},
+  // },
 
   {
     name: 'JAVLib',
