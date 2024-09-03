@@ -102,9 +102,9 @@ function getTorrentList() {
 }
 
 function main() {
-  const videoFileArray = videoManager.get()
+  const embyFolder = videoManager.get()
 
-  if (!videoFileArray)
+  if (!embyFolder.list.length)
     return
 
   // 获取视频名称 (小写，去除空格)
@@ -114,7 +114,7 @@ function main() {
     return
 
   // 当前视频名称已入库的视频列表
-  const matchedVideoList = videoFileArray.filter(item =>
+  const matchedVideoList = embyFolder.list.filter(item =>
     item.processedName.includes(pageVideoName.value),
   )
 

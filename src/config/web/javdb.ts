@@ -8,7 +8,7 @@ export const javdb = {
   url: 'https://javdb.com/',
 
   /**
-   *  在Javdb搜索当前影片
+   *  在Javdb搜索当前视频
    */
   search: (videoName: string) => {
     window.open(`${javdb.url}/search?q=${videoName}&f=all`, '_blank')

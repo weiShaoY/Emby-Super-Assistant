@@ -94,7 +94,7 @@ function videoNameCopyToClipboard(event: any) {
 /**
  *  视频位置复制到 剪切板
  */
-function directoryStructureCopyToClipboard(event: any) {
+function openFolder(event: any) {
   event.stopPropagation()
   event.preventDefault()
 
@@ -195,7 +195,7 @@ function directoryStructureCopyToClipboard(event: any) {
       :style="{
         boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
       }"
-      @click="directoryStructureCopyToClipboard"
+      @click="openFolder"
     >
       <div
         class="border border-[#52382f] rounded-3 bg-[#2a2b2f] p-3"
@@ -325,7 +325,7 @@ function directoryStructureCopyToClipboard(event: any) {
       :style="{
         boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #ffffff',
       }"
-      @click="directoryStructureCopyToClipboard"
+      @click="openFolder"
     >
       <div
         class="border border-#52382f rounded-3 bg-#2a2b2f p-2"

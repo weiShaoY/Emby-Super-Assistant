@@ -45,7 +45,7 @@ export const emby = {
   /**
    * 用户的认证令牌。
    */
-  token: 'abcc5517089e4e28bf46d4cd3e3a74b9',
+  token: 'cf925526b6f648b695cc28d2e967e3db',
 
   /**
    * 发送到 Emby 服务器的查询字符串参数。
@@ -101,6 +101,7 @@ export const emby = {
      * 返回结果的最大数量。
      */
     Limit: 50,
+
   },
 
   /**
@@ -129,7 +130,9 @@ export const emby = {
    * @param  videoName - 视频名称
    */
   openEmby(videoName: string) {
-    // 设置超时时间为 2 秒
+    /**
+     *  设置超时时间为 2 秒
+     */
     const timeoutDuration = 2000
 
     const timeoutId = setTimeout(() => {
@@ -139,6 +142,7 @@ export const emby = {
       })
     }, timeoutDuration)
 
+    console.log('%c Line:149 🍪 this.buildRequestUrl(videoName)', 'color:#93c0a4', this.buildRequestUrl(videoName))
     GM_xmlhttpRequest({
       method: 'GET',
       url: this.buildRequestUrl(videoName),
@@ -152,6 +156,8 @@ export const emby = {
         'X-Emby-Language': this.language,
       },
       onload: (response: any) => {
+        console.log('%c Line:155 🍧 response', 'color:#42b983', response)
+
         // 请求成功，清除超时计时器
         clearTimeout(timeoutId)
 

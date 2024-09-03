@@ -357,7 +357,7 @@ async function embyOpenFolder() {
 }
 
 /**
- *  在Javdb搜索当前影片
+ *  在Javdb搜索当前视频
  */
 async function embyOpenJavdb() {
   const { intent: { title } } = await getEmbyMediaInfo()

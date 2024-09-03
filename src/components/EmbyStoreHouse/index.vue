@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { Notification } from '@arco-design/web-vue'
 
-import DuplicatesModel from './components/duplicatesModel.vue'
+import DuplicatesModel from './components/duplicates_model.vue'
 
-import { getTagArray, parseNfoContent, videoManager } from '@/utils'
+import { getFormattedDateFromTimestamp, getTagArray, parseNfoContent, videoManager } from '@/utils'
 
 import { config } from '@/config'
 
@@ -25,8 +25,6 @@ function videoDuplicateHandle(event: any) {
 
   isShowDuplicatesModel.value = true
 }
-
-// # ////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  *  表示文件数据的类型
@@ -122,13 +120,6 @@ async function mainBtnHandler() {
       window as any
     ).showDirectoryPicker()
 
-    console.log('%c Line:125 🥕 directoryHandle', 'color:#3f7cff', directoryHandle)
-
-    const folderName = directoryHandle.name
-
-    console.log('%c Line:128 🥔 folderName', 'color:#b03734', folderName)
-    return
-
     // 如果用户没有选择目录，显示错误通知并退出函数
     if (!directoryHandle) {
       Notification.error({
@@ -184,7 +175,7 @@ async function mainBtnHandler() {
 
         resolution: nfoContent.resolution || '',
 
-        isChinese: file.name.includes('-c') || file.name.includes('-C'),
+        isChinese: file.name.includes('-c') || file.name.includes('-C') || file.name.includes('_ch'),
       }
 
       // 将该视频信息对象添加到 Set 中
@@ -192,7 +183,9 @@ async function mainBtnHandler() {
     }
 
     // 将收集到的所有视频信息存储到 videoManager 中
-    videoManager.set(videoFileSet)
+    videoManager.set(directoryHandle.name, videoFileSet)
+
+    const embyFolder = videoManager.get()
 
     /**
      *   耗时
@@ -201,15 +194,14 @@ async function mainBtnHandler() {
 
     isLoading.value = false
 
-    const duplicate = videoManager.duplicate()
+    // 检查 allDuplicateVideoList 和 uniqueVideoNameList 是否为 undefined，并使用空数组作为默认值
+    const allDuplicateVideoList = embyFolder.allDuplicateVideoList || []
 
-    console.log('%c Line:22 🍊 所有重复的影片列表', 'color:#b03734', duplicate.duplicatesVideoList)
-
-    console.log('%c Line:26 🍕 Emby去重的影片标题列表', 'color:#7f2b82', duplicate.duplicatesVideoNameList)
+    const uniqueVideoNameList = embyFolder.uniqueVideoNameList || []
 
     Notification.success({
       title: `读取文件夹: \u00A0\u00A0\u00A0${directoryHandle.name}\u00A0\u00A0\u00A0成功`,
-      content: `耗时\u00A0 ${time}\u00A0 秒 \u00A0 \u00A0共读取\u00A0 ${videoFileSet.size}\u00A0 个视频 \u00A0 共发现 ${duplicate.duplicatesVideoList.length} 个重复视频 \u00A0 去重后 ${duplicate.duplicatesVideoNameList.length}个`,
+      content: `耗时\u00A0 ${time}\u00A0 秒 \u00A0 \u00A0共读取\u00A0 ${videoFileSet.size}\u00A0 个视频 \u00A0 共发现 ${allDuplicateVideoList.length} 个重复视频 \u00A0 去重后 ${uniqueVideoNameList.length}个`,
       duration: 300000,
       closable: true,
       onClose() {
@@ -225,6 +217,73 @@ async function mainBtnHandler() {
     isLoading.value = false
   }
 }
+
+const embyFolder = ref(videoManager.get())
+
+/**
+ *   定时提示读取文件夹
+ */
+function folderReadReminderScheduler() {
+  /**
+   * 1 小时的毫秒数
+   */
+  const millisecondsInHour = 3600000 // 1 小时 = 3,600,000 毫秒
+
+  /**
+   *  超时时间阀值，单位为毫秒
+   *  @description 使用 `config.embyFolder.folderReadTimeoutHours` 小时来计算超时时间阀值
+   */
+  const timeThreshold = millisecondsInHour * config.embyFolder.folderReadTimeoutHours
+
+  /**
+   * 定时检查间隔，单位为毫秒
+   *  @description 使用 `config.embyFolder.folderReadCheckIntervalHours` 秒来计算间隔
+   */
+  const checkInterval = config.embyFolder.folderReadCheckIntervalHours * millisecondsInHour
+
+  /**
+   * 上次读取文件夹的时间戳
+   */
+  const lastReadTime = embyFolder.value.lastReadTime
+
+  setInterval(() => {
+    /**
+     * 当前时间戳
+     */
+    const currentTimestamp = Date.now()
+
+    if (lastReadTime) {
+      /**
+       *   当前时间戳 - 上次读取文件夹的时间戳 = 当前时间间隔
+       */
+      const timeDifference = currentTimestamp - lastReadTime
+
+      if (timeDifference >= timeThreshold) {
+        /**
+         * 小时
+         */
+        const hoursElapsed = Math.floor(timeDifference / millisecondsInHour)
+
+        /**
+         * 分钟
+         */
+        const minutesElapsed = Math.floor((timeDifference % millisecondsInHour) / 60000)
+
+        Notification.info({
+          title: `${hoursElapsed} 小时 ${minutesElapsed} 分钟未读取文件夹！`,
+          content: `上次读取时间：\u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0  \u00A0 \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 ${getFormattedDateFromTimestamp(lastReadTime)} \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 超时的时间阈值为 ${config.embyFolder.folderReadTimeoutHours} 小时 \u00A0  \u00A0  \u00A0 \u00A0 \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0  \u00A0定时器的时间间隔为 ${config.embyFolder.folderReadCheckIntervalHours} 小时`,
+          duration: 30000,
+          closable: true,
+        })
+      }
+    }
+    else {
+      console.warn('未找到上次读取时间戳')
+    }
+  }, checkInterval)
+}
+
+folderReadReminderScheduler()
 </script>
 
 <template>
@@ -235,10 +294,10 @@ async function mainBtnHandler() {
   />
 
   <div
-    class="group fixed bottom-2 left-2 flex items-center justify-center border border-2 border-white/80 rounded-full p-1 shadow-2xl"
+    class="group fixed bottom-2 left-2 z-10000 flex items-center justify-center border border-2 border-white/80 rounded-full p-1 shadow-2xl"
   >
     <button
-      class="group relative z-1000 h-20 w-20 inline-flex cursor-pointer overflow-visible rounded-full bg-[linear-gradient(#e7e9e9,#e9e9e9_50%,#fff)] p-1 transition-all duration-300"
+      class="group relative z-10000 h-20 w-20 inline-flex cursor-pointer overflow-visible rounded-full bg-[linear-gradient(#e7e9e9,#e9e9e9_50%,#fff)] p-1 transition-all duration-300"
     >
       <div
         class="h-full w-full overflow-hidden rounded-full bg-[linear-gradient(to_top,#ececec,#fff)] p-1 shadow-[0_0_1px_rgba(0,0,0,0.07),0_0_1px_rgba(0,0,0,0.05),0_3px_3px_rgba(0,0,0,0.25),0_1px_3px_rgba(0,0,0,0.12)] duration-300 hover:shadow-none"
@@ -279,7 +338,7 @@ async function mainBtnHandler() {
     </button>
 
     <div
-      class="absolute left-[50%] z-800 w-22 origin-left scale-0 cursor-pointer border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out -top-11 -translate-x-[50%] group-hover:scale-100"
+      class="absolute left-[50%] z-10000 w-22 origin-left scale-0 cursor-pointer border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out -top-11 -translate-x-[50%] group-hover:scale-100"
       @click="videoDuplicateHandle"
     >
       视频查重

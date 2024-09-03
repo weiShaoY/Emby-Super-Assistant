@@ -76,6 +76,8 @@ export default defineConfig({
          *  此标签定义允许通过GM_xmlhttpRequest检索的域（无顶级域），包括子域
          */
         connect: [
+          '192.168.0.4:*',
+          '192.168.0.4:8096',
           'jable.tv',
           'missav.com',
           'missav123.com',
@@ -104,6 +106,7 @@ export default defineConfig({
           'javlibrary.com',
           'javdb008.com',
           'g64w.com',
+          '*',
         ],
       },
 

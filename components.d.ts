@@ -9,8 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddedToEmbyButton: typeof import('./src/components/AddedToEmbyButton/index.vue')['default']
     BtsowButton: typeof import('./src/components/BtsowButton/index.vue')['default']
-    copy: typeof import('./src/components/AddedToEmbyButton/index copy.vue')['default']
-    DuplicatesModel: typeof import('./src/components/EmbyStoreHouse/components/duplicatesModel.vue')['default']
+    Duplicates_model: typeof import('./src/components/EmbyStoreHouse/components/duplicates_model.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
     EmbyStoreHouse: typeof import('./src/components/EmbyStoreHouse/index.vue')['default']
     OnlinePlay: typeof import('./src/components/OnlinePlay/index.vue')['default']
@@ -40,7 +39,6 @@ declare module 'vue' {
     Personality_tooltips_one: typeof import('./src/components/Personality/personality_tooltips/personality_tooltips_one.vue')['default']
     Setting: typeof import('./src/components/OnlinePlay/setting.vue')['default']
     SiteBtn: typeof import('./src/components/OnlinePlay/siteBtn.vue')['default']
-    StoreHouseButton: typeof import('@/components/EmbyStoreHouse/index.vue')['default']
     Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
     TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']
     UpdateChineseButton: typeof import('./src/components/UpdateChineseButton/index.vue')['default']

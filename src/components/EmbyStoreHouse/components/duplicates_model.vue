@@ -1,10 +1,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { videoManager } from '@/utils'
+import { getFormattedDateFromTimestamp, videoManager } from '@/utils'
 
-const duplicatesVideoList = ref <VideoType.Video[]>([])
-
-const duplicatesVideoNameList = ref <string[]>([])
+import { config } from '@/config'
 
 const visible = defineModel({ type: Boolean, default: false })
 
@@ -13,19 +11,11 @@ const visible = defineModel({ type: Boolean, default: false })
  */
 const isShowAll = ref(false)
 
-function main() {
-  const duplicate = videoManager.duplicate()
+const embyFolder = ref(videoManager.get())
 
-  duplicatesVideoList.value = duplicate.duplicatesVideoList
-
-  console.log('%c Line:22 🍊 所有重复的影片列表', 'color:#b03734', duplicatesVideoList)
-
-  duplicatesVideoNameList.value = duplicate.duplicatesVideoNameList
-
-  console.log('%c Line:26 🍕 Emby去重的影片标题列表', 'color:#7f2b82', duplicatesVideoNameList)
+function openFolder() {
+  config.quicker.openFolder(embyFolder.value.name)
 }
-
-main()
 </script>
 
 <template>
@@ -98,7 +88,7 @@ main()
         v-if="isShowAll"
       >
         <EmbyButton
-          v-for="(item, index) in duplicatesVideoList"
+          v-for="(item, index) in embyFolder.allDuplicateVideoList"
           :key="index"
           :video-name="item.processedName"
           :is-show-video-name="true"
@@ -111,7 +101,7 @@ main()
         v-else
       >
         <EmbyButton
-          v-for="(item, index) in duplicatesVideoNameList"
+          v-for="(item, index) in embyFolder.uniqueVideoNameList"
           :key="index"
           :video-name="item"
           :is-show-video-name="true"
@@ -129,37 +119,102 @@ main()
       >
 
         <div
-          class="flex-center"
+          class="flex flex-col items-start"
         >
-          <div>
-            <span>
-              共发现:
-            </span>
 
-            <span
-              class="m-x-1 text-5 font-bold"
+          <div
+            class="flex"
+          >
+            <div
+              class="m-r-3 flex items-center"
             >
-              {{ duplicatesVideoList.length }}
-            </span>
+              <span>
+                重复视频
+              </span>
 
-            <span>
-              部视频重复
-            </span>
+              <span
+                class="m-x-1 text-4 font-bold"
+              >
+                {{ embyFolder.allDuplicateVideoList.length }}
+              </span>
+
+              <span>
+                部
+              </span>
+
+            </div>
+
+            <div
+              class="flex items-center"
+            >
+              <span>去重后</span>
+
+              <span
+                class="m-x-1 text-4 font-bold"
+              >
+                {{ embyFolder.uniqueVideoNameList.length }}
+              </span>
+
+              <span>
+                部
+              </span>
+
+            </div>
           </div>
 
           <div
-            class="m-l-3"
+            class="flex items-center"
           >
-            <span>去重后</span>
-
-            <span
-              class="m-x-1 text-5 font-bold"
+            <div
+              class="m-r-3 flex items-center"
             >
-              {{ duplicatesVideoNameList.length }}
+              <span>
+                总共
+              </span>
+
+              <span
+                class="m-x-1 text-4 font-bold"
+              >
+                {{ embyFolder.list.length }}
+              </span>
+
+              <span>
+                部
+              </span>
+
+            </div>
+
+            <div
+              class=""
+            >
+              <span>
+                读取的文件夹为
+              </span>
+
+              <a-link
+                class="m-x-1 font-bold !text-5"
+                status="success"
+                @click="openFolder"
+              >
+                {{ embyFolder.name }}
+              </a-link>
+            </div>
+          </div>
+
+          <div
+            v-if="embyFolder.lastReadTime"
+            class="flex items-center"
+          >
+            <span
+              class="m-r-3"
+            >
+              最后读取文件夹时间为
             </span>
 
-            <span>
-              部
+            <span
+              class="text-4 font-bold"
+            >
+              {{ getFormattedDateFromTimestamp(embyFolder.lastReadTime) }}
             </span>
 
           </div>

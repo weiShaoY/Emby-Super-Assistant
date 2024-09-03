@@ -10,6 +10,8 @@ import btsow from './web/btsow'
 
 import torrentList from './torrentList'
 
+import embyFolder from './web/embyFolder'
+
 export const config = {
   /**
    *  quicker 配置
@@ -28,7 +30,7 @@ export const config = {
    */
   web: {
     /**
-     *  emby 配置
+     *  Emby 配置
      */
     emby,
 
@@ -43,6 +45,11 @@ export const config = {
     javdb,
 
   },
+
+  /**
+   *  Emby 文件夹 配置
+   */
+  embyFolder,
 }
 
 export default config

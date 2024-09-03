@@ -10,7 +10,7 @@ export const btsow = {
   url: 'https://btsow.com',
 
   /**
-   *  在Javdb搜索当前影片
+   *  在Javdb搜索当前视频
    */
   search: (videoName: string) => {
     window.open(`${btsow.url}/search/${videoName}`, '_blank')

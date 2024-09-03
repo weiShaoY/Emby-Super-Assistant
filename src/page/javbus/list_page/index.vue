@@ -25,9 +25,9 @@ const embyBtnList = ref<string[]>([])
 const updateChineseBtnList = ref<string[]>([])
 
 function main() {
-  const videoFileArray = videoManager.get()
+  const embyFolder = videoManager.get()
 
-  if (!videoFileArray) {
+  if (!embyFolder.list.length) {
     return
   }
 
@@ -53,7 +53,7 @@ function main() {
      * 当前视频名称已入库的视频列表
      */
 
-    const matchedVideoList = videoFileArray.filter(sub => sub.processedName.includes(itemVideoName))
+    const matchedVideoList = embyFolder.list.filter(sub => sub.processedName.includes(itemVideoName))
 
     // 创建一个空数组来存放匹配的视频文件
 

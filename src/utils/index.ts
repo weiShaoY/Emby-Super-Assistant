@@ -10,6 +10,8 @@ import addClassIfNotExists from './addClassIfNotExists'
 
 import addClassAndUpdateList from './addClassAndUpdateList'
 
+import getFormattedDateFromTimestamp from './getFormattedDateFromTimestamp'
+
 export {
   buttonManager,
   videoManager,
@@ -17,4 +19,5 @@ export {
   parseNfoContent,
   addClassIfNotExists,
   addClassAndUpdateList,
+  getFormattedDateFromTimestamp,
 }

@@ -3,85 +3,74 @@
  */
 export const videoManager = {
   /**
-   * 获取视频文件数组
-   * @return {VideoType[] | null} -  videoFileArray -  视频文件 JSON 字符串
+   * 获取存储的 Emby 文件夹对象
+   * @return  {EmbyFolderType}
    */
-  get(): VideoType.Video[] | null {
-    const videoFileJson = localStorage.getItem('videoFile')
+  get(): EmbyFolderType {
+    const embyFolder = JSON.parse(GM_getValue('EmbyFolder')) as EmbyFolderType
 
-    console.log('%c Line:13 🎂 videoFileJson ? JSON.parse(videoFileJson) : null', 'color:#fca650', videoFileJson ? JSON.parse(videoFileJson) : null)
-
-    return videoFileJson ? JSON.parse(videoFileJson) : null
+    return {
+      ...embyFolder,
+      allDuplicateVideoList: this.getAllDuplicateVideoList(embyFolder.list || [], 'processedName') || [],
+      uniqueVideoNameList: this.getUniqueVideoNameList(embyFolder.list || [], 'processedName') || [],
+    }
   },
 
   /**
    * 设置视频文件
-   * @param {Set<VideoType>} videoFileSet - 视频文件集合
+   * @param {string} embyFolderName - Emby 文件夹名称
+   * @param {Set<VideoType.Video>} videoFileSet - 视频文件集合
    */
-  set(videoFileSet: Set<VideoType.Video>): void {
-    const videoFile = JSON.stringify(Array.from(videoFileSet))
+  set(embyFolderName: string, videoFileSet: Set<VideoType.Video>): void {
+    const list = Array.from(videoFileSet)
 
-    localStorage.setItem('videoFile', videoFile)
+    const embyFolder: EmbyFolderType = {
+      name: embyFolderName,
+      list: list || [],
+      allDuplicateVideoList: this.getAllDuplicateVideoList(list || [], 'processedName') || [],
+      uniqueVideoNameList: this.getUniqueVideoNameList(list || [], 'processedName') || [],
+      lastReadTime: Date.now(),
+    }
+
+    GM_setValue('EmbyFolder', JSON.stringify(embyFolder))
   },
 
   /**
-   * 视频文件查重
+   * 获取所有重复视频列表
+   * @param {T[]} list - 要检查的列表
+   * @param {keyof T} property - 用于比较的属性名
+   * @return {T[]} - 返回重复视频的列表
    */
-  duplicate() {
-    /**
-     * 找出具有相同属性值的重复项
-     * @param {T[]} list - 要处理的数组
-     * @param {keyof T} property - 用于比较的属性名
-     * @returns {T[]} result - 具有重复项的新数组
-     */
-    function findDuplicatesByProperty<T>(
-      list: T[],
-      property: keyof T,
-    ): T[] {
-      const propertyMap = list.reduce((acc, item) => {
-        const key = item[property] as unknown as string
+  getAllDuplicateVideoList<T>(list: T[], property: keyof T): T[] {
+    const propertyMap = list.reduce((acc, item) => {
+      const key = item[property] as unknown as string
 
-        acc[key] = acc[key] || []
-        acc[key].push(item)
-        return acc
-      }, {} as { [key: string]: T[] })
+      acc[key] = acc[key] || []
+      acc[key].push(item)
+      return acc
+    }, {} as { [key: string]: T[] })
 
-      return Object.values(propertyMap)
-        .filter(items => items.length > 1) // 过滤掉那些只有一个项的属性值
-        .flat() // 展平数组，返回所有重复项
-    }
+    return Object.values(propertyMap)
+      .filter(items => items.length > 1) // 过滤掉那些只有一个项的属性值
+      .flat() // 展平数组，返回所有重复项
+  },
 
-    /**
-     * 获取具有重复属性值的项，并返回去重后的属性值数组
-     * @param {VideoType[]} items - 要处理的数组
-     * @param {keyof VideoType} property - 用于比较的属性名
-     * @returns {string[]} uniqueValues - 去重后的属性值数组
-     */
-    function getUniqueValuesByProperty<T>(items: T[], property: keyof T): string[] {
-      const propertyMap = items.reduce((acc, item) => {
-        const key = item[property] as unknown as string
+  /**
+   * 获取具有重复属性值的项，并返回去重后的属性值数组
+   * @param {T[]} items - 要处理的数组
+   * @param {keyof T} property - 用于比较的属性名
+   * @returns {string[]} - 返回去重后的属性值数组
+   */
+  getUniqueVideoNameList<T>(items: T[], property: keyof T): string[] {
+    const propertyMap = items.reduce((acc, item) => {
+      const key = item[property] as unknown as string
 
-        acc[key] = acc[key] || []
-        acc[key].push(item)
-        return acc
-      }, {} as { [key: string]: T[] })
+      acc[key] = acc[key] || []
+      acc[key].push(item)
+      return acc
+    }, {} as { [key: string]: T[] })
 
-      return Object.keys(propertyMap).filter(key => propertyMap[key].length > 1)
-    }
-
-    const videoFileArray = videoManager.get() || []
-
-    return {
-      /**
-       *  所有重复的影片列表
-       */
-      duplicatesVideoList: findDuplicatesByProperty(videoFileArray, 'processedName'),
-
-      /**
-       *  Emby去重的影片标题列表
-       */
-      duplicatesVideoNameList: getUniqueValuesByProperty(videoFileArray, 'processedName'),
-    }
+    return Object.keys(propertyMap).filter(key => propertyMap[key].length > 1)
   },
 }
 

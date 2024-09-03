@@ -392,7 +392,7 @@
   }
 
   /**
-   *  在Javdb搜索当前影片
+   *  在Javdb搜索当前视频
    */
   async function embyOpenJavdb() {
     const mediaInfo = await getEmbyMediaInfo()
