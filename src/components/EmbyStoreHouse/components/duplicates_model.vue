@@ -26,7 +26,7 @@ const getFolderReadTimeoutText = computed(() => {
   const lastReadTime = embyFolder.value.lastReadTime
 
   if (!lastReadTime) {
-    return '未读取文件夹'
+    return ''
   }
 
   const currentTimestamp = Date.now()
@@ -34,7 +34,7 @@ const getFolderReadTimeoutText = computed(() => {
   const timeDifference = currentTimestamp - lastReadTime
 
   if (timeDifference <= 0) {
-    return '未读取文件夹'
+    return ''
   }
 
   const hoursElapsed = Math.floor(timeDifference / millisecondsInHour)
@@ -58,11 +58,11 @@ function openFolder() {
     <template
       #title
     >
-
       <span
-        class="font-bold"
+        class="cursor-pointer font-bold"
+        @click="isShowAll = true"
       >
-        去重
+        重复 {{ embyFolder.allDuplicateVideoList.length }} 部
       </span>
 
       <div
@@ -104,9 +104,10 @@ function openFolder() {
       </div>
 
       <span
-        class="font-bold"
+        class="cursor-pointer font-bold"
+        @click="isShowAll = false"
       >
-        全部
+        去重 {{ embyFolder.uniqueVideoNameList.length }} 部
       </span>
     </template>
 
@@ -116,7 +117,7 @@ function openFolder() {
     >
 
       <template
-        v-if="isShowAll"
+        v-if="!isShowAll"
       >
         <EmbyButton
           v-for="(item, index) in embyFolder.allDuplicateVideoList"
@@ -177,7 +178,7 @@ function openFolder() {
 
           </div>
 
-          <div
+          <!-- <div
             class="flex"
           >
             <div
@@ -215,9 +216,10 @@ function openFolder() {
               </span>
 
             </div>
-          </div>
+          </div> -->
 
           <div
+            v-if="getFolderReadTimeoutText"
             class="flex items-center"
           >
             <span>
