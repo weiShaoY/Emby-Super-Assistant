@@ -122,6 +122,13 @@ async function mainBtnHandler() {
       window as any
     ).showDirectoryPicker()
 
+    console.log('%c Line:125 🥕 directoryHandle', 'color:#3f7cff', directoryHandle)
+
+    const folderName = directoryHandle.name
+
+    console.log('%c Line:128 🥔 folderName', 'color:#b03734', folderName)
+    return
+
     // 如果用户没有选择目录，显示错误通知并退出函数
     if (!directoryHandle) {
       Notification.error({

@@ -34,6 +34,14 @@ import njavSvg from '@/assets/svg/web/njav.svg'
 
 import missAvSvg from '@/assets/svg/web/missAv.svg'
 
+import ggjavSvg from '@/assets/svg/web/ggjav.svg'
+
+import highpornSvg from '@/assets/svg/web/highporn.svg'
+
+import evojavSvg from '@/assets/svg/web/evojav.svg'
+
+import javlibSvg from '@/assets/svg/web/javlib.svg'
+
 export type DomQuery_parser = {
 
   /**
@@ -355,7 +363,7 @@ export const siteList: SiteItem[] = [
     },
   },
   {
-    name: 'baihuse',
+    name: 'paipancon',
     icon: paipanconSvg,
     hostname: 'paipancon.com',
     url: 'https://paipancon.com/search/{{code}}',
@@ -369,6 +377,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'GGJAV',
+    icon: ggjavSvg,
     hostname: 'ggjav.com',
     url: 'https://ggjav.com/main/search?string={{code}}',
     fetchType: 'parser',
@@ -399,6 +408,7 @@ export const siteList: SiteItem[] = [
   // },
   {
     name: 'highporn',
+    icon: highpornSvg,
     hostname: 'highporn.net',
     url: 'https://highporn.net/search/videos?search_query={{code}}',
     fetchType: 'parser',
@@ -406,6 +416,7 @@ export const siteList: SiteItem[] = [
   },
   {
     name: 'evojav',
+    icon: evojavSvg,
     hostname: 'evojav.pro',
     url: 'https://evojav.pro/video/{{code}}/',
     fetchType: 'get',
@@ -430,6 +441,7 @@ export const siteList: SiteItem[] = [
 
   {
     name: 'JAVLib',
+    icon: javlibSvg,
     disableLibItemName: 'javlib',
     hostname: 'javlibrary.com',
     url: 'https://www.javlibrary.com/cn/vl_searchbyid.php?keyword={{code}}',
