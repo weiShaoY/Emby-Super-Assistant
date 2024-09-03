@@ -1,3 +1,4 @@
+<!------------------------------------  Emby 文件夹   ------------------------------------------------->
 <script lang="ts" setup>
 import { Notification } from '@arco-design/web-vue'
 
