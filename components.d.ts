@@ -39,6 +39,7 @@ declare module 'vue' {
     Personality_tooltips: typeof import('./src/components/Personality/personality_tooltips/index.vue')['default']
     Personality_tooltips_one: typeof import('./src/components/Personality/personality_tooltips/personality_tooltips_one.vue')['default']
     Setting: typeof import('./src/components/OnlinePlay/setting.vue')['default']
+    Site_btn: typeof import('./src/components/OnlinePlay/site_btn.vue')['default']
     SiteBtn: typeof import('./src/components/OnlinePlay/siteBtn.vue')['default']
     Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
     TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']

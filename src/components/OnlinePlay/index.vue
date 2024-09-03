@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import Setting from './setting.vue'
 
-import SiteBtn from './siteBtn.vue'
+import SiteBtn from './site_btn.vue'
 
 import { siteList } from './utils/siteList'
 
