@@ -1,6 +1,6 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { getFormattedDateFromTimestamp, videoManager } from '@/utils'
+import { embyManager, getFormattedDateFromTimestamp } from '@/utils'
 
 import { config } from '@/config'
 
@@ -11,7 +11,38 @@ const visible = defineModel({ type: Boolean, default: false })
  */
 const isShowAll = ref(false)
 
-const embyFolder = ref(videoManager.get())
+const embyFolder = ref(embyManager.get())
+
+/**
+ *  计算超时时间 *时*分*秒未重新读取文件夹
+ */
+/**
+ * 获取文件夹读取超时提示文本
+ * @return {string} 超时提示文本
+ */
+const getFolderReadTimeoutText = computed(() => {
+  const millisecondsInHour = 3600000 // 1 小时 = 3,600,000 毫秒
+
+  const lastReadTime = embyFolder.value.lastReadTime
+
+  if (!lastReadTime) {
+    return '未读取文件夹'
+  }
+
+  const currentTimestamp = Date.now()
+
+  const timeDifference = currentTimestamp - lastReadTime
+
+  if (timeDifference <= 0) {
+    return '未读取文件夹'
+  }
+
+  const hoursElapsed = Math.floor(timeDifference / millisecondsInHour)
+
+  const minutesElapsed = Math.floor((timeDifference % millisecondsInHour) / 60000)
+
+  return `${hoursElapsed}时${minutesElapsed}分`
+})
 
 function openFolder() {
   config.quicker.openFolder(embyFolder.value.name)
@@ -123,6 +154,30 @@ function openFolder() {
         >
 
           <div
+            class="flex items-center"
+          >
+            <div
+              class="m-r-3 flex items-center"
+            >
+              <span>
+                总共
+              </span>
+
+              <span
+                class="m-x-1 text-4 font-bold"
+              >
+                {{ embyFolder.list.length }}
+              </span>
+
+              <span>
+                部
+              </span>
+
+            </div>
+
+          </div>
+
+          <div
             class="flex"
           >
             <div
@@ -165,58 +220,39 @@ function openFolder() {
           <div
             class="flex items-center"
           >
-            <div
-              class="m-r-3 flex items-center"
+            <span>
+              {{ getFolderReadTimeoutText }}
+            </span>
+
+            <span
+              class="m-x-3"
             >
-              <span>
-                总共
-              </span>
-
-              <span
-                class="m-x-1 text-4 font-bold"
-              >
-                {{ embyFolder.list.length }}
-              </span>
-
-              <span>
-                部
-              </span>
-
-            </div>
-
-            <div
-              class=""
-            >
-              <span>
-                读取的文件夹为
-              </span>
-
-              <a-link
-                class="m-x-1 font-bold !text-5"
-                status="success"
-                @click="openFolder"
-              >
-                {{ embyFolder.name }}
-              </a-link>
-            </div>
+              未重新读取文件夹
+            </span>
           </div>
 
           <div
             v-if="embyFolder.lastReadTime"
             class="flex items-center"
           >
-            <span
-              class="m-r-3"
-            >
-              最后读取文件夹时间为
-            </span>
 
-            <span
-              class="text-4 font-bold"
-            >
+            <span>
               {{ getFormattedDateFromTimestamp(embyFolder.lastReadTime) }}
             </span>
 
+            <span
+              class="m-x-3"
+            >
+              读取的文件夹
+            </span>
+
+            <a-link
+              class="m-x-1 font-bold !text-5"
+              status="success"
+              @click="openFolder"
+            >
+              {{ embyFolder.name }}
+            </a-link>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import { Notification } from '@arco-design/web-vue'
 
 import DuplicatesModel from './components/duplicates_model.vue'
 
-import { getFormattedDateFromTimestamp, getTagArray, parseNfoContent, videoManager } from '@/utils'
+import { embyManager, getFormattedDateFromTimestamp, getTagArray, parseNfoContent } from '@/utils'
 
 import { config } from '@/config'
 
@@ -182,10 +182,10 @@ async function mainBtnHandler() {
       videoFileSet.add(item)
     }
 
-    // 将收集到的所有视频信息存储到 videoManager 中
-    videoManager.set(directoryHandle.name, videoFileSet)
+    // 将收集到的所有视频信息存储到 embyManager 中
+    embyManager.set(directoryHandle.name, videoFileSet)
 
-    const embyFolder = videoManager.get()
+    const embyFolder = embyManager.get()
 
     /**
      *   耗时
@@ -218,7 +218,7 @@ async function mainBtnHandler() {
   }
 }
 
-const embyFolder = ref(videoManager.get())
+const embyFolder = ref(embyManager.get())
 
 /**
  *   定时提示读取文件夹

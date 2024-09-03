@@ -1,7 +1,7 @@
 /**
  * 视频文件管理
  */
-export const videoManager = {
+export const embyManager = {
   /**
    * 获取存储的 Emby 文件夹对象
    * @return  {EmbyFolderType}
@@ -74,4 +74,4 @@ export const videoManager = {
   },
 }
 
-export default videoManager
+export default embyManager

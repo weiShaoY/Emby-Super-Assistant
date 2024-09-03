@@ -1,6 +1,6 @@
 import buttonManager from './buttonManager'
 
-import videoManager from './videoManager'
+import embyManager from './embyManager'
 
 import getTagArray from './getTagArray'
 
@@ -14,7 +14,7 @@ import getFormattedDateFromTimestamp from './getFormattedDateFromTimestamp'
 
 export {
   buttonManager,
-  videoManager,
+  embyManager,
   getTagArray,
   parseNfoContent,
   addClassIfNotExists,

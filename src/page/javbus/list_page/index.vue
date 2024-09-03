@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import { debug } from 'node:console'
 
-import { addClassAndUpdateList, addClassIfNotExists, videoManager } from '@/utils'
+import { addClassAndUpdateList, addClassIfNotExists, embyManager } from '@/utils'
 
 /**
  *  在Btsow搜索按钮
@@ -25,7 +25,7 @@ const embyBtnList = ref<string[]>([])
 const updateChineseBtnList = ref<string[]>([])
 
 function main() {
-  const embyFolder = videoManager.get()
+  const embyFolder = embyManager.get()
 
   if (!embyFolder.list.length) {
     return

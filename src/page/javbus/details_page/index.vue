@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { getTagArray, videoManager } from '@/utils'
+import { embyManager, getTagArray } from '@/utils'
 
 const addedToEmbyList = ref<VideoType.Video[]>([])
 
@@ -103,7 +103,7 @@ function getTorrentList() {
 }
 
 function main() {
-  const embyFolder = videoManager.get()
+  const embyFolder = embyManager.get()
 
   if (!embyFolder.list.length)
     return
