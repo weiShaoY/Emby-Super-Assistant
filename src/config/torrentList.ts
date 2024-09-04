@@ -13,7 +13,7 @@ export const torrentList = {
    */
   SortingRuleArray: [
     {
-      name: '-UC.torrent.无码破解',
+      name: 'UC.torrent.无码破解',
       backgroundColor: '#00FFFF',
     },
     {
@@ -21,10 +21,9 @@ export const torrentList = {
       backgroundColor: '##00BFFF',
     },
     {
-      name: '-UC',
+      name: 'UC',
       backgroundColor: '#fca650',
     },
-
     {
       name: '-c',
       backgroundColor: '#FF6347',
