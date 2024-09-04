@@ -34,6 +34,10 @@ type TorrentType = {
    */
   tagArray: VideoType.VideoTagArrayItem[]
 
+  /**
+   *  种子网站
+   */
+  web: string
 }
 
   /**

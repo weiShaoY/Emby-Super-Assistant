@@ -15,6 +15,12 @@ export const torrentList = {
     {
       name: 'UC.torrent.无码破解',
       backgroundColor: '#00FFFF',
+      web: '色花堂',
+    },
+    {
+      name: 'U.torrent.无码破解',
+      backgroundColor: '#FF9F9F',
+      web: '色花堂',
     },
     {
       name: '破解-c',
@@ -31,6 +37,7 @@ export const torrentList = {
     {
       name: '-C.torrent',
       backgroundColor: '#FF1166',
+      web: '色花堂',
     },
     {
       name: '-C',
@@ -43,6 +50,7 @@ export const torrentList = {
     {
       name: 'ThZu.Cc',
       backgroundColor: '#FF4900',
+      web: '桃花族',
     },
     {
       name: '4K-破解',
@@ -62,8 +70,10 @@ export const torrentList = {
     },
 
     // {
-    //   name: 'torrent',
-    //   backgroundColor: '#006989',
+    //   //  必须是纯小写  shkd-875.torrent
+    //   name: '.torrent',
+    //   backgroundColor: '#AD9277',
+    //   web: '色花堂',
     // },
 
   ],

@@ -65,6 +65,7 @@ async function main() {
     // 如果找到匹配的背景颜色规则，设置 backgroundColor
     if (inSortingRuleArrayIndex !== -1) {
       updatedTorrent.backgroundColor = config.torrentList.SortingRuleArray[inSortingRuleArrayIndex].backgroundColor
+      updatedTorrent.web = config.torrentList.SortingRuleArray[inSortingRuleArrayIndex].web || ''
     }
 
     // 返回更新后的对象
@@ -277,6 +278,19 @@ scrollToElement()
                     torrent.time
                   }}
                 </div>
+              </div>
+              <!-- 左边第二列 文件大小 -->
+              <div
+                class="m-l-3 w-30 group-hover:text-#fff"
+              >
+                <span
+                  v-if="torrent.web"
+                  class="text-4 font-700"
+                >
+                  {{
+                    torrent.web
+                  }}
+                </span>
               </div>
 
               <!-- 左边第二列 文件大小 -->
