@@ -20,7 +20,7 @@ export const video: VideoType.VideoConfig = {
       url: fourKSvg.toString(),
     },
     {
-      name: ['-c', '-C', '_ch'],
+      name: ['-c', '-C', '_ch', '-UC'],
       url: subtitleSvg,
     },
     {
