@@ -15,8 +15,6 @@ declare module 'vue' {
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
     EmbyFolder: typeof import('./src/components/EmbyFolder/index.vue')['default']
     EmbyStoreHouse: typeof import('./src/components/EmbyStoreHouse/index.vue')['default']
-    'Index copy': typeof import('./src/components/TorrentList/index copy.vue')['default']
-    'Index copy 2': typeof import('./src/components/TorrentList/index copy 2.vue')['default']
     OnlinePlay: typeof import('./src/components/OnlinePlay/index.vue')['default']
     Personality: typeof import('./src/components/Personality/index.vue')['default']
     Personality_button: typeof import('./src/components/Personality/personality_button/index.vue')['default']
