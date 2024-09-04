@@ -330,10 +330,12 @@ scrollToElement()
           </div>
 
           <div
-            v-if="index !== torrentList.length - 1"
+            v-if="torrentList.length === 1 || (torrentList.length > 1 && index !== torrentList.length - 1)"
             class="m-y-2 h-[1px] rounded bg-#9CA3AF"
           >
             <!-- 分割线 -->
+            <!-- torrentList.length === 1：当 torrentList 长度为 1 时显示分割线 -->
+            <!-- torrentList.length > 1 && index !== torrentList.length - 1：当 torrentList 长度大于 1 且不是最后一个元素时显示分割线 -->
           </div>
 
         </div>
