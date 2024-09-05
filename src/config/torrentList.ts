@@ -48,6 +48,10 @@ export const torrentList = {
       backgroundColor: '#2A9D8F',
     },
     {
+      name: '-U',
+      backgroundColor: '#8FBC8F',
+    },
+    {
       name: 'ThZu.Cc',
       backgroundColor: '#FF4900',
       web: '桃花族',
