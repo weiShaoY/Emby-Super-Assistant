@@ -2,11 +2,13 @@
 <script lang="ts" setup>
 import { Notification } from '@arco-design/web-vue'
 
-import DuplicatesModel from './components/duplicates_model.vue'
+import DuplicatesModal from './components/duplicates_modal.vue'
 
 import { embyManager, getFormattedDateFromTimestamp, getTagArray, parseNfoContent } from '@/utils'
 
 import { config } from '@/config'
+
+import { useSettingStore } from '@/store'
 
 /**
  *  全局的加载状态
@@ -247,7 +249,10 @@ function folderReadReminderScheduler() {
    */
   const lastReadTime = embyFolder.value.lastReadTime
 
-  setInterval(() => {
+  /**
+   * 检查是否超时并发送提醒的函数
+   */
+  function checkFolderReadStatus() {
     /**
      * 当前时间戳
      */
@@ -255,7 +260,7 @@ function folderReadReminderScheduler() {
 
     if (lastReadTime) {
       /**
-       *   当前时间戳 - 上次读取文件夹的时间戳 = 当前时间间隔
+       * 当前时间戳 - 上次读取文件夹的时间戳 = 当前时间间隔
        */
       const timeDifference = currentTimestamp - lastReadTime
 
@@ -272,7 +277,7 @@ function folderReadReminderScheduler() {
 
         Notification.info({
           title: `${hoursElapsed} 小时 ${minutesElapsed} 分钟未读取文件夹！`,
-          content: `上次读取时间：\u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0  \u00A0 \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 ${getFormattedDateFromTimestamp(lastReadTime)} \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 超时的时间阈值为 ${config.embyFolder.folderReadTimeoutHours} 小时 \u00A0  \u00A0  \u00A0 \u00A0 \u00A0  \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0 \u00A0  \u00A0定时器的时间间隔为 ${config.embyFolder.folderReadCheckIntervalHours} 小时`,
+          content: `上次读取时间：${getFormattedDateFromTimestamp(lastReadTime)}，超时的时间阈值为 ${config.embyFolder.folderReadTimeoutHours} 小时，定时器的时间间隔为 ${config.embyFolder.folderReadCheckIntervalHours} 小时`,
           duration: 30000,
           closable: true,
         })
@@ -281,7 +286,13 @@ function folderReadReminderScheduler() {
     else {
       console.warn('未找到上次读取时间戳')
     }
-  }, checkInterval)
+  }
+
+  // 立即执行一次检查
+  checkFolderReadStatus()
+
+  // 定时执行检查
+  setInterval(checkFolderReadStatus, checkInterval)
 }
 
 folderReadReminderScheduler()
@@ -289,7 +300,7 @@ folderReadReminderScheduler()
 
 <template>
   <!-- 查重弹窗 -->
-  <DuplicatesModel
+  <DuplicatesModal
     v-if="isShowDuplicatesModel"
     v-model="isShowDuplicatesModel"
   />
@@ -342,7 +353,7 @@ folderReadReminderScheduler()
       class="absolute left-[50%] z-10000 w-22 origin-left scale-0 cursor-pointer border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out -top-11 -translate-x-[50%] group-hover:scale-100"
       @click="videoDuplicateHandle"
     >
-      视频查重
+      视频查重 {{ useSettingStore().isShowSettingModal }}
     </div>
 
   </div>

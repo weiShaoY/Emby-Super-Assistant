@@ -13,13 +13,20 @@ import directives from './directives'
 
 import './directives/style.less'
 
+import store from './store'
+
 createApp(App)
+
+  .use(store)
+
   .use(directives)
+
   .mount(
     (() => {
       const app = document.createElement('div')
 
       document.body.append(app)
+
       return app
     })(),
   )
