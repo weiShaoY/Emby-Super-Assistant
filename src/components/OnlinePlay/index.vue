@@ -1,6 +1,6 @@
 <!------------------------------------  跳转在线播放   ------------------------------------------------->
 <script setup lang="ts">
-import Setting from './setting.vue'
+import OnlinePlaySetting from './onlinePlay_setting.vue'
 
 import SiteBtn from './site_btn.vue'
 
@@ -119,7 +119,7 @@ main()
         </template>
       </div>
 
-      <Setting
+      <OnlinePlaySetting
         :site-list="siteList"
         :set-disables="setDisables"
         :disables="disables"

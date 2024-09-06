@@ -5,7 +5,7 @@ export const quicker = {
   /**
    * 打开文件夹动作Id
    */
-  openFolderId: 'a186251d-2767-4729-838c-757647bed39e' + '?',
+  openFolderId: 'a186251d-2767-4729-838c-757647bed39e',
 
   /**
    * 打开文件夹的盘符
@@ -24,7 +24,7 @@ export const quicker = {
       ? directoryPath
       : `${quicker.openFolderDrive}${directoryPath}`
 
-    window.open(`${baseAction}${fullPath}`, '_blank')
+    window.open(`${baseAction}'?'${fullPath}`, '_blank')
   },
 }
 

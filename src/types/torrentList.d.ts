@@ -37,7 +37,7 @@ type TorrentType = {
   /**
    *  种子网站
    */
-  web: string
+  web?: string
 }
 
   /**

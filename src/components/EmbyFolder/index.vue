@@ -353,7 +353,7 @@ folderReadReminderScheduler()
       class="absolute left-[50%] z-10000 w-22 origin-left scale-0 cursor-pointer border border-gray-300 rounded-lg bg-white px-3 py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out -top-11 -translate-x-[50%] group-hover:scale-100"
       @click="videoDuplicateHandle"
     >
-      视频查重 {{ useSettingStore().isShowSettingModal }}
+      视频查重
     </div>
 
   </div>

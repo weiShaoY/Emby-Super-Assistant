@@ -7,14 +7,7 @@ import { defineStore } from 'pinia'
 const useSettingStore = defineStore(
   'setting',
   () => {
-    /**
-     *  是否显示设置弹窗
-     */
-    const isShowSettingModal = ref(false)
-
     return {
-
-      isShowSettingModal,
 
     }
   },

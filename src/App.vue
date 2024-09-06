@@ -18,6 +18,10 @@ const isEmby = currentUrl.includes('8096/web/index.html')
 </script>
 
 <template>
+  <Emby-Super-Assistant />
+
+  <EmbyFolder />
+
   <Javdb
     v-if="isJavdb"
   />
