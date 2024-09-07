@@ -1,9 +1,14 @@
 import { createPinia } from 'pinia'
 
-import useSettingStore from './modules/setting'
+import useSettingStore from './modules/save'
+
+import useWebStore from './modules/web'
 
 const pinia = createPinia()
 
-export { useSettingStore }
+export {
+  useSettingStore,
+  useWebStore,
+}
 
 export default pinia

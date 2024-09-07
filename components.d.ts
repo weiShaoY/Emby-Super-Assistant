@@ -13,7 +13,7 @@ declare module 'vue' {
     copy: typeof import('./src/components/Emby-Super-Assistant/index copy.vue')['default']
     Duplicates_modal: typeof import('./src/components/EmbyFolder/components/duplicates_modal.vue')['default']
     Duplicates_model: typeof import('./src/components/EmbyFolder/components/duplicates_model.vue')['default']
-    Emby: typeof import('./src/components/Emby/index.vue')['default']
+    Emby: typeof import('./src/components/Emby-Super-Assistant/setting_modal/emby.vue')['default']
     EmbyBtnTemplate: typeof import('./src/components/Personality/embyBtnTemplate.vue')['default']
     EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
     EmbyFolder: typeof import('./src/components/EmbyFolder/index.vue')['default']
@@ -21,6 +21,8 @@ declare module 'vue' {
     EmbySuperAssistant: typeof import('./src/components/Emby-Super-Assistant/index.vue')['default']
     Folder: typeof import('./src/components/Emby-Super-Assistant/setting_modal/folder.vue')['default']
     'Index copy': typeof import('./src/components/Emby-Super-Assistant/index copy.vue')['default']
+    Online_play: typeof import('./src/components/Emby-Super-Assistant/setting_modal/online_play.vue')['default']
+    Online_play_setting: typeof import('./src/components/Emby-Super-Assistant/setting_modal/online_play_setting.vue')['default']
     OnlinePlay: typeof import('./src/components/OnlinePlay/index.vue')['default']
     OnlinePlay_setting: typeof import('./src/components/OnlinePlay/onlinePlay_setting.vue')['default']
     Personality: typeof import('./src/components/Personality/index.vue')['default']
@@ -56,7 +58,9 @@ declare module 'vue' {
     Site_btn: typeof import('./src/components/OnlinePlay/site_btn.vue')['default']
     SiteBtn: typeof import('./src/components/OnlinePlay/siteBtn.vue')['default']
     Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
+    Torrent_list: typeof import('./src/components/Emby-Super-Assistant/setting_modal/torrent_list.vue')['default']
     TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']
     UpdateChineseButton: typeof import('./src/components/UpdateChineseButton/index.vue')['default']
+    Web: typeof import('./src/components/Emby-Super-Assistant/setting_modal/web.vue')['default']
   }
 }

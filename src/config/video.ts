@@ -17,7 +17,7 @@ export const video: VideoType.VideoConfig = {
   tagArray: [
     {
       name: ['4K'],
-      url: fourKSvg.toString(),
+      url: fourKSvg,
     },
     {
       name: ['-c', '-C', '_ch', '-UC'],

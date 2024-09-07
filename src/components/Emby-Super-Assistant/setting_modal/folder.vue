@@ -1,48 +1,43 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-const form = ref({
+import useFolderStore from '@/store/modules/folder'
 
-  /**
-   * 选择的盘符（如 C、D、E、F）
-   */
-  driveLetter: '',
-
-  /**
-   * 是否启用定时提示读取文件夹
-   */
-  enableReminder: true,
-
-  /**
-   * 提示读取文件夹的时间间隔（小时）
-   */
-  reminderInterval: 12,
-
-  /**
-   * 定时器检查读取提示的时间间隔（小时）
-   */
-  checkInterval: 1,
-
-  /**
-   *  Quicker打开文件夹动作Id
-   */
-  quickerOpenFolderId: 'a186251d-2767-4729-838c-757647bed39e',
-})
+const folderStore = useFolderStore()
 </script>
 
 <template>
-  <a-form
-    :model="form"
-    layout="vertical"
-  >
+  <a-form>
     <!-- 盘符选择 -->
     <a-form-item
       field="driveLetter"
-      label="选择盘符"
+      label="盘符"
     >
-      <a-input
-        v-model="form.driveLetter"
-        placeholder="请输入要读取的盘符（例如：C、D、E、F）"
-      />
+      <!-- <a-input
+        v-model="folderStore.folder.driveLetter"
+        placeholder="请输入要读取的盘符 (例如:C、D、E、F)"
+      /> -->
+      <a-select
+        v-model="folderStore.folder.driveLetter"
+        placeholder="请选择要读取的盘符"
+      >
+        <a-option
+          value="C"
+        >
+          C
+        </a-option>
+
+        <a-option
+          value="D"
+        >
+          D
+        </a-option>
+
+        <a-option
+          value="Z"
+        >
+          Z
+        </a-option>
+      </a-select>
     </a-form-item>
 
     <!-- 是否启用定时提示 -->
@@ -51,12 +46,12 @@ const form = ref({
       label="启用定时提示读取文件夹"
     >
       <a-switch
-        v-model="form.enableReminder"
+        v-model="folderStore.folder.isEnableReminder"
       />
     </a-form-item>
 
     <template
-      v-if="form.enableReminder"
+      v-if="folderStore.folder.isEnableReminder"
     >
       <!-- 提示间隔（小时） -->
       <a-form-item
@@ -64,7 +59,7 @@ const form = ref({
         label="提示读取间隔（小时）"
       >
         <a-input-number
-          v-model="form.reminderInterval"
+          v-model="folderStore.folder.reminderInterval"
           placeholder="请输入提示读取文件夹的时间间隔（单位：小时）"
         />
       </a-form-item>
@@ -75,7 +70,7 @@ const form = ref({
         label="定时器检查间隔（小时）"
       >
         <a-input-number
-          v-model="form.checkInterval"
+          v-model="folderStore.folder.checkInterval"
           placeholder="请输入定时器检查的时间间隔（单位：小时）"
         />
       </a-form-item>
@@ -87,7 +82,7 @@ const form = ref({
       label="Quicker打开文件夹动作Id"
     >
       <a-input
-        v-model="form.quickerOpenFolderId"
+        v-model="folderStore.folder.quickerOpenFolderId"
         placeholder="请输入打开文件夹动作Id"
       />
     </a-form-item>

@@ -117,4 +117,14 @@ export default defineConfig({
       },
     }),
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          'primary-6': '#52B44B',
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
 })
