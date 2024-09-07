@@ -4,6 +4,8 @@ import { computed, onMounted, ref } from 'vue' // 导入 Vue 的相关钩子函�
 
 import { handleFetch, handleFetchJavBle } from './utils/xhr' // 导入数据获取的方法
 
+import type { SiteItem } from './utils/siteList' // 导入站点项的类型定义
+
 import subtitleSvg from '@/assets/svg/tag/subtitle.svg'
 
 import noCodeSvg from '@/assets/svg/tag/noCode.svg'
@@ -13,7 +15,7 @@ const props = defineProps({
    *  站点项
    */
   siteItem: {
-    type: Object as () => OnlinePlayType.SiteItem,
+    type: Object as () => SiteItem,
     required: true,
 
   }, /**
@@ -106,9 +108,9 @@ function go() {
 }
 
 /**
- *  跳转到站点主页
+ *  跳转到官网
  */
-function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
+function goToWebsite(siteItem: SiteItem) {
   /**
    *  添加协议
    */
@@ -119,6 +121,31 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
 </script>
 
 <template>
+  <!-- <a
+    class="jop-button"
+    target="_blank"
+    :href="finalLink"
+    :style="{
+      backgroundColor: `${bgColor}`,
+      color: `${bgColor ? '#fff' : '#000'}`,
+    }"
+  >
+    <div
+      v-if="status.hasSubtitle || status.hasLeakage"
+      class="jop-button_label"
+    >
+      <span
+        v-if="status.hasSubtitle"
+      >字幕 </span>
+
+      <span
+        v-if="status.hasLeakage"
+      >无码</span>
+    </div>
+
+    <span>{{ siteItem.name }}</span>
+  </a> -->
+
   <div
     class="group relative flex flex-center cursor-pointer justify-center rounded-2"
   >
@@ -165,7 +192,7 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
       :style="{
         backgroundColor: `${bgColor}`,
       }"
-      @click="openSiteHomepage(siteItem)"
+      @click="goToWebsite(siteItem)"
     >
       {{ siteItem.name }}
     </span>
@@ -173,5 +200,110 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
 </template>
 
 <style lang="less" scoped>
+.jop-button,
+.jop-button_def {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* min-width: 50px; */
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  cursor: pointer;
+}
+.jop-button_def {
+  margin: 10px 0;
+  width: 100px;
+}
+.jop-button:visited {
+  color: #606266;
+}
+.jop-button:hover {
+  text-decoration: none;
+  color: #409eff;
+  border: 1px solid #c6e2ff;
+  background-color: #ecf5ff;
+}
 
+.jop-button_label {
+  position: absolute;
+  font-size: 10px;
+  padding: 4px;
+  border-radius: 4px;
+  top: -13px;
+  right: -10px;
+  line-height: 0.75;
+  color: #67c23a;
+  border: 1px solid #e1f3d8;
+  background: white;
+}
+
+.jop-loading {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  border: 2px dashed #dcdfe6;
+  border-top-color: transparent;
+  border-radius: 100%;
+  animation: btnLoading infinite 1s linear;
+}
+@keyframes btnLoading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.jop-tag {
+  padding: 3px 6px;
+  color: #409eff !important;
+  background: #ecf5ff;
+  border: 1px solid #d9ecff;
+  border-radius: 4px;
+}
+
+.jop-setting-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.jop-setting-title {
+  margin: 10px 0 5px 0;
+}
+.jop-setting-item {
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* db */
+.db-panel .movie-panel-info div.panel-block {
+  padding: 5.5px 12px;
+}
+.db-panel .jop-app {
+  padding: 15px 12px;
+}
+
+/* lib */
+.lib-panel .jop-app {
+  padding: 20px 30px;
+  margin-top: 10px;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  margin: 0 0 0 5px;
+  cursor: pointer;
+}
 </style>

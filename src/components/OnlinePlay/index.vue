@@ -14,7 +14,9 @@ import { libSites } from './utils/libSites'
 
 import { getCode } from './utils'
 
-import { GM_getValue, GM_setValue } from '$' // 导入 GM_getValue 和 GM_setValue 方法
+import useOnlinePlayStore from '@/store/modules/onlinePlay'
+
+import { GM_getValue, GM_setValue } from '$'
 
 const props = defineProps({
   /**
@@ -27,21 +29,15 @@ const props = defineProps({
 
 })
 
+// 导入 GM_getValue 和 GM_setValue 方法
+const onlinePlayStore = useOnlinePlayStore()
+
 /**
- *  从 libSites 中找到匹配当前 URL 的图书馆站点
+ *   从 libSites 中找到匹配当前 URL 的图书馆站点
  */
 const libItem = libSites.find(item => item.href.test(window.location.href))
 
 const code = ref ('')
-
-// 定义默认隐藏的站点名称数组
-const DEF_DIS = [
-  ...['AvJoy', 'baihuse', 'GGJAV', 'AV01', '18sex', 'highporn'],
-  ...['JavBus', 'JavDB', 'JAVLib', 'MISSAV_'],
-]
-
-// 使用 ref 创建响应式的 disables 数组，并从 GM_getValue 获取初始值
-const disables = ref<SiteItem['name'][]>(GM_getValue('disable', DEF_DIS))
 
 function main() {
   if (!libItem) {
@@ -58,36 +54,6 @@ function main() {
   libItem.method() // 调用 libItem 中定义的适配方法
 }
 
-/**
- * 计算是否显示 `SiteBtn` 组件的逻辑
- * @param siteItem - 当前站点的 `SiteItem` 对象
- * @returns 是否显示 `SiteBtn` 组件的布尔值
- */
-function shouldShowSiteBtn(siteItem: SiteItem): boolean {
-  /**
-   *  是否显示
-   */
-  const isShow = disables.value.find(disItem => disItem === siteItem.name) === undefined
-
-  /**
-   * 判断当前站点是否与指定的 `LibItem` 不同
-   */
-  const sameSite = libItem?.name !== siteItem.disableLibItemName
-
-  /**
-   * 返回综合判断结果，决定是否显示 `SiteBtn` 组件
-   */
-  return sameSite && isShow
-}
-
-/**
- *  定义一个函数来设置 disables，并保存到 GM_setValue
- */
-function setDisables(disable: SiteItem['name'][]) {
-  disables.value = disable
-  GM_setValue('disable', disable)
-}
-
 main()
 </script>
 
@@ -100,30 +66,19 @@ main()
     }"
   >
     <!-- 遍历站点列表，根据条件渲染 SiteBtn 组件 -->
-
     <div
-      class="w-full flex rounded-2 bg-[#2a2b2f] p-3"
+      class="w-full flex flex-wrap gap-3 rounded-2 bg-[#2a2b2f] p-3"
     >
-      <div
-        class="m-r-3 flex flex-1 flex-wrap gap-3"
+      <template
+        v-for="siteItem in onlinePlayStore.siteList"
       >
-        <template
-          v-for="siteItem in siteList"
-        >
-          <SiteBtn
-            v-if="shouldShowSiteBtn(siteItem)"
-            :key="siteItem.name"
-            :site-item="siteItem"
-            :code="videoName"
-          />
-        </template>
-      </div>
-
-      <OnlinePlaySetting
-        :site-list="siteList"
-        :set-disables="setDisables"
-        :disables="disables"
-      />
+        <SiteBtn
+          v-if="siteItem.isVisible && (libItem?.name !== siteItem.name)"
+          :key="siteItem.name"
+          :site-item="siteItem"
+          :code="videoName"
+        />
+      </template>
     </div>
 
   </div>
