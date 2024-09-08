@@ -8,14 +8,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     2: typeof import('./src/components/TorrentList/index copy 2.vue')['default']
-    AddedToEmbyButton: typeof import('./src/components/AddedToEmbyButton/index.vue')['default']
-    BtsowButton: typeof import('./src/components/BtsowButton/index.vue')['default']
+    AddedToEmbyButton: typeof import('./src/components/Added-To-Emby-Button/index.vue')['default']
+    BtsowButton: typeof import('./src/components/Btsow-Button/index.vue')['default']
     copy: typeof import('./src/components/OnlinePlay copy/index.vue')['default']
     Duplicates_modal: typeof import('./src/components/EmbyFolder/components/duplicates_modal.vue')['default']
     Duplicates_model: typeof import('./src/components/EmbyFolder/components/duplicates_model.vue')['default']
     Emby: typeof import('./src/components/Emby-Super-Assistant/setting_modal/emby.vue')['default']
     EmbyBtnTemplate: typeof import('./src/components/Personality/embyBtnTemplate.vue')['default']
-    EmbyButton: typeof import('./src/components/EmbyButton/index.vue')['default']
+    EmbyButton: typeof import('./src/components/Emby-Button/index.vue')['default']
     EmbyFolder: typeof import('./src/components/EmbyFolder/index.vue')['default']
     EmbyStoreHouse: typeof import('./src/components/EmbyStoreHouse/index.vue')['default']
     EmbySuperAssistant: typeof import('./src/components/Emby-Super-Assistant/index.vue')['default']
@@ -66,8 +66,8 @@ declare module 'vue' {
     SiteBtn: typeof import('./src/components/OnlinePlay/siteBtn.vue')['default']
     Tooltips: typeof import('./src/components/Personality/personality_tooltips/tooltips/index.vue')['default']
     Torrent_list: typeof import('./src/components/Emby-Super-Assistant/setting_modal/torrent_list.vue')['default']
-    TorrentList: typeof import('./src/components/TorrentList/index.vue')['default']
-    UpdateChineseButton: typeof import('./src/components/UpdateChineseButton/index.vue')['default']
+    TorrentList: typeof import('./src/components/Torrent-List/index.vue')['default']
+    UpdateChineseButton: typeof import('./src/components/Update-Chinese-Button/index.vue')['default']
     Web: typeof import('./src/components/Emby-Super-Assistant/setting_modal/web.vue')['default']
   }
 }
