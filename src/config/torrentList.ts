@@ -77,7 +77,7 @@ export const torrentList = {
     //   //  必须是纯小写  shkd-875.torrent
     //   name: '.torrent',
     //   backgroundColor: '#AD9277',
-    //   web: '色花堂',
+    //   site: '色花堂',
     // },
 
   ],

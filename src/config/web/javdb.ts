@@ -1,4 +1,4 @@
-import javdbSvg from '@/assets/svg/web/javdb.svg'
+import javdbSvg from '@/assets/svg/site/javdb.svg'
 
 export const javdb = {
   icon: javdbSvg,

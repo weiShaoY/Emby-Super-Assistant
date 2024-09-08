@@ -1,4 +1,4 @@
-import btsowSvg from '@/assets/svg/web/btsow.svg'
+import btsowSvg from '@/assets/svg/site/btsow.svg'
 
 export const btsow = {
   icon: btsowSvg,

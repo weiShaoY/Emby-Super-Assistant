@@ -4,11 +4,11 @@ import { ref } from 'vue'
 
 import { defineStore } from 'pinia'
 
-import javdbSvg from '@/assets/svg/web/javdb.svg'
+import javdbSvg from '@/assets/svg/site/javdb.svg'
 
-import btsowSvg from '@/assets/svg/web/btsow.svg'
+import btsowSvg from '@/assets/svg/site/btsow.svg'
 
-import btsowHoverSvg from '@/assets/svg/web/btsow_hover.svg'
+import btsowHoverSvg from '@/assets/svg/site/btsow_hover.svg'
 
 const useTorrentListStore = defineStore(
   'torrentList',
@@ -93,7 +93,7 @@ const useTorrentListStore = defineStore(
         //   //  必须是纯小写  shkd-875.torrent
         //   name: '.torrent',
         //   backgroundColor: '#AD9277',
-        //   web: '色花堂',
+        //   site: '色花堂',
         // },
 
       ],

@@ -1,8 +1,8 @@
 import Message from '@arco-design/web-vue/es/message'
 
-import embySvg from '@/assets/svg/web/emby.svg'
+import embySvg from '@/assets/svg/site/emby.svg'
 
-import embyHoverSvg from '@/assets/svg/web/emby-hover.svg'
+import embyHoverSvg from '@/assets/svg/site/emby-hover.svg'
 
 /**
  *  Emby 配置

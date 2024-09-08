@@ -7,7 +7,7 @@
 // @license      MIT
 // @author       少爷
 // @github       https://github.com/bpking1/embyExternalUrl
-// @include      */web/index.html
+// @include      */site/index.html
 // @downloadURL https://update.greasyfork.org/scripts/459297/embyLaunchPotplayer.user.js
 // @updateURL https://update.greasyfork.org/scripts/459297/embyLaunchPotplayer.meta.js
 // @grant        GM_setValue

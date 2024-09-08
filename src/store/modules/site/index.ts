@@ -6,15 +6,15 @@ import { defineStore } from 'pinia'
 
 import useEmbyStore from '../emby'
 
-import javdbSvg from '@/assets/svg/web/javdb.svg'
+import javdbSvg from '@/assets/svg/site/javdb.svg'
 
-import btsowSvg from '@/assets/svg/web/btsow.svg'
+import btsowSvg from '@/assets/svg/site/btsow.svg'
 
-import btsowHoverSvg from '@/assets/svg/web/btsow_hover.svg'
+import btsowHoverSvg from '@/assets/svg/site/btsow_hover.svg'
 
-import embySvg from '@/assets/svg/web/emby.svg'
+import embySvg from '@/assets/svg/site/emby.svg'
 
-import embyHoverSvg from '@/assets/svg/web/emby-hover.svg'
+import embyHoverSvg from '@/assets/svg/site/emby-hover.svg'
 
 import emby from '@/config/web/emby'
 

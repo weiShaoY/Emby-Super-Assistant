@@ -14,7 +14,7 @@ const isJavdb = currentUrl.includes('javdb')
 
 const isJavbus = currentUrl.includes('javbus')
 
-const isEmby = currentUrl.includes('8096/web/index.html')
+const isEmby = currentUrl.includes('8096/site/index.html')
 </script>
 
 <template>

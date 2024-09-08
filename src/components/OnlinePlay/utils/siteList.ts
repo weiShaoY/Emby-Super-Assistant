@@ -1,46 +1,46 @@
-import javdbSvg from '@/assets/svg/web/javdb.svg'
+import javdbSvg from '@/assets/svg/site/javdb.svg'
 
-import javbusSvg from '@/assets/svg/web/javbus.svg'
+import javbusSvg from '@/assets/svg/site/javbus.svg'
 
-import missavSvg from '@/assets/svg/web/missav.svg'
+import missavSvg from '@/assets/svg/site/missav.svg'
 
-import javmostSvg from '@/assets/svg/web/javmost.svg'
+import javmostSvg from '@/assets/svg/site/javmost.svg'
 
-import javfc2Svg from '@/assets/svg/web/javfc2.svg'
+import javfc2Svg from '@/assets/svg/site/javfc2.svg'
 
-import supjavSvg from '@/assets/svg/web/supjav.svg'
+import supjavSvg from '@/assets/svg/site/supjav.svg'
 
-import netflavSvg from '@/assets/svg/web/netflav.svg'
+import netflavSvg from '@/assets/svg/site/netflav.svg'
 
-import javmenuSvg from '@/assets/svg/web/javmenu.svg'
+import javmenuSvg from '@/assets/svg/site/javmenu.svg'
 
-import jableSvg from '@/assets/svg/web/jable.svg'
+import jableSvg from '@/assets/svg/site/jable.svg'
 
-import hayavSvg from '@/assets/svg/web/hayav.svg'
+import hayavSvg from '@/assets/svg/site/hayav.svg'
 
-import bestjavpornSvg from '@/assets/svg/web/bestjavporn.svg'
+import bestjavpornSvg from '@/assets/svg/site/bestjavporn.svg'
 
-import javGuruSvg from '@/assets/svg/web/javGuru.svg'
+import javGuruSvg from '@/assets/svg/site/javGuru.svg'
 
-import avjoySvg from '@/assets/svg/web/avjoy.svg'
+import avjoySvg from '@/assets/svg/site/avjoy.svg'
 
-import paipanconSvg from '@/assets/svg/web/paipancon.svg'
+import paipanconSvg from '@/assets/svg/site/paipancon.svg'
 
-import _18avSvg from '@/assets/svg/web/18av.svg'
+import _18avSvg from '@/assets/svg/site/18av.svg'
 
-import av01Svg from '@/assets/svg/web/av01.svg'
+import av01Svg from '@/assets/svg/site/av01.svg'
 
-import njavSvg from '@/assets/svg/web/njav.svg'
+import njavSvg from '@/assets/svg/site/njav.svg'
 
-import missAvSvg from '@/assets/svg/web/missAv.svg'
+import missAvSvg from '@/assets/svg/site/missAv.svg'
 
-import ggjavSvg from '@/assets/svg/web/ggjav.svg'
+import ggjavSvg from '@/assets/svg/site/ggjav.svg'
 
-import highpornSvg from '@/assets/svg/web/highporn.svg'
+import highpornSvg from '@/assets/svg/site/highporn.svg'
 
-import evojavSvg from '@/assets/svg/web/evojav.svg'
+import evojavSvg from '@/assets/svg/site/evojav.svg'
 
-import javlibSvg from '@/assets/svg/web/javlib.svg'
+import javlibSvg from '@/assets/svg/site/javlib.svg'
 
 export type DomQuery_parser = {
 

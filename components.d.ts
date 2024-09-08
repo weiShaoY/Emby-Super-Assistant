@@ -26,7 +26,6 @@ declare module 'vue' {
     Online_play: typeof import('./src/components/Emby-Super-Assistant/setting_modal/online_play.vue')['default']
     Online_play_setting: typeof import('./src/components/Emby-Super-Assistant/setting_modal/online_play_setting.vue')['default']
     OnlinePlay: typeof import('./src/components/OnlinePlay/index.vue')['default']
-    'OnlinePlay copy': typeof import('./src/components/OnlinePlay copy/index.vue')['default']
     OnlinePlay_setting: typeof import('./src/components/OnlinePlay copy/onlinePlay_setting.vue')['default']
     Personality: typeof import('./src/components/Personality/index.vue')['default']
     Personality_button: typeof import('./src/components/Personality/personality_button/index.vue')['default']

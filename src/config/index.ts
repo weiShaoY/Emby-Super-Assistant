@@ -26,7 +26,7 @@ export const config = {
   torrentList,
 
   /**
-   *  web 配置
+   *  site 配置
    */
   web: {
     /**

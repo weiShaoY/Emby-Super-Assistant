@@ -68,7 +68,7 @@ export default defineConfig({
         match: [
           '*://*.javdb.com/*',
           '*://*.javbus.com/*',
-          '*/web/index.html',
+          '*/site/index.html',
           '192.168.*',
         ],
 
