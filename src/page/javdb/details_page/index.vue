@@ -114,11 +114,6 @@ function getTorrentList() {
 }
 
 function main() {
-  // const embyFolder = embyManager.get()
-
-  // if (!embyFolder.list.length)
-  //   return
-
   if (!folderStore.folderFileList.length) {
     return
   }

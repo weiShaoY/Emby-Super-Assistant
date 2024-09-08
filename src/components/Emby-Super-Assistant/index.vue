@@ -211,9 +211,7 @@ async function mainBtnHandler() {
       videoFileSet.add(item)
     }
 
-    // 将收集到的所有视频信息存储到 embyManager 中
-    // embyManager.set(directoryHandle.name, videoFileSet)
-
+    // 将 Set 中的视频文件信息存储到本地
     folderStore.saveFolderFileList(directoryHandle.name, videoFileSet)
 
     folderReadTime.value = ((Date.now() - startTime) / 1000).toFixed(2)
@@ -229,8 +227,6 @@ async function mainBtnHandler() {
     isLoading.value = false
   }
 }
-
-folderStore.getFolder()
 
 function openEmby(event: MouseEvent) {
   event.stopPropagation()

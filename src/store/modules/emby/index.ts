@@ -128,6 +128,8 @@ const useEmbyStore = defineStore(
             // 将 JSON 字符串转换为 JSON 对象
               const result = JSON.parse(response.responseText)
 
+              console.log('%c Line:130 🍡 result', 'color:#465975', result)
+
               if (result.Items.length === 1) {
                 const id = result.Items[0].Id
 

@@ -9,6 +9,8 @@ import DetailsPage from './details_page/index.vue'
 function checkIfReferredFromJavdb() {
   const videoName = GM_getValue('EMBY-BTN-VALUE')
 
+  console.log('%c Line:11 🍩 videoName', 'color:#b03734', videoName)
+
   if (!videoName) {
     return
   }
@@ -35,7 +37,7 @@ function checkIfReferredFromJavdb() {
 
         // 停止观察
         observer.disconnect()
-        GM_setValue('EMBY-BTN-VALUE', '')
+        // GM_setValue('EMBY-BTN-VALUE', '')
       }
     })
 
@@ -89,6 +91,7 @@ document.addEventListener('viewbeforeshow', async (e: any) => {
   <DetailsPage
     v-if="isDetailsPage"
   />
+  1111111111111111111111111111111111111111111111111111111
 </template>
 
 <style lang="less" scoped>
