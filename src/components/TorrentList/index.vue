@@ -1,8 +1,10 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  磁链列表  ------------------------------------------------->
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 
 import { config } from '@/config'
+
+import useTorrentListStore from '@/store/modules/torrentList'
 
 const props = defineProps({
 
@@ -30,6 +32,8 @@ const props = defineProps({
     default: '',
   },
 })
+
+const torrentListStore = useTorrentListStore()
 
 const torrentList = ref<TorrentType[]>(props.torrentList)
 
@@ -179,6 +183,7 @@ scrollToElement()
 
 <template>
   <Teleport
+    v-if="torrentListStore.torrentList.isShowTorrentList"
     :to="props.to"
   >
     <div

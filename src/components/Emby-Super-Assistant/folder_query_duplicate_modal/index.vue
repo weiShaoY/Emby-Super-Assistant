@@ -1,8 +1,10 @@
-<!------------------------------------    ------------------------------------------------->
+<!------------------------------------  文件夹查询重复弹窗  ------------------------------------------------->
 <script lang="ts" setup>
-import { embyManager, getFormattedDateFromTimestamp } from '@/utils'
+import { getFormattedDateFromTimestamp } from '@/utils'
 
-import { config } from '@/config'
+import useFolderStore from '@/store/modules/folder'
+
+const folderStore = useFolderStore()
 
 const visible = defineModel({ type: Boolean, default: false })
 
@@ -10,8 +12,6 @@ const visible = defineModel({ type: Boolean, default: false })
  *  是否显示全部
  */
 const isShowAll = ref(false)
-
-const embyFolder = ref(embyManager.get())
 
 /**
  *  计算超时时间 *时*分*秒未重新读取文件夹
@@ -23,7 +23,7 @@ const embyFolder = ref(embyManager.get())
 const getFolderReadTimeoutText = computed(() => {
   const millisecondsInHour = 3600000 // 1 小时 = 3,600,000 毫秒
 
-  const lastReadTime = embyFolder.value.lastReadTime
+  const lastReadTime = folderStore.folderReadTime
 
   if (!lastReadTime) {
     return ''
@@ -41,29 +41,41 @@ const getFolderReadTimeoutText = computed(() => {
 
   const minutesElapsed = Math.floor((timeDifference % millisecondsInHour) / 60000)
 
-  return `${hoursElapsed}时${minutesElapsed}分`
+  return `${hoursElapsed} 时 ${minutesElapsed} 分`
 })
 
 function openFolder() {
-  config.quicker.openFolder(embyFolder.value.name)
+  folderStore.openFolder(folderStore.folderName)
 }
 </script>
 
 <template>
   <a-modal
     v-model:visible="visible"
-    modal-class="modal_class"
+    width="auto"
     @cancel="visible = false"
   >
     <template
       #title
     >
-      <span
-        class="cursor-pointer font-bold"
+      <div
+        class="flex cursor-pointer items-center font-700"
         @click="isShowAll = true"
       >
-        重复 {{ embyFolder.allDuplicateVideoList.length }} 部
-      </span>
+        <span>
+          重复
+        </span>
+
+        <span
+          class="m-x-2 text-5 color-primary"
+        >
+          {{ folderStore.duplicateFolderFileList.length }}
+        </span>
+
+        <span>
+          部
+        </span>
+      </div>
 
       <div
         class="toggle-container m-x-3 w-10"
@@ -103,12 +115,24 @@ function openFolder() {
         </div>
       </div>
 
-      <span
-        class="cursor-pointer font-bold"
+      <div
+        class="flex cursor-pointer items-center font-700"
         @click="isShowAll = false"
       >
-        去重 {{ embyFolder.uniqueVideoNameList.length }} 部
-      </span>
+        <span>
+          去重
+        </span>
+
+        <span
+          class="m-x-2 text-5 color-primary"
+        >
+          {{ folderStore.uniqueFolderFileNameList.length }}
+        </span>
+
+        <span>
+          部
+        </span>
+      </div>
     </template>
 
     <a-scrollbar
@@ -120,7 +144,7 @@ function openFolder() {
         v-if="!isShowAll"
       >
         <EmbyButton
-          v-for="(item, index) in embyFolder.allDuplicateVideoList"
+          v-for="(item, index) in folderStore.duplicateFolderFileList"
           :key="index"
           :video-name="item.processedName"
           :is-show-video-name="true"
@@ -133,7 +157,7 @@ function openFolder() {
         v-else
       >
         <EmbyButton
-          v-for="(item, index) in embyFolder.uniqueVideoNameList"
+          v-for="(item, index) in folderStore.uniqueFolderFileNameList"
           :key="index"
           :video-name="item"
           :is-show-video-name="true"
@@ -147,127 +171,79 @@ function openFolder() {
       #footer
     >
       <div
-        class="w-full flex items-center justify-between"
+        class="w-full flex flex-col items-start font-700 !text-4"
       >
 
         <div
-          class="flex flex-col items-start"
+          class="flex items-center"
+        >
+          <div
+            class="m-r-3 flex items-center"
+          >
+            <span>
+              总共
+            </span>
+
+            <span
+              class="m-x-2 text-5 color-primary"
+            >
+              {{ folderStore.folderFileList.length }}
+            </span>
+
+            <span>
+              部
+            </span>
+
+          </div>
+
+        </div>
+
+        <div
+          v-if="getFolderReadTimeoutText"
+          class="flex items-center"
+        >
+          <span>
+            {{ getFolderReadTimeoutText }}
+          </span>
+
+          <span
+            class="m-x-3"
+          >
+            未重新读取文件夹
+          </span>
+        </div>
+
+        <div
+          v-if="folderStore.folderReadTime"
+          class="flex items-center"
         >
 
-          <div
-            class="flex items-center"
+          <span>
+            {{ getFormattedDateFromTimestamp(folderStore.folderReadTime) }}
+          </span>
+
+          <span
+            class="m-x-3"
           >
-            <div
-              class="m-r-3 flex items-center"
-            >
-              <span>
-                总共
-              </span>
+            读取文件夹
+          </span>
 
-              <span
-                class="m-x-1 text-4 font-bold"
-              >
-                {{ embyFolder.list.length }}
-              </span>
-
-              <span>
-                部
-              </span>
-
-            </div>
-
-          </div>
-
-          <!-- <div
-            class="flex"
+          <a-tooltip
+            :content="folderStore.folderName"
+            background-color="#52B44B"
           >
-            <div
-              class="m-r-3 flex items-center"
-            >
-              <span>
-                重复视频
-              </span>
-
-              <span
-                class="m-x-1 text-4 font-bold"
-              >
-                {{ embyFolder.allDuplicateVideoList.length }}
-              </span>
-
-              <span>
-                部
-              </span>
-
-            </div>
-
-            <div
-              class="flex items-center"
-            >
-              <span>去重后</span>
-
-              <span
-                class="m-x-1 text-4 font-bold"
-              >
-                {{ embyFolder.uniqueVideoNameList.length }}
-              </span>
-
-              <span>
-                部
-              </span>
-
-            </div>
-          </div> -->
-
-          <div
-            v-if="getFolderReadTimeoutText"
-            class="flex items-center"
-          >
-            <span>
-              {{ getFolderReadTimeoutText }}
-            </span>
-
-            <span
-              class="m-x-3"
-            >
-              未重新读取文件夹
-            </span>
-          </div>
-
-          <div
-            v-if="embyFolder.lastReadTime"
-            class="flex items-center"
-          >
-
-            <span>
-              {{ getFormattedDateFromTimestamp(embyFolder.lastReadTime) }}
-            </span>
-
-            <span
-              class="m-x-3"
-            >
-              读取的文件夹
-            </span>
-
             <a-link
-              class="m-x-1 font-bold !text-5"
+              class="m-x-2 w-30 truncate text-center !block !p-1"
               status="success"
               @click="openFolder"
             >
-              {{ embyFolder.name }}
+              {{ folderStore.folderName }}
             </a-link>
-          </div>
-        </div>
+          </a-tooltip>
 
-        <a-button
-          :style="{
-            backgroundColor: '#52B54B',
-            color: '#fff',
-          }"
-          @click="visible = false"
-        >
-          确定
-        </a-button>
+        </div>
       </div>
+
     </template>
 
   </a-modal>

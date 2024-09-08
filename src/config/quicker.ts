@@ -5,7 +5,7 @@ export const quicker = {
   /**
    * 打开文件夹动作Id
    */
-  openFolderId: 'a186251d-2767-4729-838c-757647bed39e',
+  openFolderId: '8bd941d1-29ff-459d-8880-db3516a9dcd0',
 
   /**
    * 打开文件夹的盘符

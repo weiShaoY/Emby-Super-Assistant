@@ -66,8 +66,102 @@ const useEmbyStore = defineStore(
       },
     })
 
+    /**
+     * 构建 Emby 请求 URL
+     * @param  videoName - 视频名称
+     * @returns   完整的请求 URL
+     */
+    function buildRequestUrl(videoName: string) {
+      const queryParams = {
+        ...emby.value.queryParams,
+        SearchTerm: videoName,
+      }
+
+      const queryString = Object.entries(queryParams)
+        .map(
+          ([key, value]) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(value as string)}`,
+        )
+        .join('&')
+
+      return `${emby.value.url}:${emby.value.port}/emby/Users/${emby.value.userId}/Items?${queryString}`
+    }
+
+    /**
+     *  搜索 Emby 服务器上的视频。
+     *  @param  videoName - 视频名称
+     */
+    function embySearch(videoName: string) {
+    /**
+     *  设置超时时间为 2 秒
+     */
+      const timeoutDuration = 2000
+
+      const timeoutId = setTimeout(() => {
+        Message.error({
+          content: '请求超时, 请检查 Emby 服务器',
+          duration: 5000,
+        })
+      }, timeoutDuration)
+
+      console.log('%c Line:107 🍷 buildRequestUrl(videoName)', 'color:#e41a6a', buildRequestUrl(videoName))
+      GM_xmlhttpRequest({
+        method: 'GET',
+        url: buildRequestUrl(videoName),
+        headers: {
+          'Accept': 'application/json',
+          'X-Emby-Client': 'Emby Web',
+          'X-Emby-Device-Name': emby.value.deviceName,
+          'X-Emby-Device-Id': emby.value.deviceId,
+          'X-Emby-Client-Version': emby.value.clientVersion,
+          'X-Emby-Token': emby.value.token,
+          'X-Emby-Language': emby.value.language,
+        },
+        onload: (response: any) => {
+          console.log('%c Line:121 🍬 response', 'color:#ffdd4d', response)
+
+          // 请求成功，清除超时计时器
+          clearTimeout(timeoutId)
+
+          if (response.status >= 200 && response.status < 300) {
+            try {
+            // 将 JSON 字符串转换为 JSON 对象
+              const result = JSON.parse(response.responseText)
+
+              if (result.Items.length === 1) {
+                const id = result.Items[0].Id
+
+                const serverId = result.Items[0].ServerId
+
+                window.open(
+                `${emby.value.url}:${emby.value.port}/web/index.html#!/item?id=${id}&serverId=${serverId}`,
+                '_blank',
+                )
+
+                GM_setValue('EMBY-BTN-VALUE', '')
+              }
+              else {
+                GM_setValue('EMBY-BTN-VALUE', videoName)
+                window.open(`${emby.value.url}:${emby.value.port}/web/index.html#!/home`, '_blank')
+              }
+            }
+            catch (e) {
+              console.error('请求失败:', e)
+            }
+          }
+          else {
+            console.error(`HTTP 错误: ${response.status}`)
+          }
+        },
+        onerror: () => {
+          Message.error('请求失败, 请检查 Emby 服务器')
+        },
+      })
+    }
+
     return {
       emby,
+      embySearch,
     }
   },
 

@@ -26,8 +26,6 @@ else {
 </script>
 
 <template>
-  <EmbyFolder />
-
   <ListPage
     v-if="isListPage"
   />

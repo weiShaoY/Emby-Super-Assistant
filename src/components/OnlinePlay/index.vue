@@ -4,19 +4,9 @@ import OnlinePlaySetting from './onlinePlay_setting.vue'
 
 import SiteBtn from './site_btn.vue'
 
-import { siteList } from './utils/siteList'
-
-import type { SiteItem } from './utils/siteList'
-
-import type { LibItem } from './utils/libSites'
-
 import { libSites } from './utils/libSites'
 
-import { getCode } from './utils'
-
 import useOnlinePlayStore from '@/store/modules/onlinePlay'
-
-import { GM_getValue, GM_setValue } from '$'
 
 const props = defineProps({
   /**
@@ -60,6 +50,7 @@ main()
 <template>
   <!-- 定义一个容器 div，包含站点按钮列表 -->
   <div
+    v-if="onlinePlayStore.onlinePlay.isShowOnlinePlay"
     class="flex border-gray-300 rounded-2 bg-white p-3 shadow-md ease-in-out"
     :style="{
       boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #EBEBEB',
@@ -70,7 +61,7 @@ main()
       class="w-full flex flex-wrap gap-3 rounded-2 bg-[#2a2b2f] p-3"
     >
       <template
-        v-for="siteItem in onlinePlayStore.siteList"
+        v-for="siteItem in onlinePlayStore.onlinePlay.siteList"
       >
         <SiteBtn
           v-if="siteItem.isVisible && (libItem?.name !== siteItem.name)"

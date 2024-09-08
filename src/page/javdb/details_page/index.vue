@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { embyManager, getTagArray } from '@/utils'
+import useFolderStore from '@/store/modules/folder'
+
+import { getTagArray } from '@/utils'
+
+const folderStore = useFolderStore()
 
 const addedToEmbyList = ref<VideoType.Video[]>([])
 
@@ -46,7 +50,9 @@ function getPageVideoName(): string {
   const strongElements = document.querySelectorAll('.video-detail strong')
 
   if (strongElements.length > 0) {
-    const titleText = strongElements[0].textContent?.trim().toLowerCase()
+    const titleText = strongElements[0].textContent
+      ?.trim()
+      .toLowerCase()
       .replace(/\s+/g, '')
 
     return titleText || ''
@@ -75,9 +81,15 @@ function getTorrentList() {
   items.forEach((item: any) => {
     const name = item.querySelector('.name')?.textContent?.trim() || ''
 
-    const url = item.children[2]?.children[0]?.dataset?.clipboardText?.split('&')[0] || ''
+    const url
+      = item.children[2]?.children[0]?.dataset?.clipboardText?.split('&')[0] || ''
 
-    const size = Number.parseFloat(item.querySelector('.meta')?.textContent?.trim().match(/(\d+(\.\d+)?)GB/)?.[1] || '0')
+    const size = Number.parseFloat(
+      item
+        .querySelector('.meta')
+        ?.textContent?.trim()
+        .match(/(\d+(\.\d+)?)GB/)?.[1] || '0',
+    )
 
     const time = item.querySelector('.time')?.textContent?.trim() || ''
 
@@ -102,10 +114,14 @@ function getTorrentList() {
 }
 
 function main() {
-  const embyFolder = embyManager.get()
+  // const embyFolder = embyManager.get()
 
-  if (!embyFolder.list.length)
+  // if (!embyFolder.list.length)
+  //   return
+
+  if (!folderStore.folderFileList.length) {
     return
+  }
 
   // 获取视频名称 (小写，去除空格)
   pageVideoName.value = getPageVideoName()
@@ -114,11 +130,13 @@ function main() {
     return
 
   // 当前视频名称已入库的视频列表
-  const matchedVideoList = embyFolder.list.filter(item =>
+  const matchedVideoList = folderStore.folderFileList.filter(item =>
     item.processedName.includes(pageVideoName.value),
   )
 
-  const isEmbyHaveChineseTorrent = matchedVideoList.some(item => item.isChinese)
+  const isEmbyHaveChineseTorrent = matchedVideoList.some(
+    item => item.isChinese,
+  )
 
   const videoMetaPanel = document.querySelector('.video-meta-panel')
 
@@ -133,7 +151,11 @@ function main() {
   }
 
   // 如果当前视频有中文磁链可用并且 Emby 中已经存在的视频没有中文磁链，则添加提示更新中文磁链按钮
-  if (isVideoHaveChineseTorrent.value && !isEmbyHaveChineseTorrent && matchedVideoList.length) {
+  if (
+    isVideoHaveChineseTorrent.value
+    && !isEmbyHaveChineseTorrent
+    && matchedVideoList.length
+  ) {
     isShowUpdateChineseButton.value = true
   }
 }

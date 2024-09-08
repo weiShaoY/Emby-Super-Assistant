@@ -1,6 +1,10 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import { addClassAndUpdateList, addClassIfNotExists, embyManager } from '@/utils'
+import { addClassAndUpdateList, addClassIfNotExists } from '@/utils'
+
+import useFolderStore from '@/store/modules/folder'
+
+const folderStore = useFolderStore()
 
 /**
  *  在Btsow搜索按钮
@@ -23,9 +27,7 @@ const embyBtnList = ref<string[]>([])
 const updateChineseBtnList = ref<string[]>([])
 
 function main() {
-  const embyFolder = embyManager.get()
-
-  if (!embyFolder.list.length) {
+  if (!folderStore.folderFileList.length) {
     return
   }
 
@@ -53,7 +55,7 @@ function main() {
     /**
      * 当前视频名称已入库的视频列表
      */
-    const matchedVideoList = embyFolder.list.filter(sub => sub.processedName.includes(itemVideoName))
+    const matchedVideoList = folderStore.folderFileList.filter(sub => sub.processedName.includes(itemVideoName))
 
     if (matchedVideoList.length) {
       //  添加高亮

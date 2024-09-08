@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 
-import { embyManager, getTagArray } from '@/utils'
+import { getTagArray } from '@/utils'
+
+import useFolderStore from '@/store/modules/folder'
+
+const folderStore = useFolderStore()
 
 const addedToEmbyList = ref<VideoType.Video[]>([])
 
@@ -103,9 +107,7 @@ function getTorrentList() {
 }
 
 function main() {
-  const embyFolder = embyManager.get()
-
-  if (!embyFolder.list.length)
+  if (!folderStore.folderFileList.length)
     return
 
   // 获取视频名称 (小写，去除空格)
@@ -115,7 +117,7 @@ function main() {
     return
 
   // 当前视频名称已入库的视频列表
-  const matchedVideoList = embyFolder.list.filter(item =>
+  const matchedVideoList = folderStore.folderFileList.filter(item =>
     item.processedName.includes(pageVideoName.value),
   )
 

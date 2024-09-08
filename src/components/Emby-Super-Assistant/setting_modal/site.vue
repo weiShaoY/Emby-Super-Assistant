@@ -1,8 +1,8 @@
 <!------------------------------------    ------------------------------------------------->
 <script lang="ts" setup>
-import useWebStore from '@/store/modules/web'
+import useSiteStore from '@/store/modules/site'
 
-const webStore = useWebStore()
+const siteStore = useSiteStore()
 </script>
 
 <template>
@@ -16,13 +16,13 @@ const webStore = useWebStore()
         #label
       >
         <img
-          :src="webStore.web.javdb.icon"
+          :src="siteStore.site.javdb.logo"
           class="h-8 w-8"
         >
       </template>
 
       <a-input
-        v-model="webStore.web.javdb.url"
+        v-model="siteStore.site.javdb.url"
         placeholder="请输入Javdb 域名"
       />
     </a-form-item>
@@ -36,13 +36,13 @@ const webStore = useWebStore()
         #label
       >
         <img
-          :src="webStore.web.btsow.iconHover"
+          :src="siteStore.site.btsow.logoHover"
           class="h-8 w-8"
         >
       </template>
 
       <a-input
-        v-model="webStore.web.btsow.url"
+        v-model="siteStore.site.btsow.url"
         placeholder="请输入Btsow 域名"
       />
     </a-form-item>

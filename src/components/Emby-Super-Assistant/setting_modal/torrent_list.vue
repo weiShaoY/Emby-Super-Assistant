@@ -32,7 +32,6 @@ const torrentListStore = useTorrentListStore()
     </a-form-item>
 
     <!-- 排序规则数组 -->
-    <!-- 排序规则数组 -->
     <template
       v-for="(item, index) in torrentListStore.torrentList.SortingRuleArray"
       :key="index"

@@ -112,7 +112,7 @@ function go(e: any, item: SiteItem) {
       >
 
         <a-link
-          class="!flex !p-2"
+          class="items-center !flex !p-2"
           @click="go($event, item)"
         >
           <div

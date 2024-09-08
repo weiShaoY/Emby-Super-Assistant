@@ -9,7 +9,15 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import folderSvg from '@/assets/svg/folder.svg'
 
+import useFolderStore from '@/store/modules/folder'
+
+import useSiteStore from '@/store/modules/site'
+
 import { config } from '@/config'
+
+const siteStore = useSiteStore()
+
+const folderStore = useFolderStore()
 
 /**
  *  页面视频名称
@@ -353,19 +361,19 @@ async function embyOpenFolder() {
 
   const directoryPath = intent.title.substring(0, intent.title.lastIndexOf('\\'))
 
-  config.quicker.openFolder(directoryPath, true)
+  folderStore.openFolder(directoryPath, true)
 }
 
 /**
  *  在Javdb搜索当前视频
  */
-async function embyOpenJavdb() {
+async function openJavdbSearch() {
   const { intent: { title } } = await getEmbyMediaInfo()
 
   const result = title.substring(title.lastIndexOf('\\') + 1, title.indexOf('.', title.lastIndexOf('\\'))).toLowerCase()
     .replace(config.video.tagRegex, '')
 
-  config.web.javdb.search(result)
+  siteStore.openJavdbSearch(result)
 }
 
 /**
@@ -488,12 +496,12 @@ setTimeout(() => {
 
       <button
         class="btnPlay btnMainPlay raised detailButton emby-button detailButton-primary detailButton-stacked"
-        @click="embyOpenJavdb"
+        @click="openJavdbSearch"
       >
         <i
           class="m-r-2 h-6 w-6 bg-cover bg-no-repeat"
           :style="{
-            backgroundImage: `url(${config.web.javdb.icon})`,
+            backgroundImage: `url(${siteStore.site.javdb.logo})`,
           }"
         />
 

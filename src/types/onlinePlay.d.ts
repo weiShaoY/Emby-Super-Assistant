@@ -171,4 +171,5 @@ namespace OnlinePlayType {
    * 站点项的类型，可以是 "get"、"parser" 或 "post" 三种类型之一。
    */
   export type SiteItem = SiteItem_get | SiteItem_parser | SiteItem_post
+
 }

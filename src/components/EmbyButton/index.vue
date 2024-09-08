@@ -2,11 +2,9 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 
-import { Message } from '@arco-design/web-vue'
+import useSiteStore from '@/store/modules/site'
 
-import { config } from '@/config'
-
-import { GM_getValue, GM_setValue, GM_xmlhttpRequest } from '$'
+import useEmbyStore from '@/store/modules/emby'
 
 const props = defineProps({
   /**
@@ -68,17 +66,15 @@ const props = defineProps({
 
 })
 
+const embyStore = useEmbyStore()
+
+const sizeStore = useSiteStore()
+
 function embyBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  config.web.emby.openEmby(props.videoName)
+  embyStore.embySearch(props.videoName)
 }
-
-const mounted = ref(false)
-
-onMounted(async () => {
-  mounted.value = true
-})
 </script>
 
 <template>
@@ -104,12 +100,12 @@ onMounted(async () => {
       class="m-x-auto h-full"
     >
       <img
-        :src="config.web.emby.icon"
+        :src="sizeStore.site.emby.logo"
         class="max-h-full max-w-full object-contain group-hover:hidden"
       >
 
       <img
-        :src="config.web.emby.iconHover"
+        :src="sizeStore.site.emby.logoHover"
         class="hidden max-h-full max-w-full object-contain !group-hover:block"
       >
     </div>

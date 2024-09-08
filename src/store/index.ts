@@ -2,13 +2,13 @@ import { createPinia } from 'pinia'
 
 import useSettingStore from './modules/save'
 
-import useWebStore from './modules/web'
+import useSiteStore from './modules/site'
 
 const pinia = createPinia()
 
 export {
   useSettingStore,
-  useWebStore,
+  useSiteStore as useWebStore,
 }
 
 export default pinia

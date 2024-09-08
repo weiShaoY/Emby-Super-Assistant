@@ -1,4 +1,4 @@
-<!------------------------------------  设置 弹框  ------------------------------------------------->
+<!------------------------------------  设置 弹窗  ------------------------------------------------->
 <script lang="ts" setup>
 import Folder from './folder.vue'
 
@@ -6,7 +6,7 @@ import TorrentList from './torrent_list.vue'
 
 import OnlinePlaySetting from './online_play_setting.vue'
 
-import Web from './web.vue'
+import Site from './site.vue'
 
 import Emby from './emby.vue'
 
@@ -67,7 +67,7 @@ const visible = defineModel({ type: Boolean, default: false })
           title="网站"
           class="h-full p-x-20% !overflow-y-auto"
         >
-          <Web />
+          <Site />
         </a-tab-pane>
 
         <a-tab-pane

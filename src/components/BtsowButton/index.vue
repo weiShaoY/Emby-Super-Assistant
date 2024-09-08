@@ -2,7 +2,7 @@
 <script lang="ts" setup>
 import type { CSSProperties } from 'vue'
 
-import config from '@/config'
+import useSiteStore from '@/store/modules/site'
 
 const props = defineProps({
   /**
@@ -56,16 +56,18 @@ const props = defineProps({
 
 })
 
+const siteStore = useSiteStore()
+
 function btsowBtnHandler(event: MouseEvent) {
   event.preventDefault()
 
-  config.web.btsow.search(props.videoName)
+  siteStore.openBtsowSearch(props.videoName)
 }
 </script>
 
 <template>
   <div
-    class="group relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#2E2E2E] bg-transparent text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#2E2E2E] !text-[#2E2E2E] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
+    class="group relative z-1 h-25 w-40 flex translate-x-0 cursor-pointer items-center justify-center overflow-hidden border-3 border-[#FF8400] bg-transparent text-lg font-bold before:absolute before:left-0 before:top-0 before:z-[-1] before:h-full before:w-full before:translate-x--100% !bg-white before:bg-[#FF8400] !text-[#2E2E2E] before:transition-all-600 before:content-[''] hover:before:translate-x-0 !hover:text-white"
     :class="props.class"
     :style="{
       borderRadius: `${radius}px`,
@@ -76,12 +78,12 @@ function btsowBtnHandler(event: MouseEvent) {
     @click="btsowBtnHandler"
   >
     <img
-      :src="config.web.btsow.icon"
+      :src="siteStore.site.btsow.logo"
       class="max-h-full max-w-full group-hover:hidden !object-contain"
     >
 
     <img
-      :src="config.web.btsow.iconHover"
+      :src="siteStore.site.btsow.logoHover"
       class="hidden max-h-full max-w-full !object-contain !group-hover:block"
     >
   </div>

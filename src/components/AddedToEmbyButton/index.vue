@@ -8,7 +8,7 @@ import copySvg from '@/assets/svg/copy.svg'
 
 import finishSvg from '@/assets/svg/finish.svg'
 
-import { config } from '@/config'
+import useFolderStore from '@/store/modules/folder'
 
 import { GM_setClipboard } from '$'
 
@@ -70,6 +70,8 @@ const props = defineProps({
   },
 })
 
+const folderStore = useFolderStore()
+
 const isShowCopy = ref(false)
 
 /**
@@ -103,7 +105,7 @@ function openFolder(event: any) {
   // Message.success('视频位置 已复制到剪切板')
 
   //  通过 Quicker打开文件夹
-  config.quicker.openFolder(props.video.directoryPath.slice(0, -1).join('\\'))
+  folderStore.openFolder(props.video.directoryPath.slice(0, -1).join('\\'))
 }
 </script>
 

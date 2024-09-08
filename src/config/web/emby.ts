@@ -142,7 +142,6 @@ export const emby = {
       })
     }, timeoutDuration)
 
-    console.log('%c Line:149 🍪 this.buildRequestUrl(videoName)', 'color:#93c0a4', this.buildRequestUrl(videoName))
     GM_xmlhttpRequest({
       method: 'GET',
       url: this.buildRequestUrl(videoName),
