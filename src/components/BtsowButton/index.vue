@@ -79,12 +79,12 @@ function btsowBtnHandler(event: MouseEvent) {
   >
     <img
       :src="siteStore.site.btsow.logo"
-      class="max-h-full max-w-full group-hover:hidden !object-contain"
+      class="max-h-full max-w-full group-hover:hidden !rounded-0 !object-contain"
     >
 
     <img
       :src="siteStore.site.btsow.logoHover"
-      class="hidden max-h-full max-w-full !object-contain !group-hover:block"
+      class="hidden max-h-full max-w-full !rounded-0 !object-contain !group-hover:block"
     >
   </div>
 </template>
