@@ -16,11 +16,11 @@ import SettingSvg from '@/assets/svg/setting.svg'
 
 import QueryDuplicateSvg from '@/assets/svg/queryDuplicate.svg'
 
-import useFolderStore from '@/store/modules/folder'
-
 import { config } from '@/config'
 
 import { getTagArray, parseNfoContent } from '@/utils'
+
+import useFolderStore from '@/store/modules/folder'
 
 import useSiteStore from '@/store/modules/site'
 

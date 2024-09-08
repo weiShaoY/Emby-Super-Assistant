@@ -122,6 +122,7 @@ export default defineConfig({
       less: {
         modifyVars: {
           'primary-6': '#52B44B',
+          'primary-5': '#07FE38',
         },
         javascriptEnabled: true,
       },
