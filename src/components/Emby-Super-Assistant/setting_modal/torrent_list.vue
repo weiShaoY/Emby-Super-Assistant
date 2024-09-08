@@ -23,7 +23,7 @@ const torrentListStore = useTorrentListStore()
 
     <!-- 详情页是否滚动到磁链组件位置 -->
     <a-form-item
-      field="isScrollToCurrentPosition"
+      field="isScrollToTorrentList"
       label="网站详情页是否滚动到磁链组件位置"
     >
       <a-switch

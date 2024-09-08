@@ -59,7 +59,7 @@ async function main() {
    * 设置背景颜色和标签
    */
   torrentList.value = torrentList.value.map((torrent: TorrentType) => {
-    const inSortingRuleArrayIndex = config.torrentList.SortingRuleArray.findIndex(rule =>
+    const inSortingRuleArrayIndex = torrentListStore.torrentList.SortingRuleArray.findIndex(rule =>
       torrent.name.includes(rule.name),
     )
 
@@ -68,8 +68,8 @@ async function main() {
 
     // 如果找到匹配的背景颜色规则，设置 backgroundColor
     if (inSortingRuleArrayIndex !== -1) {
-      updatedTorrent.backgroundColor = config.torrentList.SortingRuleArray[inSortingRuleArrayIndex].backgroundColor
-      updatedTorrent.web = config.torrentList.SortingRuleArray[inSortingRuleArrayIndex].web || ''
+      updatedTorrent.backgroundColor = torrentListStore.torrentList.SortingRuleArray[inSortingRuleArrayIndex].backgroundColor
+      updatedTorrent.web = torrentListStore.torrentList.SortingRuleArray[inSortingRuleArrayIndex].web || ''
     }
 
     // 返回更新后的对象
@@ -80,12 +80,12 @@ async function main() {
   /**
    *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
    */
-    const indexA = config.torrentList.SortingRuleArray.findIndex(rule => videoA.name.includes(rule.name))
+    const indexA = torrentListStore.torrentList.SortingRuleArray.findIndex(rule => videoA.name.includes(rule.name))
 
     /**
      *   视频B在排序规则数组中的位置   （-1 代表不在数组中）
      */
-    const indexB = config.torrentList.SortingRuleArray.findIndex(rule => videoB.name.includes(rule.name))
+    const indexB = torrentListStore.torrentList.SortingRuleArray.findIndex(rule => videoB.name.includes(rule.name))
 
     // 1.在规则数组中，按数组里关键词的顺序排序,如果关键词的顺序一样了,按文件大小排序
 
@@ -139,7 +139,7 @@ async function main() {
 
 function scrollToElement() {
   //  如果配置 详情页 不 滚动，则直接返回
-  if (!config.torrentList.isScrollToCurrentPosition) {
+  if (!torrentListStore.torrentList.isScrollToTorrentList) {
     return
   }
 
