@@ -1,12 +1,12 @@
-import hdSvg from '@/assets/svg/tag/hd.svg'
+import fourKSvg from '../assets/svg/tag/fourK.svg'
 
-import subtitleSvg from '@/assets/svg/tag/subtitle.svg'
+import wuMaSvg from '@/assets/svg/tag/wuMa.svg'
 
-import noCodeSvg from '@/assets/svg/tag/noCode.svg'
+import ziMuSvg from '@/assets/svg/tag/ziMu.svg'
 
-import fourKSvg from '@/assets/svg/tag/fourK.svg'
+import poJieSvg from '@/assets/svg/tag/poJie.svg'
 
-import crackingSvg from '@/assets/svg/tag/cracking.svg'
+import liuChuSvg from '@/assets/svg/tag/liuChu.svg'
 
 /**
  * 视频匹配配置
@@ -21,15 +21,19 @@ export const video: VideoType.VideoConfig = {
     },
     {
       name: ['-c', '-C', '_ch', '-UC'],
-      url: subtitleSvg,
+      url: ziMuSvg,
     },
     {
       name: ['无码'],
-      url: noCodeSvg,
+      url: wuMaSvg,
     },
     {
       name: ['破解'],
-      url: crackingSvg,
+      url: poJieSvg,
+    },
+    {
+      name: ['流出'],
+      url: liuChuSvg,
     },
   ],
 

@@ -4,9 +4,9 @@ import { computed, onMounted, ref } from 'vue' // 导入 Vue 的相关钩子函�
 
 import { handleFetch, handleFetchJavBle } from './utils/xhr' // 导入数据获取的方法
 
-import subtitleSvg from '@/assets/svg/tag/subtitle.svg'
+import ziMuSvg from '@/assets/svg/tag/ziMu.svg'
 
-import noCodeSvg from '@/assets/svg/tag/noCode.svg'
+import wuMaSvg from '@/assets/svg/tag/wuMa.svg'
 
 const props = defineProps({
   /**
@@ -131,13 +131,13 @@ function openSiteHomepage(siteItem: OnlinePlayType.SiteItem) {
     >
       <img
         v-if="status.hasSubtitle"
-        :src="subtitleSvg"
+        :src="ziMuSvg"
         class="h-6 w-6"
       >
 
       <img
         v-if="status.hasLeakage"
-        :src="noCodeSvg"
+        :src="wuMaSvg"
         class="h-6 w-6"
       >
 

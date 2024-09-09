@@ -67,7 +67,9 @@ export default defineConfig({
         description: '为Emby在Jav网站监测是否入库,是否可更新,Emby调用带第三方播放器,为 JavDB、JavBus、JavLibrary 这三个站点添加跳转在线观看的链接',
         include: [
           '*://*.javdb.com/*',
+          '*://javdb.com/*',
           '*://*.javbus.com/*',
+          '*://javbus.com/*',
           '*/site/index.html',
           '*://192.168.0.*',
         ],
