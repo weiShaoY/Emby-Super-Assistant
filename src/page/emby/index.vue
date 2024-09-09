@@ -91,7 +91,6 @@ document.addEventListener('viewbeforeshow', async (e: any) => {
   <DetailsPage
     v-if="isDetailsPage"
   />
-  1111111111111111111111111111111111111111111111111111111
 </template>
 
 <style lang="less" scoped>

@@ -22,7 +22,7 @@ const isJavdb = currentUrl.includes('javdb')
 
 const isJavbus = currentUrl.includes('javbus')
 
-const isEmby = currentUrl.includes(siteStore.site.emby.url)
+const isEmby = currentUrl.includes(new URL(siteStore.site.emby.url).hostname)
 
 folderStore.getFolder()
 </script>

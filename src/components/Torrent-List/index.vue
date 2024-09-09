@@ -2,8 +2,6 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 
-import { config } from '@/config'
-
 import useTorrentListStore from '@/store/modules/torrentList'
 
 const props = defineProps({
@@ -35,6 +33,9 @@ const props = defineProps({
 
 const torrentListStore = useTorrentListStore()
 
+/**
+ *  种子列表
+ */
 const torrentList = ref<TorrentType[]>(props.torrentList)
 
 /**
@@ -54,28 +55,25 @@ function copyTorrentUrl(torrent: TorrentType) {
   Message.success(`${torrent.name} 已复制到剪切板`)
 }
 
+/**
+ * 根据种子项计算背景颜色和标签
+ * @param {TorrentType} torrent - 种子项
+ * @returns {{ backgroundColor: string; web: string }} 背景颜色和标签信息
+ */
+function getTorrentStyle(torrent: TorrentType) {
+  const matchingRule = torrentListStore.torrentList.SortingRuleArray.find(rule =>
+    torrent.name.includes(rule.name),
+  )
+
+  return matchingRule
+    ? {
+        backgroundColor: matchingRule.backgroundColor,
+        web: matchingRule.web || '',
+      }
+    : { backgroundColor: '', web: '' }
+}
+
 async function main() {
-  /**
-   * 设置背景颜色和标签
-   */
-  torrentList.value = torrentList.value.map((torrent: TorrentType) => {
-    const inSortingRuleArrayIndex = torrentListStore.torrentList.SortingRuleArray.findIndex(rule =>
-      torrent.name.includes(rule.name),
-    )
-
-    // 初始化一个新的对象，用于存储可能的更新
-    const updatedTorrent = { ...torrent }
-
-    // 如果找到匹配的背景颜色规则，设置 backgroundColor
-    if (inSortingRuleArrayIndex !== -1) {
-      updatedTorrent.backgroundColor = torrentListStore.torrentList.SortingRuleArray[inSortingRuleArrayIndex].backgroundColor
-      updatedTorrent.web = torrentListStore.torrentList.SortingRuleArray[inSortingRuleArrayIndex].web || ''
-    }
-
-    // 返回更新后的对象
-    return updatedTorrent
-  })
-
   torrentList.value.sort((videoA: TorrentType, videoB: TorrentType) => {
   /**
    *   视频A在排序规则数组中的位置   （-1 代表不在数组中）
@@ -137,6 +135,9 @@ async function main() {
   })
 }
 
+/**
+ *   滚动到磁链列表组件
+ */
 function scrollToElement() {
   //  如果配置 详情页 不 滚动，则直接返回
   if (!torrentListStore.torrentList.isScrollToTorrentList) {
@@ -164,8 +165,6 @@ function scrollToElement() {
     const element = document.querySelector(props.to)
 
     if (element) {
-      // element.scrollIntoView({ behavior: 'smooth' })
-
       const elementPosition = element.getBoundingClientRect().top + window.scrollY
 
       window.scrollTo({
@@ -189,10 +188,10 @@ scrollToElement()
     <div
       class="mx-auto w-full border rounded-md bg-white p-6 pb-1"
     >
+      <!-- 标题部分 -->
       <div
         class="flex flex-wrap items-center justify-between -m-2"
       >
-
         <div
           class="flex-center text-4 font-600 text-stroke-black"
         >
@@ -240,9 +239,7 @@ scrollToElement()
           <div
             class="group relative z-0 h-[6em] flex cursor-pointer items-center justify-between overflow-hidden rounded-[1em] p-2"
             :style="{
-              backgroundColor: torrent.backgroundColor,
-              // color: torrent.backgroundColor ? '#fff' : '#000',
-              // boxShadow: `2px 2px 35px ${torrent.backgroundColor} inset`,
+              backgroundColor: getTorrentStyle(torrent).backgroundColor,
             }"
           >
             <!-- 悬浮动画 -->
@@ -258,10 +255,11 @@ scrollToElement()
             <div
               class="flex items-center"
             >
-              <!-- 左边第一列  磁链名称 -->
+              <!-- 磁链信息 -->
               <div
                 class="w-100 p-2"
               >
+                <!-- 磁链名称 -->
                 <div
                   class="truncate text-4 font-700 group-hover:text-#fff"
                   :style="{
@@ -273,6 +271,7 @@ scrollToElement()
                   }}
                 </div>
 
+                <!-- 磁链时间 -->
                 <div
                   class="m-t-1 text-3 font-600 !group-hover:text-#fff"
                   :style="{
@@ -284,7 +283,8 @@ scrollToElement()
                   }}
                 </div>
               </div>
-              <!-- 左边第二列 文件大小 -->
+
+              <!-- 网站 信息 -->
               <div
                 class="m-l-3 w-30 group-hover:text-#fff"
               >
@@ -293,12 +293,12 @@ scrollToElement()
                   class="text-4 font-700"
                 >
                   {{
-                    torrent.web
+                    getTorrentStyle(torrent).web
                   }}
                 </span>
               </div>
 
-              <!-- 左边第二列 文件大小 -->
+              <!-- 文件大小 -->
               <div
                 class="m-l-3 w-30 group-hover:text-#fff"
               >
@@ -319,7 +319,7 @@ scrollToElement()
                 </span>
               </div>
 
-              <!-- 左边第三列  图标 -->
+              <!-- 标签图标 -->
               <div
                 v-for="tag in torrent.tagArray"
                 :key="tag.name"
@@ -338,7 +338,7 @@ scrollToElement()
             <div
               class="w-auto p-2"
             >
-
+              <!-- 复制按钮 -->
               <button
                 class="cursor-pointer rounded from-[#EB3349] to-[#F45C43] bg-gradient-to-r px-3 py-2 text-white font-semibold shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-1px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset] transition-shadow focus:shadow-[inset_-12px_-8px_40px_#46464620] hover:shadow-[rgba(6,_24,_44,_0.4)_0px_0px_0px_2px,_rgba(6,_24,_44,_0.65)_0px_4px_6px_-10px,_rgba(255,_255,_255,_0.08)_0px_1px_0px_inset]"
                 @click="copyTorrentUrl(torrent)"

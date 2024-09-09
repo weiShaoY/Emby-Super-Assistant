@@ -381,39 +381,6 @@ async function openJavdbSearch() {
  */
 const isDetailsPage = ref(false)
 
-/**
- *  地址栏是否变化
- */
-// document.addEventListener('viewbeforeshow', async (e: any) => {
-//   // 重置 isDetailsPage 状态
-//   isDetailsPage.value = false
-
-//   // 检查是否为详情页
-//   if (e.detail.contextPath.startsWith('/item?id=')) {
-//     setTimeout(() => {
-//       // const videoElement = document.querySelector(
-//       //   'div[is=\'emby-scroller\']:not(.hide) .detailTextContainer',
-//       // )
-//       const videoElement = document.querySelector(
-//         '.itemView:not(.hide) .detailTextContainer',
-//       )
-
-//       if (videoElement) {
-//       // 移除 videoElement 内所有 id 为 btnTool 的元素
-//         document.querySelectorAll('#targetNode').forEach(element => element.remove())
-
-//         // 创建并添加新按钮元素
-//         const div = document.createElement('div')
-
-//         div.id = 'targetNode'
-//         videoElement.appendChild(div)
-
-//         // 设置 isDetailsPage 状态
-//         isDetailsPage.value = true
-//       }
-//     }, 200)
-//   }
-// })
 async function main() {
   const { intent: { title } } = await getEmbyMediaInfo()
 
@@ -508,14 +475,14 @@ setTimeout(() => {
         <span> Javdb </span>
       </button>
     </div>
-
-    <!-- 在线观看 -->
-    <OnlinePlay
-      v-if="pageVideoName"
-      :video-name="pageVideoName"
-    />
-
   </Teleport>
+
+  <!-- 在线观看 -->
+  <OnlinePlay
+    v-if="isDetailsPage && pageVideoName"
+    to="#targetNode"
+    :video-name="pageVideoName"
+  />
 </template>
 
 <style lang="less" scoped></style>

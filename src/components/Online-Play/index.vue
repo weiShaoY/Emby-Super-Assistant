@@ -10,6 +10,14 @@ import useOnlinePlayStore from '@/store/modules/onlinePlay'
 
 const props = defineProps({
   /**
+   *  挂载点
+   */
+  to: {
+    type: String,
+    required: true,
+  },
+
+  /**
    *  @description  视频名称
    */
   videoName: {
@@ -48,31 +56,34 @@ main()
 </script>
 
 <template>
-  <!-- 定义一个容器 div，包含站点按钮列表 -->
-  <div
+  <Teleport
     v-if="onlinePlayStore.onlinePlay.isShowOnlinePlay"
-    class="flex border-gray-300 rounded-2 bg-white p-3 shadow-md ease-in-out"
-    :style="{
-      boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #EBEBEB',
-    }"
+    :to="to"
   >
-    <!-- 遍历站点列表，根据条件渲染 SiteBtn 组件 -->
     <div
-      class="w-full flex flex-wrap gap-3 rounded-2 bg-[#2a2b2f] p-3"
+      class="flex border-gray-300 rounded-2 bg-white p-3 shadow-md ease-in-out"
+      :style="{
+        boxShadow: 'inset 20px 20px 8px #bebebe, inset -20px -20px 8px #EBEBEB',
+      }"
     >
-      <template
-        v-for="siteItem in onlinePlayStore.onlinePlay.siteList"
+      <!-- 遍历站点列表，根据条件渲染 SiteBtn 组件 -->
+      <div
+        class="w-full flex flex-wrap gap-3 rounded-2 bg-[#2a2b2f] p-3"
       >
-        <SiteBtn
-          v-if="siteItem.isVisible && (libItem?.name !== siteItem.name)"
-          :key="siteItem.name"
-          :site-item="siteItem"
-          :code="videoName"
-        />
-      </template>
-    </div>
+        <template
+          v-for="siteItem in onlinePlayStore.onlinePlay.siteList"
+        >
+          <SiteBtn
+            v-if="siteItem.isVisible && (libItem?.name !== siteItem.name)"
+            :key="siteItem.name"
+            :site-item="siteItem"
+            :code="videoName"
+          />
+        </template>
+      </div>
 
-  </div>
+    </div>
+  </Teleport>
 </template>
 
 <style lang="less" scoped>

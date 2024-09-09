@@ -65,18 +65,20 @@ export default defineConfig({
         license: 'MIT',
         namespace: 'npm/vite-plugin-monkey',
         description: '为Emby在Jav网站监测是否入库,是否可更新,Emby调用带第三方播放器,为 JavDB、JavBus、JavLibrary 这三个站点添加跳转在线观看的链接',
-        match: [
+        include: [
           '*://*.javdb.com/*',
           '*://*.javbus.com/*',
           '*/site/index.html',
-          '192.168.*',
+          '*://192.168.0.*',
         ],
+
+        // '*://192.168.0.*:8096/*',
 
         /**
          *  此标签定义允许通过GM_xmlhttpRequest检索的域（无顶级域），包括子域
          */
         connect: [
-          '192.168.0.4:*',
+          '192.168.*',
           '192.168.0.4:8096',
           'jable.tv',
           'missav.com',
