@@ -6,7 +6,9 @@ const onlinePlayStore = useOnlinePlayStore()
 </script>
 
 <template>
-  <a-form>
+  <a-form
+    :model="onlinePlayStore.onlinePlay"
+  >
 
     <!-- 是否启用定时提示 -->
     <a-form-item

@@ -204,7 +204,7 @@ function importConfig() {
         </a-button>
 
         <a-button
-          type="outline "
+          type="outline"
           @click="importConfig"
         >
           导入配置

@@ -6,7 +6,9 @@ const siteStore = useSiteStore()
 </script>
 
 <template>
-  <a-form>
+  <a-form
+    :model="siteStore.site.javdb"
+  >
     <!-- 盘符选择 -->
     <a-form-item
       field="driveLetter"

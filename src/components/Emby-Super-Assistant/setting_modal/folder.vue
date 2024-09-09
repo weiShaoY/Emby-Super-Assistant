@@ -6,7 +6,9 @@ const folderStore = useFolderStore()
 </script>
 
 <template>
-  <a-form>
+  <a-form
+    :model="folderStore.folder"
+  >
     <!-- 盘符选择 -->
     <a-form-item
       field="driveLetter"
