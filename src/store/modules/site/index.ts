@@ -16,8 +16,6 @@ import embySvg from '@/assets/svg/site/emby.svg'
 
 import embyHoverSvg from '@/assets/svg/site/emby-hover.svg'
 
-import emby from '@/config/web/emby'
-
 const useSiteStore = defineStore(
   'site',
   () => {
