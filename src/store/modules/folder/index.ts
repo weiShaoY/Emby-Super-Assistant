@@ -23,7 +23,7 @@ const useFolderStore = defineStore(
       /**
        * 提示读取文件夹的时间间隔（小时）
        */
-      reminderInterval: 12,
+      reminderInterval: 168,
 
       /**
        * 定时器检查读取提示的时间间隔（小时）

@@ -81,8 +81,7 @@ function getTorrentList() {
   items.forEach((item: any) => {
     const name = item.querySelector('.name')?.textContent?.trim() || ''
 
-    const url
-      = item.children[2]?.children[0]?.dataset?.clipboardText?.split('&')[0] || ''
+    const url = item.querySelector('.copy-to-clipboard').dataset.clipboardText || ''
 
     const size = Number.parseFloat(
       item
@@ -103,7 +102,7 @@ function getTorrentList() {
       isVideoHaveChineseTorrent.value = true
     }
   })
-
+  console.log('%c Line:107 🍅 torrentList.value', 'color:#3f7cff', torrentList.value)
   const noBottom = document.querySelector('.no-bottom')
 
   if (noBottom) {

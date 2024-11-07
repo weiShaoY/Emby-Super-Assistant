@@ -51,6 +51,11 @@ const chineseCount = computed(() =>
  *  复制种子链接
  */
 function copyTorrentUrl(torrent: TorrentType) {
+  if (!torrent.url) {
+    Message.error('传入磁链为空, 无法复制,请检查代码')
+    return
+  }
+
   GM_setClipboard(torrent.url, 'text')
   Message.success(`${torrent.name} 已复制到剪切板`)
 }
